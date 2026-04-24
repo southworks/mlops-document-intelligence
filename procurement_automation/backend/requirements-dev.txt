@@ -1,0 +1,7 @@
+# Python Debugger
+debugpy
+
+# Testing
+pytest==8.3.5
+jsonschema==4.23.0
+jmespath==1.0.1

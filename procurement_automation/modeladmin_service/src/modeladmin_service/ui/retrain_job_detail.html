@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Training Job Detail</title>
+    <link rel="stylesheet" href="/modeladmin/ui/static/modeladmin-ui.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header header-row">
+        <div>
+          <h1 id="jobTitle">Retrain Job</h1>
+          <p>Status: <strong id="jobStatus">-</strong></p>
+        </div>
+        <nav class="stage-nav" aria-label="ModelAdmin workflow">
+          <a href="/modeladmin/ui" class="stage-pill">Review</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-candidates" class="stage-pill">Approved</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/datasets" class="stage-pill">Datasets</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-jobs" class="stage-pill active">Models</a>
+        </nav>
+      </header>
+
+      <div id="errorBox" class="error hidden"></div>
+      <div id="successBox" class="success hidden"></div>
+
+      <section class="card-grid">
+        <article class="card">
+          <h3>Job Info</h3>
+          <p><strong>ID:</strong> <span id="jobId">-</span></p>
+          <p><strong>Training dataset:</strong> <a id="datasetLink" class="link" href="#">-</a></p>
+          <p><strong>ADI model ID:</strong> <span id="adiModelId">-</span></p>
+          <p><strong>ADI operation ID:</strong> <span id="adiOperationId">-</span></p>
+          <p><strong>Error message:</strong> <span id="errorMessage">-</span></p>
+          <p><strong>Submitted at:</strong> <span id="submittedAt">-</span></p>
+          <p><strong>Updated at:</strong> <span id="updatedAt">-</span></p>
+        </article>
+
+        <article class="card">
+          <h3>Active Model</h3>
+          <p><strong>Current active model:</strong> <span id="activeModelId">-</span></p>
+          <p><strong>Source retrain job:</strong> <span id="activeSourceJobId">-</span></p>
+          <p><strong>Activated at:</strong> <span id="activatedAt">-</span></p>
+        </article>
+      </section>
+    </main>
+
+    <script src="/modeladmin/ui/static/retrain_job_detail.js"></script>
+  </body>
+</html>

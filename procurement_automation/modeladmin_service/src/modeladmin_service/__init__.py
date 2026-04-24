@@ -1,0 +1,1 @@
+"""ModelAdmin standalone service package."""

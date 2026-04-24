@@ -1,0 +1,93 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "GRN_low_confidence_005.pdf",
+	"labels": [
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"page": 1,
+					"text": "",
+					"boundingBoxes": [
+						[
+							0.23029923970994318,
+							0.20258617401123047,
+							0.32624234244015826,
+							0.20258617401123047,
+							0.32624234244015826,
+							0.2267241313539703,
+							0.23029923970994318,
+							0.2267241313539703
+						]
+					]
+				}
+			],
+			"labelType": "region"
+		},
+		{
+			"label": "PurchaseOrder",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.24509414,
+							0.16693637,
+							0.31054118,
+							0.16686364,
+							0.31054118,
+							0.18034546,
+							0.24508235,
+							0.18052727
+						]
+					],
+					"page": 1,
+					"text": "PO-3697"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.20215294,
+							0.14703637,
+							0.28515294,
+							0.14704545,
+							0.28515294,
+							0.16156363,
+							0.20215294,
+							0.16155455
+						]
+					],
+					"page": 1,
+					"text": "Acme Corp"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "ReceiptNumber",
+			"value": [
+				{
+					"page": 1,
+					"text": "GRN-2026-505",
+					"boundingBoxes": [
+						[
+							0.2400706,
+							0.10655454,
+							0.3515647,
+							0.10620909,
+							0.3515647,
+							0.11965454,
+							0.2400706,
+							0.11978182
+						]
+					]
+				}
+			]
+		}
+	]
+}

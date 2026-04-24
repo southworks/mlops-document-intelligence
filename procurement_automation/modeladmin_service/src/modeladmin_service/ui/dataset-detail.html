@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Training Dataset</title>
+    <link rel="stylesheet" href="/modeladmin/ui/static/modeladmin-ui.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header header-row">
+        <div>
+          <h1 id="datasetTitle">Training Dataset</h1>
+          <p>Status: <strong id="datasetStatus">-</strong></p>
+        </div>
+        <div>
+          <a href="/modeladmin/ui/retrain-candidates" class="link">Back to retrain candidates</a>
+        </div>
+      </header>
+
+      <div id="errorBox" class="error hidden"></div>
+      <div id="successBox" class="success hidden"></div>
+
+      <section class="card-grid">
+        <article class="card">
+          <h3>Dataset Info</h3>
+          <p><strong>ID:</strong> <span id="datasetId">-</span></p>
+          <p><strong>Name:</strong> <span id="datasetName">-</span></p>
+          <p><strong>Status:</strong> <span id="infoStatus">-</span></p>
+          <p><strong>Created by:</strong> <span id="createdBy">-</span></p>
+          <p><strong>Created at:</strong> <span id="createdAt">-</span></p>
+          <p><strong>Membership count:</strong> <span id="membershipCount">-</span></p>
+        </article>
+
+        <article class="card">
+          <h3>Dataset Actions</h3>
+          <div>
+            <h4>Stage Dataset</h4>
+            <p id="stageDescription">
+              First, move this dataset from draft to staged status to enable validation.
+            </p>
+            <button id="stageBtn" type="button">Stage Dataset</button>
+          </div>
+
+          <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;" />
+
+          <div>
+            <h4>Mark Ready for Training</h4>
+            <p id="readyDescription">
+              Once all data is reviewed and ready, you can mark it as ready for training.
+            </p>
+            <label class="field">
+              <span>Minimum items per class</span>
+              <input id="minItemsInput" type="number" value="5" min="1" />
+            </label>
+            <button id="markReadyBtn" type="button">Mark Ready for Training</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h3>Candidates in Dataset</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Candidate ID</th>
+                <th>Model Version</th>
+              </tr>
+            </thead>
+            <tbody id="membershipTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/modeladmin/ui/static/dataset-detail.js"></script>
+  </body>
+</html>

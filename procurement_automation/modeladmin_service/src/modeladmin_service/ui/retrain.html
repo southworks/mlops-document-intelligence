@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Approved for Retrain</title>
+    <link rel="stylesheet" href="/modeladmin/ui/static/modeladmin-ui.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header header-row">
+        <div>
+          <h1>Approved for Retrain</h1>
+          <p>Candidates approved for training dataset inclusion.</p>
+        </div>
+        <nav class="stage-nav" aria-label="ModelAdmin workflow">
+          <a href="/modeladmin/ui" class="stage-pill">Review</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-candidates" class="stage-pill active">Approved</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/datasets" class="stage-pill">Datasets</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-jobs" class="stage-pill">Models</a>
+        </nav>
+      </header>
+
+      <section class="filters">
+        <select id="docTypeFilter">
+          <option value="">All document types</option>
+          <option value="invoice">invoice</option>
+          <option value="purchase-order">purchase-order</option>
+          <option value="goods-receipt-note">goods-receipt-note</option>
+          <option value="unknown">unknown</option>
+        </select>
+
+        <input id="modelVersionFilter" type="text" placeholder="Model version" />
+
+        <button id="applyFiltersBtn" type="button">Apply</button>
+        <button id="clearFiltersBtn" type="button" class="secondary">Clear</button>
+      </section>
+
+      <div id="errorBox" class="error hidden"></div>
+
+      <section id="actionBar" class="action-bar hidden">
+        <div class="action-bar-content">
+          <span class="selection-count">
+            <strong id="selectionCountText">0</strong> selected
+          </span>
+
+          <label class="action-bar-field">
+            <span class="label-text">Dataset name</span>
+            <input id="datasetNameInput" type="text" placeholder="e.g., retrain-batch" />
+          </label>
+
+          <button id="createDatasetBtn" type="button">Create Dataset</button>
+          <button id="clearSelectionBtn" type="button" class="secondary">Clear Selection</button>
+        </div>
+      </section>
+
+      <section class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="checkbox-col">
+                <input id="selectAllCheckbox" type="checkbox" aria-label="Select all candidates" />
+              </th>
+              <th>ID</th>
+              <th>Status</th>
+              <th>Document Type</th>
+              <th>Confidence</th>
+              <th>Operator Label</th>
+              <th>Model Version</th>
+              <th>Approved At</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </section>
+
+      <footer class="pagination">
+        <span id="paginationInfo">Total: 0 • Page 1 of 1</span>
+        <div>
+          <button id="prevBtn" type="button">Previous</button>
+          <button id="nextBtn" type="button">Next</button>
+        </div>
+      </footer>
+    </main>
+
+    <script src="/modeladmin/ui/static/retrain.js"></script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ModelAdmin Queue</title>
+    <link rel="stylesheet" href="/modeladmin/ui/static/modeladmin-ui.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header header-row">
+        <div>
+          <h1>ModelAdmin Review Queue</h1>
+          <p>Review unknown and low-confidence documents.</p>
+        </div>
+        <nav class="stage-nav" aria-label="ModelAdmin workflow">
+          <a href="/modeladmin/ui" class="stage-pill active">Review</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-candidates" class="stage-pill">Approved</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/datasets" class="stage-pill">Datasets</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-jobs" class="stage-pill">Models</a>
+        </nav>
+      </header>
+
+      <section class="filters">
+        <select id="statusFilter">
+          <option value="">All statuses</option>
+          <option value="new">new</option>
+          <option value="reviewed">reviewed</option>
+          <option value="approved_for_training">approved_for_training</option>
+          <option value="archived">archived</option>
+        </select>
+
+        <select id="docTypeFilter">
+          <option value="">All document types</option>
+          <option value="invoice">invoice</option>
+          <option value="purchase-order">purchase-order</option>
+          <option value="goods-receipt-note">goods-receipt-note</option>
+          <option value="unknown">unknown</option>
+        </select>
+
+        <input id="modelVersionFilter" type="text" placeholder="Model version" />
+        <input id="minConfidenceFilter" type="number" step="0.01" min="0" max="1" placeholder="Min conf" />
+        <input id="maxConfidenceFilter" type="number" step="0.01" min="0" max="1" placeholder="Max conf" />
+
+        <button id="applyFiltersBtn" type="button">Apply</button>
+        <button id="clearFiltersBtn" type="button" class="secondary">Clear</button>
+      </section>
+
+      <div id="errorBox" class="error hidden"></div>
+        <div id="messageBox" class="success hidden"></div>
+
+      <section class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Predicted Type</th>
+              <th>Confidence</th>
+              <th>Trigger</th>
+              <th>Low Fields</th>
+              <th>Model Version</th>
+              <th>Created</th>
+              <th>Operator Label</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </section>
+
+      <footer class="pagination">
+        <span id="paginationInfo">Total: 0 • Page 1 of 1</span>
+        <div>
+          <button id="prevBtn" type="button">Previous</button>
+          <button id="nextBtn" type="button">Next</button>
+        </div>
+      </footer>
+    </main>
+
+    <script src="/modeladmin/ui/static/queue.js"></script>
+  </body>
+</html>

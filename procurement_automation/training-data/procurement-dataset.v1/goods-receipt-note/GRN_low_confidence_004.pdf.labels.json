@@ -1,0 +1,94 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "GRN_low_confidence_004.pdf",
+	"labels": [
+		{
+			"label": "PurchaseOrder",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.24518824,
+							0.16695455,
+							0.31054118,
+							0.16686364,
+							0.31054118,
+							0.18033637,
+							0.24521177,
+							0.18047273
+						]
+					],
+					"page": 1,
+					"text": "PO-9834"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.20297647,
+							0.14671817,
+							0.34504706,
+							0.14645454,
+							0.3450941,
+							0.16142727,
+							0.20302354,
+							0.1616909
+						]
+					],
+					"page": 1,
+					"text": "Global Supplies Ltd"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "ReceiptNumber",
+			"value": [
+				{
+					"page": 1,
+					"text": "",
+					"boundingBoxes": [
+						[
+							0.2389452162427302,
+							0.1043103974441002,
+							0.354969488921562,
+							0.1043103974441002,
+							0.354969488921562,
+							0.12327585549190123,
+							0.2389452162427302,
+							0.12327585549190123
+						]
+					]
+				}
+			],
+			"labelType": "region"
+		},
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"page": 1,
+					"text": "",
+					"boundingBoxes": [
+						[
+							0.22806786620350927,
+							0.20431035140465048,
+							0.31731735910411785,
+							0.20431035140465048,
+							0.31731735910411785,
+							0.22500001973119277,
+							0.22806786620350927,
+							0.22500001973119277
+						]
+					]
+				}
+			],
+			"labelType": "region"
+		}
+	]
+}

@@ -1,0 +1,314 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "INV-2024-004.pdf",
+	"labels": [
+		{
+			"label": "BillingAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.15178823,
+							0.3806,
+							0.39649412,
+							0.38066366,
+							0.39648235,
+							0.39551818,
+							0.15177646,
+							0.39545453
+						]
+					],
+					"page": 1,
+					"text": "123 Main Street, Miami, FL 33101"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08047059,
+							0.35446364,
+							0.21292941,
+							0.35493636,
+							0.2128353,
+							0.37147275,
+							0.08037647,
+							0.371
+						]
+					],
+					"page": 1,
+					"text": "Ana Rodriguez"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceDate",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.7059294,
+							0.27879092,
+							0.807,
+							0.2784818,
+							0.8069765,
+							0.2938091,
+							0.7059765,
+							0.29404545
+						]
+					],
+					"page": 1,
+					"text": "2024-02-18"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceId",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.17235294,
+							0.27879092,
+							0.2942706,
+							0.2786,
+							0.2942706,
+							0.29410002,
+							0.17235294,
+							0.29418182
+						]
+					],
+					"page": 1,
+					"text": "INV-2024-004"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.83248234,
+							0.6528545,
+							0.91667056,
+							0.6529545,
+							0.91667056,
+							0.6703182,
+							0.83257645,
+							0.67035455
+						]
+					],
+					"page": 1,
+					"text": "$352.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Amount",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8323647,
+							0.5067273,
+							0.89941174,
+							0.5067,
+							0.89934117,
+							0.5213909,
+							0.83241177,
+							0.5213909
+						]
+					],
+					"page": 1,
+					"text": "$320.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Description",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08041176,
+							0.50631815,
+							0.28325883,
+							0.50674546,
+							0.28320003,
+							0.52270913,
+							0.08035295,
+							0.5222818
+						]
+					],
+					"page": 1,
+					"text": "Wireless Mouse Logitech"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Quantity",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.57111764,
+							0.5076909,
+							0.5820353,
+							0.5077909,
+							0.5820353,
+							0.5197818,
+							0.5710118,
+							0.51977277
+						]
+					],
+					"page": 1,
+					"text": "4"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/UnitPrice",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.6854824,
+							0.5069,
+							0.7421882,
+							0.5068273,
+							0.7421882,
+							0.5211909,
+							0.6854941,
+							0.5213182
+						]
+					],
+					"page": 1,
+					"text": "$80.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "SubTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8323883,
+							0.5828091,
+							0.8990941,
+							0.5828,
+							0.8990941,
+							0.5972273,
+							0.83248234,
+							0.59738183
+						]
+					],
+					"page": 1,
+					"text": "$320.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "TotalTax",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8325176,
+							0.6080727,
+							0.88931763,
+							0.6080546,
+							0.88931763,
+							0.62241817,
+							0.8326,
+							0.6225455
+						]
+					],
+					"page": 1,
+					"text": "$32.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08172941,
+							0.1581909,
+							0.44270587,
+							0.158,
+							0.44271764,
+							0.1736,
+							0.08174118,
+							0.17379092
+						]
+					],
+					"page": 1,
+					"text": "1234 Business Avenue, New York, NY 10001"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08016471,
+							0.11900909,
+							0.3041647,
+							0.11970909,
+							0.3040353,
+							0.14505455,
+							0.08003529,
+							0.14435455
+						]
+					],
+					"page": 1,
+					"text": "TechSupply Co."
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorPhoneNumber",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.14382352,
+							0.2037909,
+							0.2929647,
+							0.20343636,
+							0.29302353,
+							0.21904545,
+							0.14388236,
+							0.21939999
+						]
+					],
+					"page": 1,
+					"text": "+1 (555) 123-4567"
+				}
+			],
+			"labelType": "Words"
+		}
+	]
+}

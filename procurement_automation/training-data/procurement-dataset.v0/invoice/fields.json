@@ -1,0 +1,106 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/fields.json",
+	"fields": [
+		{
+			"fieldKey": "BillingAddress",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "CustomerName",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "InvoiceDate",
+			"fieldType": "date",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "InvoiceId",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "InvoiceTotal",
+			"fieldType": "number",
+			"fieldFormat": "currency",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "Items",
+			"fieldType": "array",
+			"fieldFormat": "not-specified",
+			"itemType": "Items_object",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "SubTotal",
+			"fieldType": "number",
+			"fieldFormat": "currency",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "TotalTax",
+			"fieldType": "number",
+			"fieldFormat": "currency",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "VendorAddress",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "VendorName",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "VendorPhoneNumber",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		}
+	],
+	"definitions": {
+		"Items_object": {
+			"fieldKey": "Items_object",
+			"fieldType": "object",
+			"fieldFormat": "not-specified",
+			"fields": [
+				{
+					"fieldKey": "Amount",
+					"fieldType": "number",
+					"fieldFormat": "currency",
+					"groupIndex": 0
+				},
+				{
+					"fieldKey": "Description",
+					"fieldType": "string",
+					"fieldFormat": "not-specified",
+					"groupIndex": 0
+				},
+				{
+					"fieldKey": "Quantity",
+					"fieldType": "number",
+					"fieldFormat": "not-specified",
+					"groupIndex": 0
+				},
+				{
+					"fieldKey": "UnitPrice",
+					"fieldType": "number",
+					"fieldFormat": "currency",
+					"groupIndex": 0
+				}
+			],
+			"groupIndex": 0
+		}
+	}
+}

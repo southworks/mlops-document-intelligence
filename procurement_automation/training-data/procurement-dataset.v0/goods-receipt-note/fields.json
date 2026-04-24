@@ -1,0 +1,29 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/fields.json",
+	"fields": [
+		{
+			"fieldKey": "CustomerName",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "PurchaseOrder",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "VendorName",
+			"fieldType": "string",
+			"fieldFormat": "not-specified",
+			"groupIndex": 0
+		},
+		{
+			"fieldKey": "ReceiptNumber",
+			"fieldType": "string",
+			"fieldFormat": "not-specified"
+		}
+	],
+	"definitions": {}
+}

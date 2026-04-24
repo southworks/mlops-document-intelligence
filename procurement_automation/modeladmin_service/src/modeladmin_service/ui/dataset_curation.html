@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dataset Curation</title>
+    <link rel="stylesheet" href="/modeladmin/ui/static/modeladmin-ui.css" />
+  </head>
+  <body>
+    <main class="page" id="mainPage">
+      <header class="header header-row">
+        <div>
+          <h1 id="datasetTitle">Training Dataset</h1>
+          <p><span id="datasetStatusBadge"></span></p>
+        </div>
+        <nav class="stage-nav" aria-label="ModelAdmin workflow">
+          <a href="/modeladmin/ui" class="stage-pill">Review</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-candidates" class="stage-pill">Approved</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/datasets" class="stage-pill active">Datasets</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-jobs" class="stage-pill">Models</a>
+        </nav>
+      </header>
+
+      <div id="errorBox" class="error hidden"></div>
+      <div id="successBox" class="success hidden"></div>
+
+      <section class="card-grid">
+        <article class="card">
+          <h3>Dataset Info</h3>
+          <p><strong>ID:</strong> <span id="datasetId">-</span></p>
+          <p><strong>Name:</strong> <span id="datasetName">-</span></p>
+          <p><strong>Status:</strong> <span id="infoStatus">-</span></p>
+          <p><strong>Created by:</strong> <span id="createdBy">-</span></p>
+          <p><strong>Created at:</strong> <span id="createdAt">-</span></p>
+        </article>
+
+
+      </section>
+
+      <section class="card" id="memberSummarySection">
+        <h3>Per-class member summary</h3>
+        <div id="memberSummary" class="member-summary"></div>
+      </section>
+
+      <div id="actionArea" class="card row split hidden">
+        <p id="actionHint" class="muted"></p>
+        <button id="stageBtn" type="button" class="hidden">Stage Dataset</button>
+        <button id="recheckBtn" type="button" class="hidden">Check Sidecar Files</button>
+        <button id="markReadyBtn" type="button" class="hidden">Mark ready for retrain</button>
+        <button id="startTrainingBtn" type="button" class="hidden">Start Training</button>
+      </div>
+
+      <section id="trainingJobPanel" class="card hidden">
+        <h3>Training Job</h3>
+        <div id="trainingJobBanner"></div>
+        <p>
+          <strong>Job ID:</strong> <span id="trainingJobId">-</span>
+          &nbsp; <strong>Status:</strong> <span id="trainingJobStatus">-</span>
+          &nbsp; <span id="trainingJobPollingIndicator" class="muted"></span>
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Operation</th>
+                <th>Doc Type</th>
+                <th>Model ID</th>
+                <th>Status</th>
+                <th>Error</th>
+              </tr>
+            </thead>
+            <tbody id="trainingJobOpsTable"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="recheckResultSection" class="card hidden">
+        <h3>Sidecar File Check Results</h3>
+        <div id="recheckBanner"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Doc Type</th>
+                <th>Filename</th>
+                <th>OCR Sidecar</th>
+                <th>Labels Sidecar</th>
+                <th>Schema Match</th>
+              </tr>
+            </thead>
+            <tbody id="recheckTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3>Members</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Document ID</th>
+                <th>Filename</th>
+                <th>Label</th>
+                <th>Model version</th>
+                <th>Approved at</th>
+                <th id="removeColHeader"></th>
+              </tr>
+            </thead>
+            <tbody id="memberTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/modeladmin/ui/static/dataset_curation.js?v=20260331-stage-sidecar-gate-v2"></script>
+  </body>
+</html>

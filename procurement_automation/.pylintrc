@@ -1,0 +1,28 @@
+[MASTER]
+ignore=.venv,venv,node_modules,__pycache__,migrations
+jobs=0
+persistent=yes
+init-hook="import sys; sys.path.insert(0, 'procurement_automation/backend')"
+
+[MESSAGES CONTROL]
+disable=
+    C0114,
+    C0115,
+    C0116,
+    R0903,
+    R0913,
+    R0917,
+    R0801,
+    W0511
+
+[FORMAT]
+max-line-length=100
+
+[DESIGN]
+max-args=10
+max-locals=25
+max-branches=20
+max-statements=70
+
+[REPORTS]
+score=yes

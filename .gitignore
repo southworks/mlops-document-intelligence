@@ -1,0 +1,93 @@
+# Environment Variables (CRITICAL - NEVER COMMIT)
+.env
+.env.*
+.env.local
+.env.production
+.env.development
+*.env
+!procurement_automation/.env.example
+!procurement_automation/.env.local.example
+
+# Python Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+virtualenv/
+
+# Python Cache & Compiled Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Python Package Build
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Database Files (Local Development)
+*.db
+*.sqlite
+*.sqlite3
+invoice_ocr.db
+
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+edb.chk
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Node (Frontend)
+node_modules/
+.pnp
+.pnp.js
+
+# Frontend Build
+frontend/dist/
+frontend/build/
+backend/static/
+
+# Jupyter Notebooks (Checkpoints)
+.ipynb_checkpoints/
+
+# Azure Function Local Settings
+local.settings.json
+__blobstorage__/
+__queuestorage__/
+__azurite_db*__.json
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+copilot-instructions.md

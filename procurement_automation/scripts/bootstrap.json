@@ -1,0 +1,13 @@
+{
+  "training_data": {
+    "dataset_path": "../training-data/procurement-dataset.v0"
+  },
+  "compose_model_id": "procurement-compose-model.v0",
+  "classifier_model_id": "procurement-classificator.v0",
+  "extractors": {
+    "invoice": "invoice-extractor.v0",
+    "purchase-order": "purchase-order-extractor.v0",
+    "goods-receipt-note": "goods-receipt-note-extractor.v0"
+  },
+  "activate": true
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "documentType": "invoice",
+  "fields": [
+    {
+      "systemKey": "billing_address",
+      "path": "documents[0].fields.BillingAddress",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "customer_name",
+      "path": "documents[0].fields.CustomerName",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "invoice_date",
+      "path": "documents[0].fields.InvoiceDate",
+      "required": false,
+      "expectedType": "date"
+    },
+    {
+      "systemKey": "invoice_id",
+      "path": "documents[0].fields.InvoiceId",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "invoice_total",
+      "path": "documents[0].fields.InvoiceTotal",
+      "required": false,
+      "expectedType": "number"
+    },
+    {
+      "systemKey": "items",
+      "array": true,
+      "path": "documents[0].fields.Items",
+      "required": false,
+      "itemSchema": [
+        {
+          "systemKey": "amount",
+          "path": "Amount",
+          "required": false,
+          "expectedType": null
+        },
+        {
+          "systemKey": "description",
+          "path": "Description",
+          "required": false,
+          "expectedType": null
+        },
+        {
+          "systemKey": "quantity",
+          "path": "Quantity",
+          "required": false,
+          "expectedType": null
+        },
+        {
+          "systemKey": "unit_price",
+          "path": "UnitPrice",
+          "required": false,
+          "expectedType": null
+        }
+      ]
+    },
+    {
+      "systemKey": "sub_total",
+      "path": "documents[0].fields.SubTotal",
+      "required": false,
+      "expectedType": "number"
+    },
+    {
+      "systemKey": "total_tax",
+      "path": "documents[0].fields.TotalTax",
+      "required": false,
+      "expectedType": "number"
+    },
+    {
+      "systemKey": "vendor_address",
+      "path": "documents[0].fields.VendorAddress",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "vendor_name",
+      "path": "documents[0].fields.VendorName",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "vendor_phone_number",
+      "path": "documents[0].fields.VendorPhoneNumber",
+      "required": false,
+      "expectedType": "string"
+    }
+  ]
+}

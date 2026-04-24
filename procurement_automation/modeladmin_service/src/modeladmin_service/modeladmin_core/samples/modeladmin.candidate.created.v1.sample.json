@@ -1,0 +1,21 @@
+{
+  "event_name": "modeladmin.candidate.created.v1",
+  "contract_version": "1.0.0",
+  "document_id": "job-36d62d4f",
+  "compose_model_id": "procurement-compose-model.v2",
+  "idempotency_key": "job-36d62d4f:procurement-compose-model.v2",
+  "blob_path": "documents/2026/02/26/invoice-1002.pdf",
+  "processed_blob_path": "documents/invoice/job-36d62d4f.json",
+  "source_channel": "process-new-api",
+  "predicted_document_type": "invoice",
+  "classification_confidence": 0.62,
+  "has_low_confidence": true,
+  "trigger_reason": "low_confidence",
+  "original_filename": "invoice-1002.pdf",
+  "structured_data": {
+    "invoice_number": "INV-1002",
+    "vendor_name": "Northwind Ltd"
+  },
+  "processing_error": null,
+  "emitted_at": "2026-02-26T19:16:12.441Z"
+}

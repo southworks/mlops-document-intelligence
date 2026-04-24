@@ -1,0 +1,9 @@
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+gunicorn==21.2.0
+pydantic==2.9.2
+pydantic-settings==2.6.1
+sqlalchemy==2.0.36
+psycopg2-binary==2.9.10
+azure-ai-documentintelligence==1.0.0
+azure-storage-blob==12.24.0

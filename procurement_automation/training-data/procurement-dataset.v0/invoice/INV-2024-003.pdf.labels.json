@@ -1,0 +1,314 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "INV-2024-003.pdf",
+	"labels": [
+		{
+			"label": "BillingAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.15196471,
+							0.3805727,
+							0.39647058,
+							0.38066366,
+							0.39645883,
+							0.39545453,
+							0.15195294,
+							0.39536363
+						]
+					],
+					"page": 1,
+					"text": "123 Main Street, Miami, FL 33101"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.081094116,
+							0.3544909,
+							0.19661176,
+							0.35475454,
+							0.19655293,
+							0.36991817,
+							0.08103529,
+							0.36965454
+						]
+					],
+					"page": 1,
+					"text": "Carlos Perez"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceDate",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.70591766,
+							0.27879092,
+							0.8071883,
+							0.27851817,
+							0.8071529,
+							0.29395455,
+							0.7059412,
+							0.29405454
+						]
+					],
+					"page": 1,
+					"text": "2024-02-05"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceId",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.17214118,
+							0.2786818,
+							0.2942706,
+							0.27844545,
+							0.2942706,
+							0.2939909,
+							0.17214118,
+							0.2940818
+						]
+					],
+					"page": 1,
+					"text": "INV-2024-003"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8321294,
+							0.65264547,
+							0.93554115,
+							0.65266365,
+							0.93554115,
+							0.6711,
+							0.83227056,
+							0.6717455
+						]
+					],
+					"page": 1,
+					"text": "$1,320.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Amount",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8322118,
+							0.50662726,
+							0.9140588,
+							0.5063091,
+							0.9140588,
+							0.52163637,
+							0.83227056,
+							0.5218909
+						]
+					],
+					"page": 1,
+					"text": "$1,200.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Description",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08072942,
+							0.50649095,
+							0.3027294,
+							0.5059091,
+							0.3028,
+							0.5223,
+							0.0808,
+							0.5228818
+						]
+					],
+					"page": 1,
+					"text": "Samsung Refrigerator 500L"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Quantity",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.5728235,
+							0.50753635,
+							0.5813765,
+							0.50753635,
+							0.5813765,
+							0.5196545,
+							0.57280004,
+							0.51966363
+						]
+					],
+					"page": 1,
+					"text": "1"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/UnitPrice",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.6852235,
+							0.5067,
+							0.7669294,
+							0.5066364,
+							0.7669294,
+							0.5216909,
+							0.68528235,
+							0.5218909
+						]
+					],
+					"page": 1,
+					"text": "$1,200.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "SubTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.83231765,
+							0.58262724,
+							0.9140588,
+							0.5825,
+							0.9140588,
+							0.5975818,
+							0.83243525,
+							0.59788185
+						]
+					],
+					"page": 1,
+					"text": "$1,200.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "TotalTax",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.83239996,
+							0.60786366,
+							0.8990941,
+							0.6076909,
+							0.8990941,
+							0.62234545,
+							0.83249414,
+							0.6225455
+						]
+					],
+					"page": 1,
+					"text": "$120.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.0816,
+							0.158,
+							0.44270587,
+							0.158,
+							0.44270587,
+							0.17362727,
+							0.0816,
+							0.17362727
+						]
+					],
+					"page": 1,
+					"text": "1234 Business Avenue, New York, NY 10001"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.081329405,
+							0.12030909,
+							0.3221765,
+							0.12075455,
+							0.32210588,
+							0.14203636,
+							0.081258826,
+							0.14159091
+						]
+					],
+					"page": 1,
+					"text": "ElectroHome Inc."
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorPhoneNumber",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.14383529,
+							0.20374545,
+							0.2929647,
+							0.20336364,
+							0.29303527,
+							0.21893635,
+							0.14390588,
+							0.21932727
+						]
+					],
+					"page": 1,
+					"text": "+1 (555) 123-4567"
+				}
+			],
+			"labelType": "Words"
+		}
+	]
+}

@@ -1,0 +1,94 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "GRN_low_confidence_003.pdf",
+	"labels": [
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"page": 1,
+					"text": "",
+					"boundingBoxes": [
+						[
+							0.2258366629269737,
+							0.2060344630274279,
+							0.3373985290527345,
+							0.2060344630274279,
+							0.3373985290527345,
+							0.22500001973119277,
+							0.2258366629269737,
+							0.22500001973119277
+						]
+					]
+				}
+			],
+			"labelType": "region"
+		},
+		{
+			"label": "PurchaseOrder",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.24514116,
+							0.1670091,
+							0.31054118,
+							0.16697273,
+							0.31054118,
+							0.18025455,
+							0.24515295,
+							0.18035454
+						]
+					],
+					"page": 1,
+					"text": "PO-9645"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.20350587,
+							0.14688182,
+							0.35416472,
+							0.1465091,
+							0.35422352,
+							0.16088182,
+							0.2035647,
+							0.16125454
+						]
+					],
+					"page": 1,
+					"text": "International Traders"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "ReceiptNumber",
+			"value": [
+				{
+					"page": 1,
+					"text": "",
+					"boundingBoxes": [
+						[
+							0.23671401296619457,
+							0.10258618716535894,
+							0.35943206570453134,
+							0.10258618716535894,
+							0.35943206570453134,
+							0.12155177675444506,
+							0.23671401296619457,
+							0.12155177675444506
+						]
+					]
+				}
+			],
+			"labelType": "region"
+		}
+	]
+}

@@ -1,0 +1,93 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "GRN-2024-204.pdf",
+	"labels": [
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.1264706,
+							0.41530907,
+							0.26242355,
+							0.41563636,
+							0.2623647,
+							0.42976362,
+							0.12641177,
+							0.4294364
+						]
+					],
+					"page": 1,
+					"text": "ABC Company Inc"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "PurchaseOrder",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.44981176,
+							0.21722727,
+							0.54948235,
+							0.21739091,
+							0.54948235,
+							0.22999091,
+							0.44977647,
+							0.22956362
+						]
+					],
+					"page": 1,
+					"text": "PO-2024-204"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.12684706,
+							0.3417909,
+							0.25469413,
+							0.34253636,
+							0.25455296,
+							0.35738182,
+							0.12670588,
+							0.35663638
+						]
+					],
+					"page": 1,
+					"text": "TechSupply Corp"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "ReceiptNumber",
+			"value": [
+				{
+					"page": 1,
+					"text": "GRN-2024-204",
+					"boundingBoxes": [
+						[
+							0.4501764705882353,
+							0.18795454545454546,
+							0.5624941176470588,
+							0.18807272727272728,
+							0.5624941176470588,
+							0.20077272727272727,
+							0.4501764705882353,
+							0.20040000000000002
+						]
+					]
+				}
+			]
+		}
+	]
+}

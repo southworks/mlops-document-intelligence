@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "modeladmin.samples.approved.v1",
+  "title": "ModelAdmin Samples Approved Export V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_name",
+    "contract_version",
+    "export_id",
+    "candidate_id",
+    "document_id",
+    "compose_model_id",
+    "idempotency_key",
+    "operator_label",
+    "approved_at",
+    "blob_path"
+  ],
+  "properties": {
+    "event_name": { "const": "modeladmin.samples.approved.v1" },
+    "contract_version": { "const": "1.0.0" },
+    "export_id": { "type": "string", "minLength": 1 },
+    "candidate_id": { "type": "string", "minLength": 1 },
+    "document_id": { "type": "string", "minLength": 1 },
+    "compose_model_id": { "type": "string", "minLength": 1 },
+    "idempotency_key": { "type": "string", "minLength": 1 },
+    "operator_label": { "type": "string", "minLength": 1 },
+    "approved_at": { "type": "string", "format": "date-time" },
+    "blob_path": { "type": "string", "minLength": 1 },
+    "processed_blob_path": { "type": ["string", "null"] },
+    "source_channel": { "type": ["string", "null"] },
+    "training_target_path": { "type": ["string", "null"] },
+    "metadata": { "type": "object" }
+  }
+}

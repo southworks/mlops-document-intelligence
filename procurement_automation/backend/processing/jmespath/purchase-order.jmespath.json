@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "documentType": "purchase-order",
+  "fields": [
+    {
+      "systemKey": "customer_address",
+      "path": "documents[0].fields.CustomerAddress",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "customer_name",
+      "path": "documents[0].fields.CustomerName",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "customer_phone_number",
+      "path": "documents[0].fields.CustomerPhoneNumber",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "date",
+      "path": "documents[0].fields.Date",
+      "required": false,
+      "expectedType": "date"
+    },
+    {
+      "systemKey": "total",
+      "path": "documents[0].fields.Total",
+      "required": false,
+      "expectedType": "number"
+    },
+    {
+      "systemKey": "items",
+      "array": true,
+      "path": "documents[0].fields.Items",
+      "required": false,
+      "itemSchema": [
+        {
+          "systemKey": "amount",
+          "path": "Amount",
+          "required": false,
+          "expectedType": null
+        },
+        {
+          "systemKey": "description",
+          "path": "Description",
+          "required": false,
+          "expectedType": null
+        },
+        {
+          "systemKey": "quantity",
+          "path": "Quantity",
+          "required": false,
+          "expectedType": null
+        },
+        {
+          "systemKey": "unit_price",
+          "path": "UnitPrice",
+          "required": false,
+          "expectedType": null
+        },
+        {
+          "systemKey": "product_code",
+          "path": "ProductCode",
+          "required": false,
+          "expectedType": null
+        }
+      ]
+    },
+    {
+      "systemKey": "payment_term",
+      "path": "documents[0].fields.PaymentTerm",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "purchase_order",
+      "path": "documents[0].fields.PurchaseOrder",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "shipping_address",
+      "path": "documents[0].fields.ShippingAddress",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "shipping_address_recipient",
+      "path": "documents[0].fields.ShippingAddressRecipient",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "sub_total",
+      "path": "documents[0].fields.SubTotal",
+      "required": false,
+      "expectedType": "number"
+    },
+    {
+      "systemKey": "total_tax",
+      "path": "documents[0].fields.TotalTax",
+      "required": false,
+      "expectedType": "number"
+    },
+    {
+      "systemKey": "vendor_address",
+      "path": "documents[0].fields.VendorAddress",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "vendor_name",
+      "path": "documents[0].fields.VendorName",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "vendor_phone_number",
+      "path": "documents[0].fields.VendorPhoneNumber",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "delivery_date",
+      "path": "documents[0].fields.DeliveryDate",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "shipping_total",
+      "path": "documents[0].fields.ShippingTotal",
+      "required": false,
+      "expectedType": "number"
+    }
+  ]
+}

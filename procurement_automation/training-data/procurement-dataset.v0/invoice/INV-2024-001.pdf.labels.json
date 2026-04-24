@@ -1,0 +1,314 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "INV-2024-001.pdf",
+	"labels": [
+		{
+			"label": "BillingAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.1519059,
+							0.3806,
+							0.39649412,
+							0.38066366,
+							0.39648235,
+							0.3954909,
+							0.15189412,
+							0.39542726
+						]
+					],
+					"page": 1,
+					"text": "123 Main Street, Miami, FL 33101"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08137647,
+							0.3543909,
+							0.18098824,
+							0.35424545,
+							0.18102352,
+							0.36966363,
+							0.081411764,
+							0.36980912
+						]
+					],
+					"page": 1,
+					"text": "John Smith"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceDate",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.7058,
+							0.27882728,
+							0.80729413,
+							0.2785,
+							0.80729413,
+							0.29396364,
+							0.7058235,
+							0.2940818
+						]
+					],
+					"page": 1,
+					"text": "2024-01-15"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceId",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.17234118,
+							0.27870908,
+							0.29231763,
+							0.27843636,
+							0.29231763,
+							0.29410908,
+							0.17232941,
+							0.29424545
+						]
+					],
+					"page": 1,
+					"text": "INV-2024-001"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.83248234,
+							0.65284544,
+							0.91667056,
+							0.6529364,
+							0.91667056,
+							0.6703454,
+							0.83255297,
+							0.67035455
+						]
+					],
+					"page": 1,
+					"text": "$935.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Amount",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.83244705,
+							0.5067182,
+							0.8990941,
+							0.50667274,
+							0.8990941,
+							0.5212091,
+							0.83248234,
+							0.5213909
+						]
+					],
+					"page": 1,
+					"text": "$850.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Description",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08005882,
+							0.50683635,
+							0.26757646,
+							0.5062,
+							0.26767057,
+							0.52244544,
+							0.08015294,
+							0.52308184
+						]
+					],
+					"page": 1,
+					"text": "Laptop Dell Inspiron 15"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Quantity",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.5728706,
+							0.50756365,
+							0.5813765,
+							0.5076091,
+							0.5813765,
+							0.51969093,
+							0.57284707,
+							0.5196364
+						]
+					],
+					"page": 1,
+					"text": "1"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/UnitPrice",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.6854588,
+							0.50676364,
+							0.75195295,
+							0.50685453,
+							0.75195295,
+							0.5212273,
+							0.6854824,
+							0.5213909
+						]
+					],
+					"page": 1,
+					"text": "$850.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "SubTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.83244705,
+							0.5826636,
+							0.8990941,
+							0.5827636,
+							0.8990941,
+							0.5971,
+							0.8325294,
+							0.59738183
+						]
+					],
+					"page": 1,
+					"text": "$850.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "TotalTax",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8325176,
+							0.60800004,
+							0.88931763,
+							0.6079818,
+							0.88931763,
+							0.6223636,
+							0.83255297,
+							0.6224546
+						]
+					],
+					"page": 1,
+					"text": "$85.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08169412,
+							0.15816364,
+							0.44270587,
+							0.15797272,
+							0.44271764,
+							0.1736,
+							0.08170588,
+							0.17379092
+						]
+					],
+					"page": 1,
+					"text": "1234 Business Avenue, New York, NY 10001"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.080129415,
+							0.11901819,
+							0.3041647,
+							0.11971819,
+							0.3040353,
+							0.14503635,
+							0.08,
+							0.14433636
+						]
+					],
+					"page": 1,
+					"text": "TechSupply Co."
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorPhoneNumber",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.14378823,
+							0.20378183,
+							0.2929647,
+							0.20342727,
+							0.29302353,
+							0.21902728,
+							0.14384706,
+							0.21938181
+						]
+					],
+					"page": 1,
+					"text": "+1 (555) 123-4567"
+				}
+			],
+			"labelType": "Words"
+		}
+	]
+}

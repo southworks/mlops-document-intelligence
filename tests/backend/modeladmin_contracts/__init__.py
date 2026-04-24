@@ -1,0 +1,1 @@
+# Modeladmin contracts tests package

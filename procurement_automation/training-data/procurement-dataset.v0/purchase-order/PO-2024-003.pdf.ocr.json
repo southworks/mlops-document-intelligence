@@ -1,0 +1,3562 @@
+{
+	"status": "succeeded",
+	"createdDateTime": "2026-02-25T16:42:28Z",
+	"lastUpdatedDateTime": "2026-02-25T16:42:31Z",
+	"analyzeResult": {
+		"apiVersion": "2024-11-30",
+		"modelId": "prebuilt-layout",
+		"stringIndexType": "utf16CodeUnit",
+		"content": "Purchase Order\nPO-2024-003\nDate: 2024-02-01\nDelivery: 2024-02-20\nTerms: Net 30\nVENDOR ElectroHome Inc. 4567 Electronics Way, Boston, MA 02 +1 (555) 345-6789\nBUYER Zain Mart Procurement 5678 Commerce Blvd, Chicago, IL 606 +1 (555) 987-6543\nSHIP TO: Zain Mart Store #5, 300 Retail Plaza, Chicago, IL 60604\nCode\nDescription\nQty\nPrice\nTotal\nRF-SAM-500\nSamsung Refrigerator 500L\n8\n$1200.00\n$9600.00\nWM-LG-450\nLG Washing Machine 450W\n6\n$950.00\n$5700.00\nSub:\n$15300.00\nTax:\n$1530.00\nTOTAL:\n$16830.00",
+		"pages": [
+			{
+				"pageNumber": 1,
+				"angle": -0.06759999692440033,
+				"width": 8.5,
+				"height": 11,
+				"unit": "inch",
+				"words": [
+					{
+						"content": "Purchase",
+						"polygon": [
+							0.6957,
+							0.2288,
+							2.1842,
+							0.2281,
+							2.1818,
+							0.5246,
+							0.6932,
+							0.518
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 0,
+							"length": 8
+						}
+					},
+					{
+						"content": "Order",
+						"polygon": [
+							2.2998,
+							0.2288,
+							3.2152,
+							0.2289,
+							3.2152,
+							0.5247,
+							2.298,
+							0.5257
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 9,
+							"length": 5
+						}
+					},
+					{
+						"content": "PO-2024-003",
+						"polygon": [
+							6.4659,
+							0.3008,
+							7.8138,
+							0.2988,
+							7.8138,
+							0.5148,
+							6.4654,
+							0.513
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 15,
+							"length": 11
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							0.6914,
+							0.8091,
+							0.9507,
+							0.8081,
+							0.9507,
+							0.9215,
+							0.6918,
+							0.9218
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 27,
+							"length": 5
+						}
+					},
+					{
+						"content": "2024-02-01",
+						"polygon": [
+							0.9878,
+							0.8085,
+							1.5581,
+							0.806,
+							1.5578,
+							0.9205,
+							0.9877,
+							0.9211
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 33,
+							"length": 10
+						}
+					},
+					{
+						"content": "Delivery:",
+						"polygon": [
+							2.7714,
+							0.8087,
+							3.2016,
+							0.8068,
+							3.2014,
+							0.9269,
+							2.7714,
+							0.9287
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 44,
+							"length": 9
+						}
+					},
+					{
+						"content": "2024-02-20",
+						"polygon": [
+							3.2389,
+							0.8065,
+							3.8164,
+							0.8042,
+							3.8161,
+							0.9235,
+							3.2387,
+							0.9266
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 54,
+							"length": 10
+						}
+					},
+					{
+						"content": "Terms:",
+						"polygon": [
+							5.5486,
+							0.8077,
+							5.892,
+							0.8075,
+							5.8918,
+							0.9205,
+							5.5485,
+							0.922
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 65,
+							"length": 6
+						}
+					},
+					{
+						"content": "Net",
+						"polygon": [
+							5.9347,
+							0.8076,
+							6.1036,
+							0.8073,
+							6.1034,
+							0.92,
+							5.9345,
+							0.9202
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 72,
+							"length": 3
+						}
+					},
+					{
+						"content": "30",
+						"polygon": [
+							6.1352,
+							0.8072,
+							6.2688,
+							0.8048,
+							6.2684,
+							0.9204,
+							6.1349,
+							0.92
+						],
+						"confidence": 0.999,
+						"span": {
+							"offset": 76,
+							"length": 2
+						}
+					},
+					{
+						"content": "VENDOR",
+						"polygon": [
+							0.7544,
+							1.2403,
+							1.306,
+							1.2396,
+							1.306,
+							1.3608,
+							0.7543,
+							1.3598
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 79,
+							"length": 6
+						}
+					},
+					{
+						"content": "ElectroHome",
+						"polygon": [
+							0.761,
+							1.4168,
+							1.4002,
+							1.4183,
+							1.3999,
+							1.5332,
+							0.7607,
+							1.5311
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 86,
+							"length": 11
+						}
+					},
+					{
+						"content": "Inc.",
+						"polygon": [
+							1.4396,
+							1.4187,
+							1.6159,
+							1.4178,
+							1.6159,
+							1.5335,
+							1.4394,
+							1.5333
+						],
+						"confidence": 0.958,
+						"span": {
+							"offset": 98,
+							"length": 4
+						}
+					},
+					{
+						"content": "4567",
+						"polygon": [
+							0.7583,
+							1.5597,
+							1.0058,
+							1.5602,
+							1.0056,
+							1.6788,
+							0.7582,
+							1.678
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 103,
+							"length": 4
+						}
+					},
+					{
+						"content": "Electronics",
+						"polygon": [
+							1.0437,
+							1.5601,
+							1.5825,
+							1.5587,
+							1.5819,
+							1.6819,
+							1.0435,
+							1.6789
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 108,
+							"length": 11
+						}
+					},
+					{
+						"content": "Way,",
+						"polygon": [
+							1.6124,
+							1.5587,
+							1.8599,
+							1.5594,
+							1.8591,
+							1.682,
+							1.6118,
+							1.6819
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 120,
+							"length": 4
+						}
+					},
+					{
+						"content": "Boston,",
+						"polygon": [
+							1.9018,
+							1.5592,
+							2.269,
+							1.5589,
+							2.2681,
+							1.6818,
+							1.901,
+							1.6822
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 125,
+							"length": 7
+						}
+					},
+					{
+						"content": "MA",
+						"polygon": [
+							2.3109,
+							1.5587,
+							2.4745,
+							1.5577,
+							2.474,
+							1.6812,
+							2.3101,
+							1.6815
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 133,
+							"length": 2
+						}
+					},
+					{
+						"content": "02",
+						"polygon": [
+							2.5044,
+							1.5575,
+							2.6396,
+							1.5569,
+							2.6396,
+							1.6805,
+							2.504,
+							1.6813
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 136,
+							"length": 2
+						}
+					},
+					{
+						"content": "+1",
+						"polygon": [
+							0.7605,
+							1.7003,
+							0.8723,
+							1.7005,
+							0.8727,
+							1.8213,
+							0.7609,
+							1.8213
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 139,
+							"length": 2
+						}
+					},
+					{
+						"content": "(555)",
+						"polygon": [
+							0.9223,
+							1.7001,
+							1.1778,
+							1.6981,
+							1.1778,
+							1.8211,
+							0.9224,
+							1.8211
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 142,
+							"length": 5
+						}
+					},
+					{
+						"content": "345-6789",
+						"polygon": [
+							1.2098,
+							1.698,
+							1.687,
+							1.6969,
+							1.6869,
+							1.8175,
+							1.2098,
+							1.8209
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 148,
+							"length": 8
+						}
+					},
+					{
+						"content": "BUYER",
+						"polygon": [
+							4.5094,
+							1.2417,
+							4.9583,
+							1.2407,
+							4.9583,
+							1.3599,
+							4.5092,
+							1.3602
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 157,
+							"length": 5
+						}
+					},
+					{
+						"content": "Zain",
+						"polygon": [
+							4.5077,
+							1.4143,
+							4.7229,
+							1.4146,
+							4.722,
+							1.5321,
+							4.5072,
+							1.5323
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 163,
+							"length": 4
+						}
+					},
+					{
+						"content": "Mart",
+						"polygon": [
+							4.7614,
+							1.4148,
+							4.9823,
+							1.415,
+							4.9813,
+							1.5331,
+							4.7603,
+							1.5324
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 168,
+							"length": 4
+						}
+					},
+					{
+						"content": "Procurement",
+						"polygon": [
+							5.0169,
+							1.4151,
+							5.6611,
+							1.4167,
+							5.6611,
+							1.5329,
+							5.0158,
+							1.5333
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 173,
+							"length": 11
+						}
+					},
+					{
+						"content": "5678",
+						"polygon": [
+							4.5082,
+							1.5585,
+							4.7555,
+							1.5592,
+							4.7553,
+							1.68,
+							4.5081,
+							1.6793
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 185,
+							"length": 4
+						}
+					},
+					{
+						"content": "Commerce",
+						"polygon": [
+							4.792,
+							1.5594,
+							5.3291,
+							1.5588,
+							5.3289,
+							1.682,
+							4.7917,
+							1.6801
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 190,
+							"length": 8
+						}
+					},
+					{
+						"content": "Blvd,",
+						"polygon": [
+							5.3697,
+							1.5587,
+							5.6048,
+							1.5581,
+							5.6044,
+							1.6822,
+							5.3695,
+							1.6819
+						],
+						"confidence": 0.974,
+						"span": {
+							"offset": 199,
+							"length": 5
+						}
+					},
+					{
+						"content": "Chicago,",
+						"polygon": [
+							5.6433,
+							1.5581,
+							6.073,
+							1.5581,
+							6.0725,
+							1.6829,
+							5.6429,
+							1.6826
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 205,
+							"length": 8
+						}
+					},
+					{
+						"content": "IL",
+						"polygon": [
+							6.1176,
+							1.5579,
+							6.2027,
+							1.5576,
+							6.2024,
+							1.6829,
+							6.1171,
+							1.6829
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 214,
+							"length": 2
+						}
+					},
+					{
+						"content": "606",
+						"polygon": [
+							6.2352,
+							1.5573,
+							6.4303,
+							1.5565,
+							6.4303,
+							1.6829,
+							6.2348,
+							1.6829
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 217,
+							"length": 3
+						}
+					},
+					{
+						"content": "+1",
+						"polygon": [
+							4.5091,
+							1.7004,
+							4.6214,
+							1.6996,
+							4.6221,
+							1.8213,
+							4.51,
+							1.8213
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 221,
+							"length": 2
+						}
+					},
+					{
+						"content": "(555)",
+						"polygon": [
+							4.6715,
+							1.6994,
+							4.9282,
+							1.6984,
+							4.9284,
+							1.8212,
+							4.672,
+							1.8213
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 224,
+							"length": 5
+						}
+					},
+					{
+						"content": "987-6543",
+						"polygon": [
+							4.9602,
+							1.6984,
+							5.4395,
+							1.6971,
+							5.4394,
+							1.818,
+							4.9606,
+							1.821
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 230,
+							"length": 8
+						}
+					},
+					{
+						"content": "SHIP",
+						"polygon": [
+							0.6905,
+							2.0525,
+							0.9466,
+							2.0541,
+							0.9464,
+							2.1799,
+							0.6904,
+							2.1769
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 239,
+							"length": 4
+						}
+					},
+					{
+						"content": "TO:",
+						"polygon": [
+							0.9823,
+							2.0538,
+							1.167,
+							2.0519,
+							1.1669,
+							2.1789,
+							0.9821,
+							2.1798
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 244,
+							"length": 3
+						}
+					},
+					{
+						"content": "Zain",
+						"polygon": [
+							1.3139,
+							2.0529,
+							1.528,
+							2.0534,
+							1.5281,
+							2.181,
+							1.3139,
+							2.1797
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 248,
+							"length": 4
+						}
+					},
+					{
+						"content": "Mart",
+						"polygon": [
+							1.5679,
+							2.0533,
+							1.7862,
+							2.0532,
+							1.7861,
+							2.1814,
+							1.5679,
+							2.1812
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 253,
+							"length": 4
+						}
+					},
+					{
+						"content": "Store",
+						"polygon": [
+							1.8198,
+							2.0532,
+							2.0801,
+							2.0536,
+							2.08,
+							2.1821,
+							1.8197,
+							2.1813
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 258,
+							"length": 5
+						}
+					},
+					{
+						"content": "#5,",
+						"polygon": [
+							2.1116,
+							2.0536,
+							2.2627,
+							2.0536,
+							2.2626,
+							2.1821,
+							2.1115,
+							2.1822
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 264,
+							"length": 3
+						}
+					},
+					{
+						"content": "300",
+						"polygon": [
+							2.3005,
+							2.0535,
+							2.481,
+							2.0535,
+							2.4809,
+							2.182,
+							2.3004,
+							2.182
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 268,
+							"length": 3
+						}
+					},
+					{
+						"content": "Retail",
+						"polygon": [
+							2.5209,
+							2.0536,
+							2.7938,
+							2.0538,
+							2.7936,
+							2.1828,
+							2.5208,
+							2.1821
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 272,
+							"length": 6
+						}
+					},
+					{
+						"content": "Plaza,",
+						"polygon": [
+							2.8357,
+							2.0538,
+							3.1317,
+							2.0544,
+							3.1315,
+							2.184,
+							2.8356,
+							2.1829
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 279,
+							"length": 6
+						}
+					},
+					{
+						"content": "Chicago,",
+						"polygon": [
+							3.1716,
+							2.0542,
+							3.5956,
+							2.0547,
+							3.5955,
+							2.183,
+							3.1713,
+							2.1838
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 286,
+							"length": 8
+						}
+					},
+					{
+						"content": "IL",
+						"polygon": [
+							3.6208,
+							2.0545,
+							3.7299,
+							2.053,
+							3.7298,
+							2.1829,
+							3.6207,
+							2.1831
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 295,
+							"length": 2
+						}
+					},
+					{
+						"content": "60604",
+						"polygon": [
+							3.7656,
+							2.0525,
+							4.0825,
+							2.0533,
+							4.0824,
+							2.1812,
+							3.7654,
+							2.1829
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 298,
+							"length": 5
+						}
+					},
+					{
+						"content": "Code",
+						"polygon": [
+							0.7596,
+							2.5483,
+							1.0514,
+							2.5475,
+							1.0514,
+							2.6573,
+							0.7595,
+							2.6556
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 304,
+							"length": 4
+						}
+					},
+					{
+						"content": "Description",
+						"polygon": [
+							1.6586,
+							2.5459,
+							2.2855,
+							2.545,
+							2.2855,
+							2.6714,
+							1.6582,
+							2.6684
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 309,
+							"length": 11
+						}
+					},
+					{
+						"content": "Qty",
+						"polygon": [
+							5.134,
+							2.5466,
+							5.3328,
+							2.55,
+							5.3298,
+							2.6771,
+							5.1313,
+							2.6739
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 321,
+							"length": 3
+						}
+					},
+					{
+						"content": "Price",
+						"polygon": [
+							5.824,
+							2.5487,
+							6.1149,
+							2.548,
+							6.1142,
+							2.6572,
+							5.8235,
+							2.6564
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 325,
+							"length": 5
+						}
+					},
+					{
+						"content": "Total",
+						"polygon": [
+							6.7987,
+							2.5466,
+							7.0778,
+							2.5447,
+							7.0778,
+							2.6551,
+							6.7982,
+							2.6553
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 331,
+							"length": 5
+						}
+					},
+					{
+						"content": "RF-SAM-500",
+						"polygon": [
+							0.7574,
+							2.7005,
+							1.3359,
+							2.6989,
+							1.3355,
+							2.7942,
+							0.7576,
+							2.7942
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 337,
+							"length": 10
+						}
+					},
+					{
+						"content": "Samsung",
+						"polygon": [
+							1.6613,
+							2.6992,
+							2.0677,
+							2.6983,
+							2.0672,
+							2.8067,
+							1.661,
+							2.8066
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 348,
+							"length": 7
+						}
+					},
+					{
+						"content": "Refrigerator",
+						"polygon": [
+							2.091,
+							2.6981,
+							2.6137,
+							2.6966,
+							2.6134,
+							2.8067,
+							2.0904,
+							2.8067
+						],
+						"confidence": 0.777,
+						"span": {
+							"offset": 356,
+							"length": 12
+						}
+					},
+					{
+						"content": "500L",
+						"polygon": [
+							2.6352,
+							2.6966,
+							2.8644,
+							2.6958,
+							2.8642,
+							2.8047,
+							2.6349,
+							2.8067
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 369,
+							"length": 4
+						}
+					},
+					{
+						"content": "8",
+						"polygon": [
+							5.4989,
+							2.7113,
+							5.5584,
+							2.7122,
+							5.5585,
+							2.7882,
+							5.4987,
+							2.787
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 374,
+							"length": 1
+						}
+					},
+					{
+						"content": "$1200.00",
+						"polygon": [
+							5.976,
+							2.7032,
+							6.3955,
+							2.7002,
+							6.3952,
+							2.7975,
+							5.976,
+							2.7989
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 376,
+							"length": 8
+						}
+					},
+					{
+						"content": "$9600.00",
+						"polygon": [
+							7.1567,
+							2.7041,
+							7.5758,
+							2.7012,
+							7.5758,
+							2.7947,
+							7.1569,
+							2.7957
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 385,
+							"length": 8
+						}
+					},
+					{
+						"content": "WM-LG-450",
+						"polygon": [
+							0.754,
+							2.8578,
+							1.3005,
+							2.8593,
+							1.3005,
+							2.9636,
+							0.754,
+							2.9621
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 394,
+							"length": 9
+						}
+					},
+					{
+						"content": "LG",
+						"polygon": [
+							1.6568,
+							2.8567,
+							1.7904,
+							2.8571,
+							1.7901,
+							2.9728,
+							1.6566,
+							2.9728
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 404,
+							"length": 2
+						}
+					},
+					{
+						"content": "Washing",
+						"polygon": [
+							1.819,
+							2.8571,
+							2.197,
+							2.8578,
+							2.1962,
+							2.9728,
+							1.8186,
+							2.9728
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 407,
+							"length": 7
+						}
+					},
+					{
+						"content": "Machine",
+						"polygon": [
+							2.2314,
+							2.8576,
+							2.5941,
+							2.8552,
+							2.5934,
+							2.9718,
+							2.2305,
+							2.9728
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 415,
+							"length": 7
+						}
+					},
+					{
+						"content": "450W",
+						"polygon": [
+							2.6189,
+							2.855,
+							2.8831,
+							2.8523,
+							2.8831,
+							2.9691,
+							2.6182,
+							2.9716
+						],
+						"confidence": 0.99,
+						"span": {
+							"offset": 423,
+							"length": 4
+						}
+					},
+					{
+						"content": "6",
+						"polygon": [
+							5.4979,
+							2.8695,
+							5.5615,
+							2.8686,
+							5.5615,
+							2.9537,
+							5.4977,
+							2.9535
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 428,
+							"length": 1
+						}
+					},
+					{
+						"content": "$950.00",
+						"polygon": [
+							6.0307,
+							2.8625,
+							6.3971,
+							2.8599,
+							6.3971,
+							2.9642,
+							6.0304,
+							2.9666
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 430,
+							"length": 7
+						}
+					},
+					{
+						"content": "$5700.00",
+						"polygon": [
+							7.157,
+							2.8599,
+							7.5758,
+							2.8572,
+							7.5758,
+							2.9643,
+							7.1568,
+							2.9651
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 438,
+							"length": 8
+						}
+					},
+					{
+						"content": "Sub:",
+						"polygon": [
+							5.8314,
+							3.1476,
+							6.0928,
+							3.148,
+							6.0928,
+							3.2662,
+							5.8301,
+							3.2649
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 447,
+							"length": 4
+						}
+					},
+					{
+						"content": "$15300.00",
+						"polygon": [
+							6.9718,
+							3.143,
+							7.5758,
+							3.1425,
+							7.5758,
+							3.2718,
+							6.9717,
+							3.2718
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 452,
+							"length": 9
+						}
+					},
+					{
+						"content": "Tax:",
+						"polygon": [
+							5.829,
+							3.3164,
+							6.0817,
+							3.3167,
+							6.0817,
+							3.4323,
+							5.8284,
+							3.4323
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 462,
+							"length": 4
+						}
+					},
+					{
+						"content": "$1530.00",
+						"polygon": [
+							7.0409,
+							3.3109,
+							7.5747,
+							3.3103,
+							7.5742,
+							3.4359,
+							7.0411,
+							3.4376
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 467,
+							"length": 8
+						}
+					},
+					{
+						"content": "TOTAL:",
+						"polygon": [
+							5.8263,
+							3.5087,
+							6.3473,
+							3.5098,
+							6.3473,
+							3.6467,
+							5.8262,
+							3.645
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 476,
+							"length": 6
+						}
+					},
+					{
+						"content": "$16830.00",
+						"polygon": [
+							6.9084,
+							3.5084,
+							7.5758,
+							3.509,
+							7.5758,
+							3.6466,
+							6.9088,
+							3.6482
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 483,
+							"length": 9
+						}
+					}
+				],
+				"lines": [
+					{
+						"content": "Purchase Order",
+						"polygon": [
+							0.6933,
+							0.2272,
+							3.2134,
+							0.2277,
+							3.2133,
+							0.5211,
+							0.6932,
+							0.5205
+						],
+						"spans": [
+							{
+								"offset": 0,
+								"length": 14
+							}
+						]
+					},
+					{
+						"content": "PO-2024-003",
+						"polygon": [
+							6.4651,
+							0.3008,
+							7.8094,
+							0.2988,
+							7.8097,
+							0.5114,
+							6.4654,
+							0.5133
+						],
+						"spans": [
+							{
+								"offset": 15,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Date: 2024-02-01",
+						"polygon": [
+							0.6914,
+							0.8082,
+							1.5559,
+							0.806,
+							1.5562,
+							0.9186,
+							0.6917,
+							0.9208
+						],
+						"spans": [
+							{
+								"offset": 27,
+								"length": 16
+							}
+						]
+					},
+					{
+						"content": "Delivery: 2024-02-20",
+						"polygon": [
+							2.7708,
+							0.8082,
+							3.8143,
+							0.8037,
+							3.8148,
+							0.9229,
+							2.7714,
+							0.9274
+						],
+						"spans": [
+							{
+								"offset": 44,
+								"length": 20
+							}
+						]
+					},
+					{
+						"content": "Terms: Net 30",
+						"polygon": [
+							5.5482,
+							0.8065,
+							6.2653,
+							0.8048,
+							6.2656,
+							0.9185,
+							5.5485,
+							0.9201
+						],
+						"spans": [
+							{
+								"offset": 65,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "VENDOR",
+						"polygon": [
+							0.7544,
+							1.2395,
+							1.3046,
+							1.2396,
+							1.3046,
+							1.3588,
+							0.7543,
+							1.3587
+						],
+						"spans": [
+							{
+								"offset": 79,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "ElectroHome Inc.",
+						"polygon": [
+							0.7608,
+							1.4168,
+							1.6141,
+							1.4178,
+							1.6139,
+							1.5329,
+							0.7607,
+							1.5319
+						],
+						"spans": [
+							{
+								"offset": 86,
+								"length": 16
+							}
+						]
+					},
+					{
+						"content": "4567 Electronics Way, Boston, MA 02",
+						"polygon": [
+							0.7581,
+							1.5597,
+							2.6375,
+							1.5569,
+							2.6377,
+							1.6796,
+							0.7582,
+							1.6824
+						],
+						"spans": [
+							{
+								"offset": 103,
+								"length": 35
+							}
+						]
+					},
+					{
+						"content": "+1 (555) 345-6789",
+						"polygon": [
+							0.7603,
+							1.7,
+							1.6842,
+							1.6959,
+							1.6848,
+							1.817,
+							0.7609,
+							1.821
+						],
+						"spans": [
+							{
+								"offset": 139,
+								"length": 17
+							}
+						]
+					},
+					{
+						"content": "BUYER",
+						"polygon": [
+							4.5089,
+							1.2417,
+							4.958,
+							1.2405,
+							4.9583,
+							1.3584,
+							4.5092,
+							1.3596
+						],
+						"spans": [
+							{
+								"offset": 157,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "Zain Mart Procurement",
+						"polygon": [
+							4.5075,
+							1.4138,
+							5.6606,
+							1.4163,
+							5.6604,
+							1.5328,
+							4.5072,
+							1.5303
+						],
+						"spans": [
+							{
+								"offset": 163,
+								"length": 21
+							}
+						]
+					},
+					{
+						"content": "5678 Commerce Blvd, Chicago, IL 606",
+						"polygon": [
+							4.508,
+							1.5585,
+							6.4298,
+							1.5565,
+							6.4299,
+							1.6819,
+							4.5081,
+							1.6829
+						],
+						"spans": [
+							{
+								"offset": 185,
+								"length": 35
+							}
+						]
+					},
+					{
+						"content": "+1 (555) 987-6543",
+						"polygon": [
+							4.5091,
+							1.699,
+							5.4371,
+							1.697,
+							5.4374,
+							1.8187,
+							4.5093,
+							1.8207
+						],
+						"spans": [
+							{
+								"offset": 221,
+								"length": 17
+							}
+						]
+					},
+					{
+						"content": "SHIP TO: Zain Mart Store #5, 300 Retail Plaza, Chicago, IL 60604",
+						"polygon": [
+							0.6904,
+							2.052,
+							4.0789,
+							2.0514,
+							4.0789,
+							2.1817,
+							0.6904,
+							2.1822
+						],
+						"spans": [
+							{
+								"offset": 239,
+								"length": 64
+							}
+						]
+					},
+					{
+						"content": "Code",
+						"polygon": [
+							0.7596,
+							2.5468,
+							1.0489,
+							2.5474,
+							1.0487,
+							2.6556,
+							0.7593,
+							2.655
+						],
+						"spans": [
+							{
+								"offset": 304,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "Description",
+						"polygon": [
+							1.6583,
+							2.5446,
+							2.2846,
+							2.545,
+							2.2846,
+							2.6694,
+							1.6583,
+							2.6691
+						],
+						"spans": [
+							{
+								"offset": 309,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "Qty",
+						"polygon": [
+							5.134,
+							2.5455,
+							5.3304,
+							2.5497,
+							5.3277,
+							2.6759,
+							5.1313,
+							2.6717
+						],
+						"spans": [
+							{
+								"offset": 321,
+								"length": 3
+							}
+						]
+					},
+					{
+						"content": "Price",
+						"polygon": [
+							5.8234,
+							2.5482,
+							6.1112,
+							2.5479,
+							6.1113,
+							2.6553,
+							5.8235,
+							2.6556
+						],
+						"spans": [
+							{
+								"offset": 325,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "Total",
+						"polygon": [
+							6.798,
+							2.5455,
+							7.0771,
+							2.5448,
+							7.0774,
+							2.6537,
+							6.7983,
+							2.6543
+						],
+						"spans": [
+							{
+								"offset": 331,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "RF-SAM-500",
+						"polygon": [
+							0.7574,
+							2.6998,
+							1.3339,
+							2.6988,
+							1.334,
+							2.7941,
+							0.7576,
+							2.795
+						],
+						"spans": [
+							{
+								"offset": 337,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "Samsung Refrigerator 500L",
+						"polygon": [
+							1.6607,
+							2.6989,
+							2.8612,
+							2.6958,
+							2.8615,
+							2.8047,
+							1.661,
+							2.8067
+						],
+						"spans": [
+							{
+								"offset": 348,
+								"length": 25
+							}
+						]
+					},
+					{
+						"content": "8",
+						"polygon": [
+							5.4989,
+							2.7104,
+							5.5568,
+							2.7105,
+							5.5566,
+							2.7873,
+							5.4987,
+							2.7871
+						],
+						"spans": [
+							{
+								"offset": 374,
+								"length": 1
+							}
+						]
+					},
+					{
+						"content": "$1200.00",
+						"polygon": [
+							5.9756,
+							2.7018,
+							6.3916,
+							2.7001,
+							6.392,
+							2.7967,
+							5.976,
+							2.7985
+						],
+						"spans": [
+							{
+								"offset": 376,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "$9600.00",
+						"polygon": [
+							7.1563,
+							2.7036,
+							7.5712,
+							2.7012,
+							7.5717,
+							2.7942,
+							7.1569,
+							2.7957
+						],
+						"spans": [
+							{
+								"offset": 385,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "WM-LG-450",
+						"polygon": [
+							0.754,
+							2.8578,
+							1.2973,
+							2.8592,
+							1.297,
+							2.9623,
+							0.7538,
+							2.9609
+						],
+						"spans": [
+							{
+								"offset": 394,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "LG Washing Machine 450W",
+						"polygon": [
+							1.6562,
+							2.8567,
+							2.8831,
+							2.8523,
+							2.8831,
+							2.9696,
+							1.6566,
+							2.9728
+						],
+						"spans": [
+							{
+								"offset": 404,
+								"length": 23
+							}
+						]
+					},
+					{
+						"content": "6",
+						"polygon": [
+							5.4979,
+							2.8686,
+							5.559,
+							2.8687,
+							5.5588,
+							2.9528,
+							5.4977,
+							2.9527
+						],
+						"spans": [
+							{
+								"offset": 428,
+								"length": 1
+							}
+						]
+					},
+					{
+						"content": "$950.00",
+						"polygon": [
+							6.0297,
+							2.8616,
+							6.3927,
+							2.8591,
+							6.3934,
+							2.9624,
+							6.0304,
+							2.9649
+						],
+						"spans": [
+							{
+								"offset": 430,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "$5700.00",
+						"polygon": [
+							7.1564,
+							2.859,
+							7.5722,
+							2.8572,
+							7.5727,
+							2.9625,
+							7.1569,
+							2.9643
+						],
+						"spans": [
+							{
+								"offset": 438,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "Sub:",
+						"polygon": [
+							5.8308,
+							3.1462,
+							6.0926,
+							3.1477,
+							6.0919,
+							3.2651,
+							5.8301,
+							3.2635
+						],
+						"spans": [
+							{
+								"offset": 447,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "$15300.00",
+						"polygon": [
+							6.9715,
+							3.143,
+							7.571,
+							3.1419,
+							7.5712,
+							3.2706,
+							6.9717,
+							3.2717
+						],
+						"spans": [
+							{
+								"offset": 452,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Tax:",
+						"polygon": [
+							5.8287,
+							3.3157,
+							6.0804,
+							3.3163,
+							6.0802,
+							3.4311,
+							5.8284,
+							3.4306
+						],
+						"spans": [
+							{
+								"offset": 462,
+								"length": 4
+							}
+						]
+					},
+					{
+						"content": "$1530.00",
+						"polygon": [
+							7.0409,
+							3.3109,
+							7.5717,
+							3.3103,
+							7.5718,
+							3.4353,
+							7.041,
+							3.4359
+						],
+						"spans": [
+							{
+								"offset": 467,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "TOTAL:",
+						"polygon": [
+							5.8263,
+							3.508,
+							6.3453,
+							3.5096,
+							6.3449,
+							3.6443,
+							5.8259,
+							3.6427
+						],
+						"spans": [
+							{
+								"offset": 476,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "$16830.00",
+						"polygon": [
+							6.9084,
+							3.5084,
+							7.5715,
+							3.509,
+							7.5714,
+							3.6476,
+							6.9083,
+							3.647
+						],
+						"spans": [
+							{
+								"offset": 483,
+								"length": 9
+							}
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 0,
+						"length": 492
+					}
+				]
+			}
+		],
+		"tables": [
+			{
+				"rowCount": 6,
+				"columnCount": 5,
+				"cells": [
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"content": "Code",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6742,
+									2.4916,
+									1.4973,
+									2.4916,
+									1.4973,
+									2.7044,
+									0.6742,
+									2.7044
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 304,
+								"length": 4
+							}
+						],
+						"elements": [
+							"/paragraphs/8"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 1,
+						"content": "Description",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.4973,
+									2.4916,
+									4.0109,
+									2.4916,
+									4.0109,
+									2.7044,
+									1.4973,
+									2.7044
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 309,
+								"length": 11
+							}
+						],
+						"elements": [
+							"/paragraphs/9"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 2,
+						"content": "Qty",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.0109,
+									2.4916,
+									5.6793,
+									2.4916,
+									5.6793,
+									2.7044,
+									4.0109,
+									2.7044
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 321,
+								"length": 3
+							}
+						],
+						"elements": [
+							"/paragraphs/10"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 3,
+						"content": "Price",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.6793,
+									2.4916,
+									6.6053,
+									2.4916,
+									6.598,
+									2.7044,
+									5.6793,
+									2.7044
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 325,
+								"length": 5
+							}
+						],
+						"elements": [
+							"/paragraphs/11"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 4,
+						"content": "Total",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.6053,
+									2.4916,
+									7.7445,
+									2.4916,
+									7.7445,
+									2.7044,
+									6.598,
+									2.7044
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 331,
+								"length": 5
+							}
+						],
+						"elements": [
+							"/paragraphs/12"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "RF-SAM-500",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6742,
+									2.7044,
+									1.4973,
+									2.7044,
+									1.4973,
+									2.8291,
+									0.6742,
+									2.8291
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 337,
+								"length": 10
+							}
+						],
+						"elements": [
+							"/paragraphs/13"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "Samsung Refrigerator 500L",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.4973,
+									2.7044,
+									4.0109,
+									2.7044,
+									4.0109,
+									2.8291,
+									1.4973,
+									2.8291
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 348,
+								"length": 25
+							}
+						],
+						"elements": [
+							"/paragraphs/14"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 2,
+						"content": "8",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.0109,
+									2.7044,
+									5.6793,
+									2.7044,
+									5.6793,
+									2.8291,
+									4.0109,
+									2.8291
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 374,
+								"length": 1
+							}
+						],
+						"elements": [
+							"/paragraphs/15"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 3,
+						"content": "$1200.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.6793,
+									2.7044,
+									6.598,
+									2.7044,
+									6.598,
+									2.8291,
+									5.6793,
+									2.8291
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 376,
+								"length": 8
+							}
+						],
+						"elements": [
+							"/paragraphs/16"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 4,
+						"content": "$9600.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.598,
+									2.7044,
+									7.7445,
+									2.7044,
+									7.7445,
+									2.8291,
+									6.598,
+									2.8291
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 385,
+								"length": 8
+							}
+						],
+						"elements": [
+							"/paragraphs/17"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 0,
+						"content": "WM-LG-450",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6742,
+									2.8291,
+									1.4973,
+									2.8291,
+									1.4973,
+									3.0566,
+									0.6668,
+									3.0566
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 394,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/18"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 1,
+						"content": "LG Washing Machine 450W",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.4973,
+									2.8291,
+									4.0109,
+									2.8291,
+									4.0109,
+									3.0566,
+									1.4973,
+									3.0566
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 404,
+								"length": 23
+							}
+						],
+						"elements": [
+							"/paragraphs/19"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 2,
+						"content": "6",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.0109,
+									2.8291,
+									5.6793,
+									2.8291,
+									5.6793,
+									3.0566,
+									4.0109,
+									3.0566
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 428,
+								"length": 1
+							}
+						],
+						"elements": [
+							"/paragraphs/20"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 3,
+						"content": "$950.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.6793,
+									2.8291,
+									6.598,
+									2.8291,
+									6.598,
+									3.0566,
+									5.6793,
+									3.0566
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 430,
+								"length": 7
+							}
+						],
+						"elements": [
+							"/paragraphs/21"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 4,
+						"content": "$5700.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.598,
+									2.8291,
+									7.7445,
+									2.8291,
+									7.7372,
+									3.0566,
+									6.598,
+									3.0566
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 438,
+								"length": 8
+							}
+						],
+						"elements": [
+							"/paragraphs/22"
+						]
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 0,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6668,
+									3.0566,
+									1.4973,
+									3.0566,
+									1.4973,
+									3.2767,
+									0.6668,
+									3.2767
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.4973,
+									3.0566,
+									4.0109,
+									3.0566,
+									4.0109,
+									3.284,
+									1.4973,
+									3.2767
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.0109,
+									3.0566,
+									5.6793,
+									3.0566,
+									5.6719,
+									3.284,
+									4.0109,
+									3.284
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 3,
+						"content": "Sub:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.6793,
+									3.0566,
+									6.598,
+									3.0566,
+									6.5906,
+									3.284,
+									5.6719,
+									3.284
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 447,
+								"length": 4
+							}
+						],
+						"elements": [
+							"/paragraphs/23"
+						]
+					},
+					{
+						"rowIndex": 3,
+						"columnIndex": 4,
+						"content": "$15300.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.598,
+									3.0566,
+									7.7372,
+									3.0566,
+									7.7372,
+									3.284,
+									6.5906,
+									3.284
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 452,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/24"
+						]
+					},
+					{
+						"rowIndex": 4,
+						"columnIndex": 0,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6668,
+									3.2767,
+									1.4973,
+									3.2767,
+									1.4973,
+									3.4528,
+									0.6668,
+									3.4528
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 4,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.4973,
+									3.2767,
+									4.0109,
+									3.284,
+									4.0109,
+									3.4601,
+									1.4973,
+									3.4528
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 4,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.0109,
+									3.284,
+									5.6719,
+									3.284,
+									5.6719,
+									3.4675,
+									4.0109,
+									3.4601
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 4,
+						"columnIndex": 3,
+						"content": "Tax:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.6719,
+									3.284,
+									6.5906,
+									3.284,
+									6.5906,
+									3.4675,
+									5.6719,
+									3.4675
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 462,
+								"length": 4
+							}
+						],
+						"elements": [
+							"/paragraphs/25"
+						]
+					},
+					{
+						"rowIndex": 4,
+						"columnIndex": 4,
+						"content": "$1530.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.5906,
+									3.284,
+									7.7372,
+									3.284,
+									7.7372,
+									3.4675,
+									6.5906,
+									3.4675
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 467,
+								"length": 8
+							}
+						],
+						"elements": [
+							"/paragraphs/26"
+						]
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 0,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6668,
+									3.4528,
+									1.4973,
+									3.4528,
+									1.4973,
+									3.6803,
+									0.6595,
+									3.6803
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 1,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									1.4973,
+									3.4528,
+									4.0109,
+									3.4601,
+									4.0109,
+									3.6803,
+									1.4973,
+									3.6803
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 2,
+						"content": "",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.0109,
+									3.4601,
+									5.6719,
+									3.4675,
+									5.6719,
+									3.6876,
+									4.0109,
+									3.6803
+								]
+							}
+						],
+						"spans": []
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 3,
+						"content": "TOTAL:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.6719,
+									3.4675,
+									6.5906,
+									3.4675,
+									6.5906,
+									3.6876,
+									5.6719,
+									3.6876
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 476,
+								"length": 6
+							}
+						],
+						"elements": [
+							"/paragraphs/27"
+						]
+					},
+					{
+						"rowIndex": 5,
+						"columnIndex": 4,
+						"content": "$16830.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.5906,
+									3.4675,
+									7.7372,
+									3.4675,
+									7.7298,
+									3.6876,
+									6.5906,
+									3.6876
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 483,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/28"
+						]
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6693,
+							2.4799,
+							7.8333,
+							2.4814,
+							7.8341,
+							3.679,
+							0.6709,
+							3.677
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 304,
+						"length": 188
+					}
+				]
+			}
+		],
+		"paragraphs": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 14
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6933,
+							0.2272,
+							3.2134,
+							0.2277,
+							3.2133,
+							0.5211,
+							0.6932,
+							0.5205
+						]
+					}
+				],
+				"content": "Purchase Order"
+			},
+			{
+				"spans": [
+					{
+						"offset": 15,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.4651,
+							0.3008,
+							7.8094,
+							0.2988,
+							7.8097,
+							0.5114,
+							6.4654,
+							0.5133
+						]
+					}
+				],
+				"content": "PO-2024-003"
+			},
+			{
+				"spans": [
+					{
+						"offset": 27,
+						"length": 16
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6914,
+							0.8082,
+							1.5559,
+							0.806,
+							1.5562,
+							0.9186,
+							0.6917,
+							0.9208
+						]
+					}
+				],
+				"content": "Date: 2024-02-01"
+			},
+			{
+				"spans": [
+					{
+						"offset": 44,
+						"length": 20
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							2.7708,
+							0.8082,
+							3.8143,
+							0.8037,
+							3.8148,
+							0.9229,
+							2.7714,
+							0.9274
+						]
+					}
+				],
+				"content": "Delivery: 2024-02-20"
+			},
+			{
+				"spans": [
+					{
+						"offset": 65,
+						"length": 13
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.5482,
+							0.8065,
+							6.2653,
+							0.8048,
+							6.2656,
+							0.9185,
+							5.5485,
+							0.9201
+						]
+					}
+				],
+				"content": "Terms: Net 30"
+			},
+			{
+				"spans": [
+					{
+						"offset": 79,
+						"length": 77
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.7538,
+							1.2395,
+							2.6361,
+							1.2313,
+							2.6386,
+							1.8128,
+							0.7564,
+							1.821
+						]
+					}
+				],
+				"content": "VENDOR ElectroHome Inc. 4567 Electronics Way, Boston, MA 02 +1 (555) 345-6789"
+			},
+			{
+				"spans": [
+					{
+						"offset": 157,
+						"length": 81
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.5066,
+							1.2415,
+							6.4291,
+							1.2374,
+							6.4304,
+							1.8166,
+							4.5078,
+							1.8207
+						]
+					}
+				],
+				"content": "BUYER Zain Mart Procurement 5678 Commerce Blvd, Chicago, IL 606 +1 (555) 987-6543"
+			},
+			{
+				"spans": [
+					{
+						"offset": 239,
+						"length": 64
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6904,
+							2.052,
+							4.0789,
+							2.0514,
+							4.0789,
+							2.1817,
+							0.6904,
+							2.1822
+						]
+					}
+				],
+				"content": "SHIP TO: Zain Mart Store #5, 300 Retail Plaza, Chicago, IL 60604"
+			},
+			{
+				"spans": [
+					{
+						"offset": 304,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6742,
+							2.4916,
+							1.4973,
+							2.4916,
+							1.4973,
+							2.7044,
+							0.6742,
+							2.7044
+						]
+					}
+				],
+				"content": "Code"
+			},
+			{
+				"spans": [
+					{
+						"offset": 309,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.4973,
+							2.4916,
+							4.0109,
+							2.4916,
+							4.0109,
+							2.7044,
+							1.4973,
+							2.7044
+						]
+					}
+				],
+				"content": "Description"
+			},
+			{
+				"spans": [
+					{
+						"offset": 321,
+						"length": 3
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.0109,
+							2.4916,
+							5.6793,
+							2.4916,
+							5.6793,
+							2.7044,
+							4.0109,
+							2.7044
+						]
+					}
+				],
+				"content": "Qty"
+			},
+			{
+				"spans": [
+					{
+						"offset": 325,
+						"length": 5
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.6793,
+							2.4916,
+							6.6053,
+							2.4916,
+							6.598,
+							2.7044,
+							5.6793,
+							2.7044
+						]
+					}
+				],
+				"content": "Price"
+			},
+			{
+				"spans": [
+					{
+						"offset": 331,
+						"length": 5
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.6053,
+							2.4916,
+							7.7445,
+							2.4916,
+							7.7445,
+							2.7044,
+							6.598,
+							2.7044
+						]
+					}
+				],
+				"content": "Total"
+			},
+			{
+				"spans": [
+					{
+						"offset": 337,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6742,
+							2.7044,
+							1.4973,
+							2.7044,
+							1.4973,
+							2.8291,
+							0.6742,
+							2.8291
+						]
+					}
+				],
+				"content": "RF-SAM-500"
+			},
+			{
+				"spans": [
+					{
+						"offset": 348,
+						"length": 25
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.4973,
+							2.7044,
+							4.0109,
+							2.7044,
+							4.0109,
+							2.8291,
+							1.4973,
+							2.8291
+						]
+					}
+				],
+				"content": "Samsung Refrigerator 500L"
+			},
+			{
+				"spans": [
+					{
+						"offset": 374,
+						"length": 1
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.0109,
+							2.7044,
+							5.6793,
+							2.7044,
+							5.6793,
+							2.8291,
+							4.0109,
+							2.8291
+						]
+					}
+				],
+				"content": "8"
+			},
+			{
+				"spans": [
+					{
+						"offset": 376,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.6793,
+							2.7044,
+							6.598,
+							2.7044,
+							6.598,
+							2.8291,
+							5.6793,
+							2.8291
+						]
+					}
+				],
+				"content": "$1200.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 385,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.598,
+							2.7044,
+							7.7445,
+							2.7044,
+							7.7445,
+							2.8291,
+							6.598,
+							2.8291
+						]
+					}
+				],
+				"content": "$9600.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 394,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6742,
+							2.8291,
+							1.4973,
+							2.8291,
+							1.4973,
+							3.0566,
+							0.6668,
+							3.0566
+						]
+					}
+				],
+				"content": "WM-LG-450"
+			},
+			{
+				"spans": [
+					{
+						"offset": 404,
+						"length": 23
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							1.4973,
+							2.8291,
+							4.0109,
+							2.8291,
+							4.0109,
+							3.0566,
+							1.4973,
+							3.0566
+						]
+					}
+				],
+				"content": "LG Washing Machine 450W"
+			},
+			{
+				"spans": [
+					{
+						"offset": 428,
+						"length": 1
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.0109,
+							2.8291,
+							5.6793,
+							2.8291,
+							5.6793,
+							3.0566,
+							4.0109,
+							3.0566
+						]
+					}
+				],
+				"content": "6"
+			},
+			{
+				"spans": [
+					{
+						"offset": 430,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.6793,
+							2.8291,
+							6.598,
+							2.8291,
+							6.598,
+							3.0566,
+							5.6793,
+							3.0566
+						]
+					}
+				],
+				"content": "$950.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 438,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.598,
+							2.8291,
+							7.7445,
+							2.8291,
+							7.7372,
+							3.0566,
+							6.598,
+							3.0566
+						]
+					}
+				],
+				"content": "$5700.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 447,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.6793,
+							3.0566,
+							6.598,
+							3.0566,
+							6.5906,
+							3.284,
+							5.6719,
+							3.284
+						]
+					}
+				],
+				"content": "Sub:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 452,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.598,
+							3.0566,
+							7.7372,
+							3.0566,
+							7.7372,
+							3.284,
+							6.5906,
+							3.284
+						]
+					}
+				],
+				"content": "$15300.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 462,
+						"length": 4
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.6719,
+							3.284,
+							6.5906,
+							3.284,
+							6.5906,
+							3.4675,
+							5.6719,
+							3.4675
+						]
+					}
+				],
+				"content": "Tax:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 467,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.5906,
+							3.284,
+							7.7372,
+							3.284,
+							7.7372,
+							3.4675,
+							6.5906,
+							3.4675
+						]
+					}
+				],
+				"content": "$1530.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 476,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.6719,
+							3.4675,
+							6.5906,
+							3.4675,
+							6.5906,
+							3.6876,
+							5.6719,
+							3.6876
+						]
+					}
+				],
+				"content": "TOTAL:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 483,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.5906,
+							3.4675,
+							7.7372,
+							3.4675,
+							7.7298,
+							3.6876,
+							6.5906,
+							3.6876
+						]
+					}
+				],
+				"content": "$16830.00"
+			}
+		],
+		"styles": [],
+		"contentFormat": "text",
+		"sections": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 492
+					}
+				],
+				"elements": [
+					"/paragraphs/0",
+					"/paragraphs/1",
+					"/paragraphs/2",
+					"/paragraphs/3",
+					"/paragraphs/4",
+					"/paragraphs/5",
+					"/paragraphs/6",
+					"/paragraphs/7",
+					"/tables/0"
+				]
+			}
+		]
+	}
+}

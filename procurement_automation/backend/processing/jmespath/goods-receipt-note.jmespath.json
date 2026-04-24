@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "documentType": "goods-receipt-note",
+  "fields": [
+    {
+      "systemKey": "customer_name",
+      "path": "documents[0].fields.CustomerName",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "purchase_order",
+      "path": "documents[0].fields.PurchaseOrder",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "vendor_name",
+      "path": "documents[0].fields.VendorName",
+      "required": false,
+      "expectedType": "string"
+    },
+    {
+      "systemKey": "receipt_number",
+      "path": "documents[0].fields.ReceiptNumber",
+      "required": false,
+      "expectedType": "string"
+    }
+  ]
+}

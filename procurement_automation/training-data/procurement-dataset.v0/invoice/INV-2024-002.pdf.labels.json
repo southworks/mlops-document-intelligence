@@ -1,0 +1,314 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "INV-2024-002.pdf",
+	"labels": [
+		{
+			"label": "BillingAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.1518706,
+							0.3805273,
+							0.39649412,
+							0.38065454,
+							0.39648235,
+							0.3954909,
+							0.15185882,
+							0.39535454
+						]
+					],
+					"page": 1,
+					"text": "123 Main Street, Miami, FL 33101"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08083529,
+							0.35425454,
+							0.19472942,
+							0.35454547,
+							0.19465883,
+							0.3698909,
+							0.08076471,
+							0.3696
+						]
+					],
+					"page": 1,
+					"text": "Maria Garcia"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceDate",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.7057059,
+							0.27883637,
+							0.80729413,
+							0.27863637,
+							0.80729413,
+							0.2939091,
+							0.7057294,
+							0.2939091
+						]
+					],
+					"page": 1,
+					"text": "2024-01-22"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceId",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.17224705,
+							0.27873635,
+							0.2942706,
+							0.2785,
+							0.2942706,
+							0.29403636,
+							0.1722353,
+							0.29413638
+						]
+					],
+					"page": 1,
+					"text": "INV-2024-002"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8323647,
+							0.6526818,
+							0.91667056,
+							0.65284544,
+							0.91667056,
+							0.67016363,
+							0.83241177,
+							0.67035455
+						]
+					],
+					"page": 1,
+					"text": "$495.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Amount",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8323883,
+							0.5066636,
+							0.8990941,
+							0.5065455,
+							0.8990941,
+							0.5212454,
+							0.83242357,
+							0.5213909
+						]
+					],
+					"page": 1,
+					"text": "$450.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Description",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08098823,
+							0.5065727,
+							0.26044706,
+							0.5067909,
+							0.26041177,
+							0.52160907,
+							0.08095294,
+							0.5213909
+						]
+					],
+					"page": 1,
+					"text": "Office Chair Executive"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Quantity",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.57284707,
+							0.50756365,
+							0.5813765,
+							0.5075909,
+							0.5813765,
+							0.51964545,
+							0.5728235,
+							0.5196273
+						]
+					],
+					"page": 1,
+					"text": "1"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/UnitPrice",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.68524706,
+							0.5067,
+							0.75195295,
+							0.50673634,
+							0.75195295,
+							0.5211818,
+							0.68528235,
+							0.52126366
+						]
+					],
+					"page": 1,
+					"text": "$450.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "SubTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8323294,
+							0.5827091,
+							0.8990941,
+							0.5827182,
+							0.8990941,
+							0.5970636,
+							0.83242357,
+							0.5973273
+						]
+					],
+					"page": 1,
+					"text": "$450.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "TotalTax",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8323883,
+							0.6080091,
+							0.88931763,
+							0.6079636,
+							0.88931763,
+							0.6223,
+							0.83243525,
+							0.6223091
+						]
+					],
+					"page": 1,
+					"text": "$45.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.0816353,
+							0.15813637,
+							0.44270587,
+							0.15785454,
+							0.4427294,
+							0.17359091,
+							0.081658825,
+							0.17387272
+						]
+					],
+					"page": 1,
+					"text": "1234 Business Avenue, New York, NY 10001"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08149412,
+							0.11900909,
+							0.2586941,
+							0.120027274,
+							0.25845882,
+							0.14414546,
+							0.081258826,
+							0.14311819
+						]
+					],
+					"page": 1,
+					"text": "Office Depot"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorPhoneNumber",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.1436353,
+							0.20374545,
+							0.2929647,
+							0.20336364,
+							0.29303527,
+							0.21897273,
+							0.14370589,
+							0.21936364
+						]
+					],
+					"page": 1,
+					"text": "+1 (555) 123-4567"
+				}
+			],
+			"labelType": "Words"
+		}
+	]
+}

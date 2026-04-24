@@ -1,0 +1,314 @@
+{
+	"$schema": "https://schema.cognitiveservices.azure.com/formrecognizer/2021-03-01/labels.json",
+	"document": "INV-2024-005.pdf",
+	"labels": [
+		{
+			"label": "BillingAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.15178823,
+							0.38055456,
+							0.39648235,
+							0.38073635,
+							0.39645883,
+							0.39545453,
+							0.1517647,
+							0.39527273
+						]
+					],
+					"page": 1,
+					"text": "123 Main Street, Miami, FL 33101"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "CustomerName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08075294,
+							0.35459998,
+							0.19991766,
+							0.35480908,
+							0.19987059,
+							0.3698909,
+							0.08070588,
+							0.36968184
+						]
+					],
+					"page": 1,
+					"text": "Luis Martinez"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceDate",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.7058588,
+							0.2788091,
+							0.80729413,
+							0.27856362,
+							0.80729413,
+							0.29389092,
+							0.7058824,
+							0.2939091
+						]
+					],
+					"page": 1,
+					"text": "2024-03-02"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceId",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.17238823,
+							0.27875453,
+							0.2942706,
+							0.27853635,
+							0.2942706,
+							0.29406363,
+							0.17237647,
+							0.2941182
+						]
+					],
+					"page": 1,
+					"text": "INV-2024-005"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "InvoiceTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8323412,
+							0.6528091,
+							0.93554115,
+							0.6527455,
+							0.93554115,
+							0.6709273,
+							0.83241177,
+							0.67136365
+						]
+					],
+					"page": 1,
+					"text": "$2,750.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Amount",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.8323647,
+							0.5068273,
+							0.9140588,
+							0.5064545,
+							0.9140588,
+							0.52144545,
+							0.83241177,
+							0.5218909
+						]
+					],
+					"page": 1,
+					"text": "$2,500.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Description",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08047059,
+							0.5065,
+							0.31837645,
+							0.50658184,
+							0.3183647,
+							0.52143633,
+							0.08045882,
+							0.52135456
+						]
+					],
+					"page": 1,
+					"text": "Power Tools Set Professional"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/Quantity",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.5728353,
+							0.50756365,
+							0.5813765,
+							0.5075818,
+							0.5813765,
+							0.5196364,
+							0.5728117,
+							0.51961815
+						]
+					],
+					"page": 1,
+					"text": "1"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "Items/0/UnitPrice",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.6854,
+							0.50673634,
+							0.7669294,
+							0.5066636,
+							0.7669294,
+							0.5215545,
+							0.6854588,
+							0.5218909
+						]
+					],
+					"page": 1,
+					"text": "$2,500.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "SubTotal",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.83239996,
+							0.58275455,
+							0.9140588,
+							0.58256364,
+							0.9140588,
+							0.5974,
+							0.8325059,
+							0.59788185
+						]
+					],
+					"page": 1,
+					"text": "$2,500.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "TotalTax",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.83243525,
+							0.6078091,
+							0.8990941,
+							0.6076818,
+							0.8990941,
+							0.62224543,
+							0.83249414,
+							0.6225455
+						]
+					],
+					"page": 1,
+					"text": "$250.00"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorAddress",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08170588,
+							0.15820001,
+							0.44270587,
+							0.15796363,
+							0.44271764,
+							0.1736,
+							0.08171765,
+							0.17382728
+						]
+					],
+					"page": 1,
+					"text": "1234 Business Avenue, New York, NY 10001"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorName",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.08149412,
+							0.120518185,
+							0.2194,
+							0.120154545,
+							0.2194,
+							0.14091818,
+							0.08150588,
+							0.14091818
+						]
+					],
+					"page": 1,
+					"text": "BuildMart"
+				}
+			],
+			"labelType": "Words"
+		},
+		{
+			"label": "VendorPhoneNumber",
+			"value": [
+				{
+					"boundingBoxes": [
+						[
+							0.14361177,
+							0.20380001,
+							0.2929647,
+							0.20342727,
+							0.29303527,
+							0.21892728,
+							0.14368236,
+							0.21930002
+						]
+					],
+					"page": 1,
+					"text": "+1 (555) 123-4567"
+				}
+			],
+			"labelType": "Words"
+		}
+	]
+}

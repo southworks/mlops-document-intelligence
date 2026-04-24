@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compose Models</title>
+    <link rel="stylesheet" href="/modeladmin/ui/static/modeladmin-ui.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header header-row">
+        <div>
+          <h1>Compose Models</h1>
+          <p>Select and activate the compose model used by document processing.</p>
+        </div>
+        <nav class="stage-nav" aria-label="ModelAdmin workflow">
+          <a href="/modeladmin/ui" class="stage-pill">Review</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-candidates" class="stage-pill">Approved</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/datasets" class="stage-pill">Datasets</a>
+          <span class="stage-sep">-&gt;</span>
+          <a href="/modeladmin/ui/retrain-jobs" class="stage-pill active">Models</a>
+        </nav>
+      </header>
+
+      <div id="errorBox" class="error hidden"></div>
+
+      <section class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Model ID</th>
+              <th>Created (ADI)</th>
+              <th>Classifier</th>
+              <th>Extractors</th>
+              <th>Active</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="/modeladmin/ui/static/retrain_jobs.js"></script>
+  </body>
+</html>

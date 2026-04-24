@@ -1,0 +1,19 @@
+{
+  "event_name": "modeladmin.samples.approved.v1",
+  "contract_version": "1.0.0",
+  "export_id": "exp-20260226-001",
+  "candidate_id": "a6b92fd3-a4de-455d-94cf-cd876434b0e4",
+  "document_id": "job-36d62d4f",
+  "compose_model_id": "procurement-compose-model.v2",
+  "idempotency_key": "a6b92fd3-a4de-455d-94cf-cd876434b0e4:exp-20260226-001",
+  "operator_label": "invoice",
+  "approved_at": "2026-02-26T20:10:01.190Z",
+  "blob_path": "documents/2026/02/26/invoice-1002.pdf",
+  "processed_blob_path": "documents/invoice/job-36d62d4f.json",
+  "source_channel": "process-new-api",
+  "training_target_path": "training-data/minimum/invoice/2026/02/job-36d62d4f.json",
+  "metadata": {
+    "tenant": "finopt",
+    "notes": "approved from review queue"
+  }
+}

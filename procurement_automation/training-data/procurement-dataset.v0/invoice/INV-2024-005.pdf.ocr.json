@@ -1,0 +1,2890 @@
+{
+	"status": "succeeded",
+	"createdDateTime": "2026-02-25T16:42:23Z",
+	"lastUpdatedDateTime": "2026-02-25T16:42:27Z",
+	"analyzeResult": {
+		"apiVersion": "2024-11-30",
+		"modelId": "prebuilt-layout",
+		"stringIndexType": "utf16CodeUnit",
+		"content": "INVOICE\n#INV-2024-005\nBuildMart\n1234 Business Avenue, New York, NY 10001 Tax ID: 12-3456789\nPhone: +1 (555) 123-4567\nInvoice #: INV-2024-005\nDate: 2024-03-02\nBILL TO:\nLuis Martinez\nAddress: 123 Main Street, Miami, FL 33101\nDESCRIPTION\nQTY\nUNIT PRICE\nTOTAL\nPower Tools Set Professional\n1\n$2,500.00\n$2,500.00\nSubtotal:\n$2,500.00\nTax (10.0%):\n$250.00\nTOTAL:\n$2,750.00\nPAYMENT METHOD: Credit Card Status: PAID\nThank you for your business! Questions? Contact: contact@buildmart.com",
+		"pages": [
+			{
+				"pageNumber": 1,
+				"angle": -0.05860000103712082,
+				"width": 8.5,
+				"height": 11,
+				"unit": "inch",
+				"words": [
+					{
+						"content": "INVOICE",
+						"polygon": [
+							0.6973,
+							0.3564,
+							2.5179,
+							0.3459,
+							2.5179,
+							0.7233,
+							0.6974,
+							0.7199
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 0,
+							"length": 7
+						}
+					},
+					{
+						"content": "#INV-2024-005",
+						"polygon": [
+							5.5357,
+							0.5059,
+							7.0723,
+							0.5038,
+							7.0723,
+							0.7175,
+							5.5351,
+							0.7159
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 8,
+							"length": 13
+						}
+					},
+					{
+						"content": "BuildMart",
+						"polygon": [
+							0.6927,
+							1.3257,
+							1.8649,
+							1.3217,
+							1.8649,
+							1.5501,
+							0.6928,
+							1.5501
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 22,
+							"length": 9
+						}
+					},
+					{
+						"content": "1234",
+						"polygon": [
+							0.6949,
+							1.7402,
+							1.0276,
+							1.742,
+							1.0274,
+							1.9054,
+							0.6946,
+							1.9045
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 32,
+							"length": 4
+						}
+					},
+					{
+						"content": "Business",
+						"polygon": [
+							1.0825,
+							1.7422,
+							1.6929,
+							1.7421,
+							1.6925,
+							1.909,
+							1.0824,
+							1.9054
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 37,
+							"length": 8
+						}
+					},
+					{
+						"content": "Avenue,",
+						"polygon": [
+							1.7341,
+							1.7421,
+							2.2867,
+							1.7421,
+							2.2865,
+							1.9099,
+							1.7338,
+							1.9092
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 46,
+							"length": 7
+						}
+					},
+					{
+						"content": "New",
+						"polygon": [
+							2.3472,
+							1.7415,
+							2.6468,
+							1.741,
+							2.6466,
+							1.9099,
+							2.3469,
+							1.9099
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 54,
+							"length": 3
+						}
+					},
+					{
+						"content": "York,",
+						"polygon": [
+							2.6881,
+							1.741,
+							3.0344,
+							1.74,
+							3.0339,
+							1.9098,
+							2.6878,
+							1.9099
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 58,
+							"length": 5
+						}
+					},
+					{
+						"content": "NY",
+						"polygon": [
+							3.0949,
+							1.7397,
+							3.2984,
+							1.7386,
+							3.2978,
+							1.9099,
+							3.0944,
+							1.9093
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 64,
+							"length": 2
+						}
+					},
+					{
+						"content": "10001",
+						"polygon": [
+							3.3561,
+							1.7383,
+							3.763,
+							1.7386,
+							3.7622,
+							1.9072,
+							3.3555,
+							1.9099
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 67,
+							"length": 5
+						}
+					},
+					{
+						"content": "Tax",
+						"polygon": [
+							0.6829,
+							1.9915,
+							0.9469,
+							1.992,
+							0.947,
+							2.148,
+							0.6833,
+							2.148
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 73,
+							"length": 3
+						}
+					},
+					{
+						"content": "ID:",
+						"polygon": [
+							0.9987,
+							1.9916,
+							1.1747,
+							1.9914,
+							1.1747,
+							2.148,
+							0.9987,
+							2.148
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 77,
+							"length": 3
+						}
+					},
+					{
+						"content": "12-3456789",
+						"polygon": [
+							1.242,
+							1.9913,
+							2.0531,
+							1.9907,
+							2.0531,
+							2.148,
+							1.242,
+							2.148
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 81,
+							"length": 10
+						}
+					},
+					{
+						"content": "Phone:",
+						"polygon": [
+							0.6878,
+							2.241,
+							1.1664,
+							2.2418,
+							1.1659,
+							2.4117,
+							0.6874,
+							2.4082
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 92,
+							"length": 6
+						}
+					},
+					{
+						"content": "+1",
+						"polygon": [
+							1.2217,
+							2.2418,
+							1.3684,
+							2.2416,
+							1.368,
+							2.4102,
+							1.2213,
+							2.412
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 99,
+							"length": 2
+						}
+					},
+					{
+						"content": "(555)",
+						"polygon": [
+							1.4431,
+							2.2421,
+							1.7916,
+							2.24,
+							1.7913,
+							2.4099,
+							1.4428,
+							2.4097
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 102,
+							"length": 5
+						}
+					},
+					{
+						"content": "123-4567",
+						"polygon": [
+							1.847,
+							2.2399,
+							2.4902,
+							2.2386,
+							2.4902,
+							2.4074,
+							1.8467,
+							2.4103
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 108,
+							"length": 8
+						}
+					},
+					{
+						"content": "Invoice",
+						"polygon": [
+							0.6887,
+							3.0666,
+							1.2008,
+							3.0669,
+							1.2009,
+							3.2362,
+							0.6887,
+							3.2374
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 117,
+							"length": 7
+						}
+					},
+					{
+						"content": "#:",
+						"polygon": [
+							1.2342,
+							3.0669,
+							1.3957,
+							3.0664,
+							1.3956,
+							3.2357,
+							1.2342,
+							3.2362
+						],
+						"confidence": 0.913,
+						"span": {
+							"offset": 125,
+							"length": 2
+						}
+					},
+					{
+						"content": "INV-2024-005",
+						"polygon": [
+							1.4653,
+							3.0663,
+							2.5013,
+							3.0639,
+							2.5013,
+							3.2347,
+							1.4652,
+							3.2353
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 128,
+							"length": 12
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							5.5485,
+							3.065,
+							5.9393,
+							3.0666,
+							5.9395,
+							3.233,
+							5.5485,
+							3.233
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 141,
+							"length": 5
+						}
+					},
+					{
+						"content": "2024-03-02",
+						"polygon": [
+							5.9998,
+							3.0669,
+							6.862,
+							3.0642,
+							6.862,
+							3.2328,
+							6,
+							3.233
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 147,
+							"length": 10
+						}
+					},
+					{
+						"content": "BILL",
+						"polygon": [
+							0.6928,
+							3.5081,
+							1.1849,
+							3.507,
+							1.1846,
+							3.7146,
+							0.6927,
+							3.7146
+						],
+						"confidence": 0.99,
+						"span": {
+							"offset": 158,
+							"length": 4
+						}
+					},
+					{
+						"content": "TO:",
+						"polygon": [
+							1.2498,
+							3.5065,
+							1.627,
+							3.5046,
+							1.627,
+							3.7146,
+							1.2495,
+							3.7146
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 163,
+							"length": 3
+						}
+					},
+					{
+						"content": "Luis",
+						"polygon": [
+							0.6864,
+							3.9006,
+							0.9957,
+							3.9021,
+							0.9949,
+							4.0664,
+							0.6865,
+							4.0665
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 167,
+							"length": 4
+						}
+					},
+					{
+						"content": "Martinez",
+						"polygon": [
+							1.0549,
+							3.9024,
+							1.6989,
+							3.9029,
+							1.6989,
+							4.0671,
+							1.0542,
+							4.0667
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 172,
+							"length": 8
+						}
+					},
+					{
+						"content": "Address:",
+						"polygon": [
+							0.683,
+							4.1918,
+							1.2314,
+							4.1927,
+							1.2308,
+							4.3466,
+							0.6824,
+							4.3477
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 181,
+							"length": 8
+						}
+					},
+					{
+						"content": "123",
+						"polygon": [
+							1.2906,
+							4.1924,
+							1.4965,
+							4.1918,
+							1.4959,
+							4.3477,
+							1.29,
+							4.3467
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 190,
+							"length": 3
+						}
+					},
+					{
+						"content": "Main",
+						"polygon": [
+							1.5274,
+							4.1917,
+							1.8441,
+							4.1912,
+							1.8433,
+							4.3485,
+							1.5268,
+							4.3478
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 194,
+							"length": 4
+						}
+					},
+					{
+						"content": "Street,",
+						"polygon": [
+							1.8955,
+							4.191,
+							2.292,
+							4.1897,
+							2.2913,
+							4.3483,
+							1.8948,
+							4.3485
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 199,
+							"length": 7
+						}
+					},
+					{
+						"content": "Miami,",
+						"polygon": [
+							2.3435,
+							4.1898,
+							2.7373,
+							4.1904,
+							2.7367,
+							4.3484,
+							2.3427,
+							4.3482
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 207,
+							"length": 6
+						}
+					},
+					{
+						"content": "FL",
+						"polygon": [
+							2.7914,
+							4.1905,
+							2.9459,
+							4.1903,
+							2.9451,
+							4.3491,
+							2.7908,
+							4.3486
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 214,
+							"length": 2
+						}
+					},
+					{
+						"content": "33101",
+						"polygon": [
+							2.9896,
+							4.1902,
+							3.3701,
+							4.1881,
+							3.3698,
+							4.3469,
+							2.9889,
+							4.3492
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 217,
+							"length": 5
+						}
+					},
+					{
+						"content": "DESCRIPTION",
+						"polygon": [
+							0.685,
+							5.0059,
+							1.8372,
+							5.0042,
+							1.8372,
+							5.1761,
+							0.6855,
+							5.1761
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 223,
+							"length": 11
+						}
+					},
+					{
+						"content": "QTY",
+						"polygon": [
+							4.8585,
+							5.0112,
+							5.2074,
+							5.0088,
+							5.2074,
+							5.1744,
+							4.8579,
+							5.1761
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 235,
+							"length": 3
+						}
+					},
+					{
+						"content": "UNIT",
+						"polygon": [
+							5.8278,
+							5.0074,
+							6.2179,
+							5.0073,
+							6.2176,
+							5.1743,
+							5.828,
+							5.1761
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 239,
+							"length": 4
+						}
+					},
+					{
+						"content": "PRICE",
+						"polygon": [
+							6.2756,
+							5.0076,
+							6.7845,
+							5.0057,
+							6.7845,
+							5.1737,
+							6.2752,
+							5.1742
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 244,
+							"length": 5
+						}
+					},
+					{
+						"content": "TOTAL",
+						"polygon": [
+							7.0742,
+							5.0117,
+							7.6423,
+							5.0095,
+							7.6423,
+							5.1706,
+							7.0744,
+							5.1706
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 250,
+							"length": 5
+						}
+					},
+					{
+						"content": "Power",
+						"polygon": [
+							0.6842,
+							5.5715,
+							1.128,
+							5.5726,
+							1.1277,
+							5.7336,
+							0.6839,
+							5.7344
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 256,
+							"length": 5
+						}
+					},
+					{
+						"content": "Tools",
+						"polygon": [
+							1.1679,
+							5.5723,
+							1.5399,
+							5.5723,
+							1.5396,
+							5.7353,
+							1.1675,
+							5.7339
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 262,
+							"length": 5
+						}
+					},
+					{
+						"content": "Set",
+						"polygon": [
+							1.5878,
+							5.5724,
+							1.8163,
+							5.5726,
+							1.8159,
+							5.7353,
+							1.5875,
+							5.7353
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 268,
+							"length": 3
+						}
+					},
+					{
+						"content": "Professional",
+						"polygon": [
+							1.8642,
+							5.5725,
+							2.7061,
+							5.5737,
+							2.7061,
+							5.7347,
+							1.8637,
+							5.7352
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 272,
+							"length": 12
+						}
+					},
+					{
+						"content": "1",
+						"polygon": [
+							4.8691,
+							5.5832,
+							4.9417,
+							5.5834,
+							4.9417,
+							5.716,
+							4.8689,
+							5.7158
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 285,
+							"length": 1
+						}
+					},
+					{
+						"content": "$2,500.00",
+						"polygon": [
+							5.8259,
+							5.5741,
+							6.5189,
+							5.5733,
+							6.5189,
+							5.7371,
+							5.8264,
+							5.7408
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 287,
+							"length": 9
+						}
+					},
+					{
+						"content": "$2,500.00",
+						"polygon": [
+							7.0751,
+							5.5751,
+							7.7695,
+							5.571,
+							7.7695,
+							5.7359,
+							7.0755,
+							5.7408
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 297,
+							"length": 9
+						}
+					},
+					{
+						"content": "Subtotal:",
+						"polygon": [
+							4.8561,
+							6.4105,
+							5.4674,
+							6.4119,
+							5.4674,
+							6.5657,
+							4.8562,
+							6.5657
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 307,
+							"length": 9
+						}
+					},
+					{
+						"content": "$2,500.00",
+						"polygon": [
+							7.0754,
+							6.4103,
+							7.7695,
+							6.4082,
+							7.7695,
+							6.5714,
+							7.0763,
+							6.5767
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 317,
+							"length": 9
+						}
+					},
+					{
+						"content": "Tax",
+						"polygon": [
+							4.8541,
+							6.6839,
+							5.113,
+							6.6847,
+							5.1132,
+							6.8616,
+							4.8542,
+							6.8608
+						],
+						"confidence": 0.963,
+						"span": {
+							"offset": 327,
+							"length": 3
+						}
+					},
+					{
+						"content": "(10.0%):",
+						"polygon": [
+							5.1625,
+							6.685,
+							5.7385,
+							6.6857,
+							5.7379,
+							6.8644,
+							5.1627,
+							6.862
+						],
+						"confidence": 0.976,
+						"span": {
+							"offset": 331,
+							"length": 8
+						}
+					},
+					{
+						"content": "$250.00",
+						"polygon": [
+							7.0757,
+							6.6859,
+							7.6423,
+							6.6845,
+							7.6423,
+							6.8447,
+							7.0762,
+							6.848
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 340,
+							"length": 7
+						}
+					},
+					{
+						"content": "TOTAL:",
+						"polygon": [
+							4.8552,
+							7.1818,
+							5.5726,
+							7.1854,
+							5.5726,
+							7.3684,
+							4.8552,
+							7.3651
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 348,
+							"length": 6
+						}
+					},
+					{
+						"content": "$2,750.00",
+						"polygon": [
+							7.0749,
+							7.1809,
+							7.9521,
+							7.1802,
+							7.9521,
+							7.3802,
+							7.0755,
+							7.385
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 355,
+							"length": 9
+						}
+					},
+					{
+						"content": "PAYMENT",
+						"polygon": [
+							0.6855,
+							8.0438,
+							1.4321,
+							8.0446,
+							1.4313,
+							8.2078,
+							0.6851,
+							8.2063
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 365,
+							"length": 7
+						}
+					},
+					{
+						"content": "METHOD:",
+						"polygon": [
+							1.4802,
+							8.0446,
+							2.1679,
+							8.0449,
+							2.167,
+							8.2092,
+							1.4794,
+							8.2076
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 373,
+							"length": 7
+						}
+					},
+					{
+						"content": "Credit",
+						"polygon": [
+							2.2241,
+							8.0446,
+							2.6281,
+							8.0461,
+							2.6274,
+							8.2094,
+							2.2232,
+							8.2092
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 381,
+							"length": 6
+						}
+					},
+					{
+						"content": "Card",
+						"polygon": [
+							2.6762,
+							8.0464,
+							3.0104,
+							8.0458,
+							3.0104,
+							8.2099,
+							2.6756,
+							8.2093
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 388,
+							"length": 4
+						}
+					},
+					{
+						"content": "Status:",
+						"polygon": [
+							0.6861,
+							8.2988,
+							1.1569,
+							8.3005,
+							1.1565,
+							8.4506,
+							0.6861,
+							8.4517
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 393,
+							"length": 7
+						}
+					},
+					{
+						"content": "PAID",
+						"polygon": [
+							1.2188,
+							8.3002,
+							1.5716,
+							8.2985,
+							1.5716,
+							8.4515,
+							1.2183,
+							8.4506
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 401,
+							"length": 4
+						}
+					},
+					{
+						"content": "Thank",
+						"polygon": [
+							0.686,
+							9.0541,
+							1.0387,
+							9.0551,
+							1.0383,
+							9.2008,
+							0.6858,
+							9.2004
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 406,
+							"length": 5
+						}
+					},
+					{
+						"content": "you",
+						"polygon": [
+							1.0745,
+							9.0549,
+							1.2699,
+							9.0544,
+							1.2695,
+							9.2008,
+							1.0741,
+							9.2008
+						],
+						"confidence": 0.999,
+						"span": {
+							"offset": 412,
+							"length": 3
+						}
+					},
+					{
+						"content": "for",
+						"polygon": [
+							1.3081,
+							9.0546,
+							1.4606,
+							9.0548,
+							1.4602,
+							9.2008,
+							1.3076,
+							9.2008
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 416,
+							"length": 3
+						}
+					},
+					{
+						"content": "your",
+						"polygon": [
+							1.4916,
+							9.0548,
+							1.7371,
+							9.0547,
+							1.7366,
+							9.2008,
+							1.4912,
+							9.2007
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 420,
+							"length": 4
+						}
+					},
+					{
+						"content": "business!",
+						"polygon": [
+							1.7728,
+							9.0547,
+							2.3067,
+							9.0554,
+							2.3063,
+							9.1971,
+							1.7723,
+							9.2008
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 425,
+							"length": 9
+						}
+					},
+					{
+						"content": "Questions?",
+						"polygon": [
+							0.6864,
+							9.2578,
+							1.3216,
+							9.2591,
+							1.3215,
+							9.4022,
+							0.6864,
+							9.4008
+						],
+						"confidence": 0.945,
+						"span": {
+							"offset": 435,
+							"length": 10
+						}
+					},
+					{
+						"content": "Contact:",
+						"polygon": [
+							1.364,
+							9.2591,
+							1.8157,
+							9.259,
+							1.8155,
+							9.4037,
+							1.3638,
+							9.4024
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 446,
+							"length": 8
+						}
+					},
+					{
+						"content": "contact@buildmart.com",
+						"polygon": [
+							1.8628,
+							9.2591,
+							3.182,
+							9.2613,
+							3.182,
+							9.4041,
+							1.8626,
+							9.4036
+						],
+						"confidence": 0.948,
+						"span": {
+							"offset": 455,
+							"length": 21
+						}
+					}
+				],
+				"lines": [
+					{
+						"content": "INVOICE",
+						"polygon": [
+							0.6973,
+							0.3458,
+							2.5136,
+							0.3432,
+							2.5142,
+							0.7198,
+							0.6974,
+							0.7226
+						],
+						"spans": [
+							{
+								"offset": 0,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "#INV-2024-005",
+						"polygon": [
+							5.5352,
+							0.5038,
+							7.0677,
+							0.5039,
+							7.0677,
+							0.7144,
+							5.5351,
+							0.7142
+						],
+						"spans": [
+							{
+								"offset": 8,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "BuildMart",
+						"polygon": [
+							0.6925,
+							1.323,
+							1.86,
+							1.3216,
+							1.8603,
+							1.5486,
+							0.6928,
+							1.5501
+						],
+						"spans": [
+							{
+								"offset": 22,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "1234 Business Avenue, New York, NY 10001",
+						"polygon": [
+							0.6944,
+							1.7402,
+							3.7591,
+							1.7366,
+							3.7593,
+							1.9072,
+							0.6946,
+							1.9099
+						],
+						"spans": [
+							{
+								"offset": 32,
+								"length": 40
+							}
+						]
+					},
+					{
+						"content": "Tax ID: 12-3456789",
+						"polygon": [
+							0.6829,
+							1.9914,
+							2.0499,
+							1.9903,
+							2.05,
+							2.1472,
+							0.683,
+							2.148
+						],
+						"spans": [
+							{
+								"offset": 73,
+								"length": 18
+							}
+						]
+					},
+					{
+						"content": "Phone: +1 (555) 123-4567",
+						"polygon": [
+							0.6871,
+							2.241,
+							2.4857,
+							2.2374,
+							2.486,
+							2.4069,
+							0.6875,
+							2.4105
+						],
+						"spans": [
+							{
+								"offset": 92,
+								"length": 24
+							}
+						]
+					},
+					{
+						"content": "Invoice #: INV-2024-005",
+						"polygon": [
+							0.6884,
+							3.0662,
+							2.4998,
+							3.0633,
+							2.5001,
+							3.2318,
+							0.6887,
+							3.2347
+						],
+						"spans": [
+							{
+								"offset": 117,
+								"length": 23
+							}
+						]
+					},
+					{
+						"content": "Date: 2024-03-02",
+						"polygon": [
+							5.5484,
+							3.065,
+							6.8581,
+							3.0643,
+							6.8582,
+							3.2321,
+							5.5485,
+							3.2328
+						],
+						"spans": [
+							{
+								"offset": 141,
+								"length": 16
+							}
+						]
+					},
+					{
+						"content": "BILL TO:",
+						"polygon": [
+							0.6928,
+							3.5043,
+							1.6255,
+							3.5045,
+							1.6254,
+							3.7135,
+							0.6926,
+							3.7129
+						],
+						"spans": [
+							{
+								"offset": 158,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "Luis Martinez",
+						"polygon": [
+							0.6864,
+							3.9006,
+							1.695,
+							3.9025,
+							1.6947,
+							4.0657,
+							0.6862,
+							4.0638
+						],
+						"spans": [
+							{
+								"offset": 167,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "Address: 123 Main Street, Miami, FL 33101",
+						"polygon": [
+							0.6822,
+							4.1914,
+							3.3649,
+							4.1881,
+							3.3651,
+							4.3461,
+							0.6824,
+							4.3494
+						],
+						"spans": [
+							{
+								"offset": 181,
+								"length": 41
+							}
+						]
+					},
+					{
+						"content": "DESCRIPTION",
+						"polygon": [
+							0.685,
+							5.0059,
+							1.8361,
+							5.0042,
+							1.8363,
+							5.174,
+							0.6853,
+							5.1756
+						],
+						"spans": [
+							{
+								"offset": 223,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "QTY",
+						"polygon": [
+							4.8567,
+							5.0112,
+							5.206,
+							5.0086,
+							5.2072,
+							5.1716,
+							4.8579,
+							5.1743
+						],
+						"spans": [
+							{
+								"offset": 235,
+								"length": 3
+							}
+						]
+					},
+					{
+						"content": "UNIT PRICE",
+						"polygon": [
+							5.8276,
+							5.0074,
+							6.7843,
+							5.0051,
+							6.7845,
+							5.1718,
+							5.828,
+							5.174
+						],
+						"spans": [
+							{
+								"offset": 239,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "TOTAL",
+						"polygon": [
+							7.074,
+							5.0109,
+							7.6402,
+							5.0096,
+							7.6406,
+							5.17,
+							7.0744,
+							5.1706
+						],
+						"spans": [
+							{
+								"offset": 250,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "Power Tools Set Professional",
+						"polygon": [
+							0.6841,
+							5.571,
+							2.7037,
+							5.5733,
+							2.7035,
+							5.7345,
+							0.6839,
+							5.7321
+						],
+						"spans": [
+							{
+								"offset": 256,
+								"length": 28
+							}
+						]
+					},
+					{
+						"content": "1",
+						"polygon": [
+							4.8691,
+							5.5832,
+							4.9373,
+							5.5833,
+							4.937,
+							5.7149,
+							4.8689,
+							5.7147
+						],
+						"spans": [
+							{
+								"offset": 285,
+								"length": 1
+							}
+						]
+					},
+					{
+						"content": "$2,500.00",
+						"polygon": [
+							5.8256,
+							5.5741,
+							6.5146,
+							5.571,
+							6.5153,
+							5.7354,
+							5.8264,
+							5.7385
+						],
+						"spans": [
+							{
+								"offset": 287,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "$2,500.00",
+						"polygon": [
+							7.0745,
+							5.5751,
+							7.7681,
+							5.5709,
+							7.7691,
+							5.7347,
+							7.0755,
+							5.739
+						],
+						"spans": [
+							{
+								"offset": 297,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Subtotal:",
+						"polygon": [
+							4.8561,
+							6.4099,
+							5.4641,
+							6.4115,
+							5.4637,
+							6.5651,
+							4.8557,
+							6.5634
+						],
+						"spans": [
+							{
+								"offset": 307,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "$2,500.00",
+						"polygon": [
+							7.0754,
+							6.4103,
+							7.7656,
+							6.4082,
+							7.7661,
+							6.5728,
+							7.0759,
+							6.5749
+						],
+						"spans": [
+							{
+								"offset": 317,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Tax (10.0%):",
+						"polygon": [
+							4.8541,
+							6.6828,
+							5.7353,
+							6.6857,
+							5.7347,
+							6.862,
+							4.8535,
+							6.8592
+						],
+						"spans": [
+							{
+								"offset": 327,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "$250.00",
+						"polygon": [
+							7.0757,
+							6.6859,
+							7.6416,
+							6.6843,
+							7.642,
+							6.8438,
+							7.0762,
+							6.8454
+						],
+						"spans": [
+							{
+								"offset": 340,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "TOTAL:",
+						"polygon": [
+							4.8552,
+							7.1813,
+							5.5723,
+							7.1849,
+							5.5714,
+							7.3658,
+							4.8543,
+							7.3623
+						],
+						"spans": [
+							{
+								"offset": 348,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "$2,750.00",
+						"polygon": [
+							7.0749,
+							7.1809,
+							7.9505,
+							7.1783,
+							7.9511,
+							7.3809,
+							7.0755,
+							7.3836
+						],
+						"spans": [
+							{
+								"offset": 355,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "PAYMENT METHOD: Credit Card",
+						"polygon": [
+							0.6854,
+							8.0438,
+							3.008,
+							8.0448,
+							3.0078,
+							8.2077,
+							0.6851,
+							8.2045
+						],
+						"spans": [
+							{
+								"offset": 365,
+								"length": 27
+							}
+						]
+					},
+					{
+						"content": "Status: PAID",
+						"polygon": [
+							0.686,
+							8.2983,
+							1.5709,
+							8.2981,
+							1.5709,
+							8.4489,
+							0.6861,
+							8.4492
+						],
+						"spans": [
+							{
+								"offset": 393,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "Thank you for your business!",
+						"polygon": [
+							0.6858,
+							9.0541,
+							2.3028,
+							9.0547,
+							2.3028,
+							9.2001,
+							0.6858,
+							9.1994
+						],
+						"spans": [
+							{
+								"offset": 406,
+								"length": 28
+							}
+						]
+					},
+					{
+						"content": "Questions? Contact: contact@buildmart.com",
+						"polygon": [
+							0.6864,
+							9.2571,
+							3.1798,
+							9.26,
+							3.1796,
+							9.403,
+							0.6862,
+							9.4
+						],
+						"spans": [
+							{
+								"offset": 435,
+								"length": 41
+							}
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 0,
+						"length": 476
+					}
+				]
+			}
+		],
+		"tables": [
+			{
+				"rowCount": 2,
+				"columnCount": 4,
+				"cells": [
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"content": "DESCRIPTION",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6208,
+									4.8961,
+									3.6489,
+									4.9034,
+									3.6415,
+									5.4318,
+									0.6208,
+									5.4244
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 223,
+								"length": 11
+							}
+						],
+						"elements": [
+							"/paragraphs/10"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 1,
+						"content": "QTY",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.6489,
+									4.9034,
+									5.5157,
+									4.8961,
+									5.5157,
+									5.4318,
+									3.6415,
+									5.4318
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 235,
+								"length": 3
+							}
+						],
+						"elements": [
+							"/paragraphs/11"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 2,
+						"content": "UNIT PRICE",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.5157,
+									4.8961,
+									6.9195,
+									4.8961,
+									6.9195,
+									5.4318,
+									5.5157,
+									5.4318
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 239,
+								"length": 10
+							}
+						],
+						"elements": [
+							"/paragraphs/12"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 3,
+						"content": "TOTAL",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.9195,
+									4.8961,
+									7.8235,
+									4.8961,
+									7.8308,
+									5.4318,
+									6.9195,
+									5.4318
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 250,
+								"length": 5
+							}
+						],
+						"elements": [
+							"/paragraphs/13"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "Power Tools Set Professional",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6208,
+									5.4244,
+									3.6415,
+									5.4318,
+									3.6415,
+									5.784,
+									0.6208,
+									5.784
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 256,
+								"length": 28
+							}
+						],
+						"elements": [
+							"/paragraphs/14"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "1",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.6415,
+									5.4318,
+									5.5157,
+									5.4318,
+									5.5157,
+									5.7913,
+									3.6415,
+									5.784
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 285,
+								"length": 1
+							}
+						],
+						"elements": [
+							"/paragraphs/15"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 2,
+						"content": "$2,500.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.5157,
+									5.4318,
+									6.9195,
+									5.4318,
+									6.9195,
+									5.7913,
+									5.5157,
+									5.7913
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 287,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/16"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 3,
+						"content": "$2,500.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.9195,
+									5.4318,
+									7.8308,
+									5.4318,
+									7.8308,
+									5.7913,
+									6.9195,
+									5.7913
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 297,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/17"
+						]
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6527,
+							4.8985,
+							7.82,
+							4.8992,
+							7.8204,
+							5.7848,
+							0.6535,
+							5.7839
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 223,
+						"length": 83
+					}
+				]
+			},
+			{
+				"rowCount": 3,
+				"columnCount": 2,
+				"cells": [
+					{
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"content": "Subtotal:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.7979,
+									6.3608,
+									6.3916,
+									6.3608,
+									6.3916,
+									6.6266,
+									4.7979,
+									6.6266
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 307,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/18"
+						]
+					},
+					{
+						"rowIndex": 0,
+						"columnIndex": 1,
+						"content": "$2,500.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.3916,
+									6.3608,
+									7.8193,
+									6.3608,
+									7.8249,
+									6.6266,
+									6.3916,
+									6.6266
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 317,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/19"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "Tax (10.0%):",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.7979,
+									6.6266,
+									6.3916,
+									6.6266,
+									6.3916,
+									7.0861,
+									4.7979,
+									7.0805
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 327,
+								"length": 12
+							}
+						],
+						"elements": [
+							"/paragraphs/20"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "$250.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.3916,
+									6.6266,
+									7.8249,
+									6.6266,
+									7.8304,
+									7.0805,
+									6.3916,
+									7.0861
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 340,
+								"length": 7
+							}
+						],
+						"elements": [
+							"/paragraphs/21"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 0,
+						"content": "TOTAL:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.7979,
+									7.0805,
+									6.3916,
+									7.0861,
+									6.3916,
+									7.4238,
+									4.7979,
+									7.4238
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 348,
+								"length": 6
+							}
+						],
+						"elements": [
+							"/paragraphs/22"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 1,
+						"content": "$2,750.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.3916,
+									7.0861,
+									7.8304,
+									7.0805,
+									7.8359,
+									7.4182,
+									6.3916,
+									7.4238
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 355,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/23"
+						]
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.807,
+							6.3867,
+							7.923,
+							6.3851,
+							7.9235,
+							7.4155,
+							4.8072,
+							7.4169
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 307,
+						"length": 57
+					}
+				]
+			}
+		],
+		"paragraphs": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6968,
+							0.3458,
+							2.5136,
+							0.343,
+							2.5142,
+							0.7198,
+							0.6974,
+							0.7226
+						]
+					}
+				],
+				"role": "title",
+				"content": "INVOICE"
+			},
+			{
+				"spans": [
+					{
+						"offset": 8,
+						"length": 13
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.5352,
+							0.5036,
+							7.0677,
+							0.5039,
+							7.0677,
+							0.7144,
+							5.5351,
+							0.7142
+						]
+					}
+				],
+				"content": "#INV-2024-005"
+			},
+			{
+				"spans": [
+					{
+						"offset": 22,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6925,
+							1.323,
+							1.86,
+							1.3216,
+							1.8603,
+							1.5486,
+							0.6928,
+							1.5501
+						]
+					}
+				],
+				"content": "BuildMart"
+			},
+			{
+				"spans": [
+					{
+						"offset": 32,
+						"length": 59
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6826,
+							1.7402,
+							3.7591,
+							1.7366,
+							3.7595,
+							2.1452,
+							0.683,
+							2.1487
+						]
+					}
+				],
+				"content": "1234 Business Avenue, New York, NY 10001 Tax ID: 12-3456789"
+			},
+			{
+				"spans": [
+					{
+						"offset": 92,
+						"length": 24
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6871,
+							2.241,
+							2.4857,
+							2.2374,
+							2.486,
+							2.4069,
+							0.6875,
+							2.4105
+						]
+					}
+				],
+				"content": "Phone: +1 (555) 123-4567"
+			},
+			{
+				"spans": [
+					{
+						"offset": 117,
+						"length": 23
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6884,
+							3.0662,
+							2.4998,
+							3.0633,
+							2.5001,
+							3.2318,
+							0.6887,
+							3.2347
+						]
+					}
+				],
+				"content": "Invoice #: INV-2024-005"
+			},
+			{
+				"spans": [
+					{
+						"offset": 141,
+						"length": 16
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.5484,
+							3.065,
+							6.8581,
+							3.0643,
+							6.8582,
+							3.2321,
+							5.5485,
+							3.2328
+						]
+					}
+				],
+				"content": "Date: 2024-03-02"
+			},
+			{
+				"spans": [
+					{
+						"offset": 158,
+						"length": 8
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6928,
+							3.5043,
+							1.6255,
+							3.5045,
+							1.6254,
+							3.7135,
+							0.6926,
+							3.7129
+						]
+					}
+				],
+				"content": "BILL TO:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 167,
+						"length": 13
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6864,
+							3.9006,
+							1.695,
+							3.9025,
+							1.6947,
+							4.0657,
+							0.6862,
+							4.0638
+						]
+					}
+				],
+				"content": "Luis Martinez"
+			},
+			{
+				"spans": [
+					{
+						"offset": 181,
+						"length": 41
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6822,
+							4.1914,
+							3.3649,
+							4.1881,
+							3.3651,
+							4.3461,
+							0.6824,
+							4.3494
+						]
+					}
+				],
+				"content": "Address: 123 Main Street, Miami, FL 33101"
+			},
+			{
+				"spans": [
+					{
+						"offset": 223,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6208,
+							4.8961,
+							3.6489,
+							4.9034,
+							3.6415,
+							5.4318,
+							0.6208,
+							5.4244
+						]
+					}
+				],
+				"content": "DESCRIPTION"
+			},
+			{
+				"spans": [
+					{
+						"offset": 235,
+						"length": 3
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.6489,
+							4.9034,
+							5.5157,
+							4.8961,
+							5.5157,
+							5.4318,
+							3.6415,
+							5.4318
+						]
+					}
+				],
+				"content": "QTY"
+			},
+			{
+				"spans": [
+					{
+						"offset": 239,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.5157,
+							4.8961,
+							6.9195,
+							4.8961,
+							6.9195,
+							5.4318,
+							5.5157,
+							5.4318
+						]
+					}
+				],
+				"content": "UNIT PRICE"
+			},
+			{
+				"spans": [
+					{
+						"offset": 250,
+						"length": 5
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.9195,
+							4.8961,
+							7.8235,
+							4.8961,
+							7.8308,
+							5.4318,
+							6.9195,
+							5.4318
+						]
+					}
+				],
+				"content": "TOTAL"
+			},
+			{
+				"spans": [
+					{
+						"offset": 256,
+						"length": 28
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6208,
+							5.4244,
+							3.6415,
+							5.4318,
+							3.6415,
+							5.784,
+							0.6208,
+							5.784
+						]
+					}
+				],
+				"content": "Power Tools Set Professional"
+			},
+			{
+				"spans": [
+					{
+						"offset": 285,
+						"length": 1
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.6415,
+							5.4318,
+							5.5157,
+							5.4318,
+							5.5157,
+							5.7913,
+							3.6415,
+							5.784
+						]
+					}
+				],
+				"content": "1"
+			},
+			{
+				"spans": [
+					{
+						"offset": 287,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.5157,
+							5.4318,
+							6.9195,
+							5.4318,
+							6.9195,
+							5.7913,
+							5.5157,
+							5.7913
+						]
+					}
+				],
+				"content": "$2,500.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 297,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.9195,
+							5.4318,
+							7.8308,
+							5.4318,
+							7.8308,
+							5.7913,
+							6.9195,
+							5.7913
+						]
+					}
+				],
+				"content": "$2,500.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 307,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.7979,
+							6.3608,
+							6.3916,
+							6.3608,
+							6.3916,
+							6.6266,
+							4.7979,
+							6.6266
+						]
+					}
+				],
+				"content": "Subtotal:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 317,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.3916,
+							6.3608,
+							7.8193,
+							6.3608,
+							7.8249,
+							6.6266,
+							6.3916,
+							6.6266
+						]
+					}
+				],
+				"content": "$2,500.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 327,
+						"length": 12
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.7979,
+							6.6266,
+							6.3916,
+							6.6266,
+							6.3916,
+							7.0861,
+							4.7979,
+							7.0805
+						]
+					}
+				],
+				"content": "Tax (10.0%):"
+			},
+			{
+				"spans": [
+					{
+						"offset": 340,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.3916,
+							6.6266,
+							7.8249,
+							6.6266,
+							7.8304,
+							7.0805,
+							6.3916,
+							7.0861
+						]
+					}
+				],
+				"content": "$250.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 348,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.7979,
+							7.0805,
+							6.3916,
+							7.0861,
+							6.3916,
+							7.4238,
+							4.7979,
+							7.4238
+						]
+					}
+				],
+				"content": "TOTAL:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 355,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.3916,
+							7.0861,
+							7.8304,
+							7.0805,
+							7.8359,
+							7.4182,
+							6.3916,
+							7.4238
+						]
+					}
+				],
+				"content": "$2,750.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 365,
+						"length": 40
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6852,
+							8.0438,
+							3.008,
+							8.0448,
+							3.0078,
+							8.4502,
+							0.685,
+							8.4492
+						]
+					}
+				],
+				"content": "PAYMENT METHOD: Credit Card Status: PAID"
+			},
+			{
+				"spans": [
+					{
+						"offset": 406,
+						"length": 70
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6858,
+							9.0528,
+							3.18,
+							9.0557,
+							3.1796,
+							9.403,
+							0.6854,
+							9.4
+						]
+					}
+				],
+				"content": "Thank you for your business! Questions? Contact: contact@buildmart.com"
+			}
+		],
+		"styles": [],
+		"contentFormat": "text",
+		"sections": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 476
+					}
+				],
+				"elements": [
+					"/paragraphs/0",
+					"/paragraphs/1",
+					"/paragraphs/2",
+					"/paragraphs/3",
+					"/paragraphs/4",
+					"/paragraphs/5",
+					"/paragraphs/6",
+					"/paragraphs/7",
+					"/paragraphs/8",
+					"/paragraphs/9",
+					"/tables/0",
+					"/tables/1",
+					"/paragraphs/24",
+					"/paragraphs/25"
+				]
+			}
+		]
+	}
+}

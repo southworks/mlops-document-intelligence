@@ -1,0 +1,2826 @@
+{
+	"status": "succeeded",
+	"createdDateTime": "2026-02-25T16:42:19Z",
+	"lastUpdatedDateTime": "2026-02-25T16:42:22Z",
+	"analyzeResult": {
+		"apiVersion": "2024-11-30",
+		"modelId": "prebuilt-layout",
+		"stringIndexType": "utf16CodeUnit",
+		"content": "INVOICE\n#INV-2024-003\nElectroHome Inc. 1234 Business Avenue, New York, NY 10001 Tax ID: 12-3456789 Phone: +1 (555) 123-4567\nInvoice #: INV-2024-003\nDate: 2024-02-05\nBILL TO: Carlos Perez Address: 123 Main Street, Miami, FL 33101\nDESCRIPTION\nQTY\nUNIT PRICE\nTOTAL\nSamsung Refrigerator 500L\n1\n$1,200.00\n$1,200.00\nSubtotal:\n$1,200.00\nTax (10.0%):\n$120.00\nTOTAL:\n$1,320.00\nPAYMENT METHOD: Credit Card Status: PAID\nThank you for your business! Questions? Contact: contact@electrohomeinc .. com",
+		"pages": [
+			{
+				"pageNumber": 1,
+				"angle": -0.05249999836087227,
+				"width": 8.5,
+				"height": 11,
+				"unit": "inch",
+				"words": [
+					{
+						"content": "INVOICE",
+						"polygon": [
+							0.6964,
+							0.3561,
+							2.5179,
+							0.3456,
+							2.5179,
+							0.7243,
+							0.6967,
+							0.7207
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 0,
+							"length": 7
+						}
+					},
+					{
+						"content": "#INV-2024-003",
+						"polygon": [
+							5.5351,
+							0.506,
+							7.0667,
+							0.504,
+							7.0667,
+							0.718,
+							5.5347,
+							0.7164
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 8,
+							"length": 13
+						}
+					},
+					{
+						"content": "ElectroHome",
+						"polygon": [
+							0.6913,
+							1.3235,
+							2.2267,
+							1.3272,
+							2.2259,
+							1.5611,
+							0.6908,
+							1.5575
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 22,
+							"length": 11
+						}
+					},
+					{
+						"content": "Inc.",
+						"polygon": [
+							2.3191,
+							1.3276,
+							2.7385,
+							1.3283,
+							2.7375,
+							1.5611,
+							2.3181,
+							1.5611
+						],
+						"confidence": 0.974,
+						"span": {
+							"offset": 34,
+							"length": 4
+						}
+					},
+					{
+						"content": "1234",
+						"polygon": [
+							0.6938,
+							1.7393,
+							1.0274,
+							1.741,
+							1.0273,
+							1.9058,
+							0.6936,
+							1.9054
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 39,
+							"length": 4
+						}
+					},
+					{
+						"content": "Business",
+						"polygon": [
+							1.0825,
+							1.7412,
+							1.6918,
+							1.7417,
+							1.6915,
+							1.9088,
+							1.0824,
+							1.9057
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 44,
+							"length": 8
+						}
+					},
+					{
+						"content": "Avenue,",
+						"polygon": [
+							1.7359,
+							1.7417,
+							2.2845,
+							1.7414,
+							2.2844,
+							1.9099,
+							1.7357,
+							1.9091
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 53,
+							"length": 7
+						}
+					},
+					{
+						"content": "New",
+						"polygon": [
+							2.3479,
+							1.7409,
+							2.6457,
+							1.7409,
+							2.6455,
+							1.9099,
+							2.3478,
+							1.9099
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 61,
+							"length": 3
+						}
+					},
+					{
+						"content": "York,",
+						"polygon": [
+							2.687,
+							1.7409,
+							3.0344,
+							1.7396,
+							3.034,
+							1.9096,
+							2.6868,
+							1.9099
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 65,
+							"length": 5
+						}
+					},
+					{
+						"content": "NY",
+						"polygon": [
+							3.095,
+							1.7394,
+							3.2991,
+							1.7383,
+							3.2985,
+							1.9097,
+							3.0946,
+							1.9091
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 71,
+							"length": 2
+						}
+					},
+					{
+						"content": "10001",
+						"polygon": [
+							3.3542,
+							1.738,
+							3.763,
+							1.7384,
+							3.763,
+							1.9073,
+							3.3537,
+							1.9097
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 74,
+							"length": 5
+						}
+					},
+					{
+						"content": "Tax",
+						"polygon": [
+							0.6819,
+							1.9907,
+							0.9472,
+							1.9913,
+							0.9474,
+							2.148,
+							0.6824,
+							2.148
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 80,
+							"length": 3
+						}
+					},
+					{
+						"content": "ID:",
+						"polygon": [
+							0.9992,
+							1.991,
+							1.1734,
+							1.9906,
+							1.1736,
+							2.148,
+							0.9993,
+							2.148
+						],
+						"confidence": 0.988,
+						"span": {
+							"offset": 84,
+							"length": 3
+						}
+					},
+					{
+						"content": "12-3456789",
+						"polygon": [
+							1.2411,
+							1.9906,
+							2.0531,
+							1.9902,
+							2.0531,
+							2.148,
+							1.2412,
+							2.148
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 88,
+							"length": 10
+						}
+					},
+					{
+						"content": "Phone:",
+						"polygon": [
+							0.6872,
+							2.2407,
+							1.168,
+							2.2413,
+							1.1676,
+							2.412,
+							0.6869,
+							2.4087
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 99,
+							"length": 6
+						}
+					},
+					{
+						"content": "+1",
+						"polygon": [
+							1.2236,
+							2.2412,
+							1.3681,
+							2.2411,
+							1.3678,
+							2.4104,
+							1.2232,
+							2.4123
+						],
+						"confidence": 0.987,
+						"span": {
+							"offset": 106,
+							"length": 2
+						}
+					},
+					{
+						"content": "(555)",
+						"polygon": [
+							1.4431,
+							2.2416,
+							1.7905,
+							2.2396,
+							1.7903,
+							2.4101,
+							1.4429,
+							2.4098
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 109,
+							"length": 5
+						}
+					},
+					{
+						"content": "123-4567",
+						"polygon": [
+							1.8461,
+							2.2395,
+							2.4902,
+							2.2382,
+							2.4902,
+							2.4075,
+							1.8459,
+							2.4105
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 115,
+							"length": 8
+						}
+					},
+					{
+						"content": "Invoice",
+						"polygon": [
+							0.6883,
+							3.0667,
+							1.2011,
+							3.0664,
+							1.2013,
+							3.236,
+							0.6884,
+							3.2376
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 124,
+							"length": 7
+						}
+					},
+					{
+						"content": "#:",
+						"polygon": [
+							1.2346,
+							3.0663,
+							1.3935,
+							3.0658,
+							1.3936,
+							3.2354,
+							1.2348,
+							3.236
+						],
+						"confidence": 0.946,
+						"span": {
+							"offset": 132,
+							"length": 2
+						}
+					},
+					{
+						"content": "INV-2024-003",
+						"polygon": [
+							1.4632,
+							3.0655,
+							2.5013,
+							3.0629,
+							2.5013,
+							3.2339,
+							1.4632,
+							3.2349
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 135,
+							"length": 12
+						}
+					},
+					{
+						"content": "Date:",
+						"polygon": [
+							5.5478,
+							3.0649,
+							5.9396,
+							3.0663,
+							5.9398,
+							3.2347,
+							5.5479,
+							3.236
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 148,
+							"length": 5
+						}
+					},
+					{
+						"content": "2024-02-05",
+						"polygon": [
+							6.0003,
+							3.0667,
+							6.8611,
+							3.0637,
+							6.8608,
+							3.2335,
+							6.0005,
+							3.2346
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 154,
+							"length": 10
+						}
+					},
+					{
+						"content": "BILL",
+						"polygon": [
+							0.6917,
+							3.5082,
+							1.1845,
+							3.5066,
+							1.1843,
+							3.7146,
+							0.6918,
+							3.7146
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 165,
+							"length": 4
+						}
+					},
+					{
+						"content": "TO:",
+						"polygon": [
+							1.2495,
+							3.5061,
+							1.627,
+							3.5048,
+							1.627,
+							3.7146,
+							1.2493,
+							3.7146
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 170,
+							"length": 3
+						}
+					},
+					{
+						"content": "Carlos",
+						"polygon": [
+							0.6893,
+							3.8994,
+							1.1695,
+							3.9016,
+							1.1689,
+							4.0668,
+							0.6894,
+							4.0662
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 174,
+							"length": 6
+						}
+					},
+					{
+						"content": "Perez",
+						"polygon": [
+							1.2289,
+							3.902,
+							1.6712,
+							3.9044,
+							1.6706,
+							4.0664,
+							1.2282,
+							4.067
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 181,
+							"length": 5
+						}
+					},
+					{
+						"content": "Address:",
+						"polygon": [
+							0.6825,
+							4.1915,
+							1.2324,
+							4.1924,
+							1.2319,
+							4.3474,
+							0.6819,
+							4.3484
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 187,
+							"length": 8
+						}
+					},
+					{
+						"content": "123",
+						"polygon": [
+							1.2921,
+							4.1921,
+							1.5074,
+							4.1912,
+							1.5069,
+							4.3486,
+							1.2916,
+							4.3475
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 196,
+							"length": 3
+						}
+					},
+					{
+						"content": "Main",
+						"polygon": [
+							1.5567,
+							4.1911,
+							1.842,
+							4.1906,
+							1.8414,
+							4.3493,
+							1.5562,
+							4.3488
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 200,
+							"length": 4
+						}
+					},
+					{
+						"content": "Street,",
+						"polygon": [
+							1.8939,
+							4.1904,
+							2.2804,
+							4.1891,
+							2.2799,
+							4.349,
+							1.8933,
+							4.3493
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 205,
+							"length": 7
+						}
+					},
+					{
+						"content": "Miami,",
+						"polygon": [
+							2.3116,
+							4.1891,
+							2.737,
+							4.1896,
+							2.7364,
+							4.349,
+							2.311,
+							4.3489
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 213,
+							"length": 6
+						}
+					},
+					{
+						"content": "FL",
+						"polygon": [
+							2.7915,
+							4.1897,
+							2.9445,
+							4.1897,
+							2.9439,
+							4.3495,
+							2.7909,
+							4.3492
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 220,
+							"length": 2
+						}
+					},
+					{
+						"content": "33101",
+						"polygon": [
+							2.9886,
+							4.1896,
+							3.37,
+							4.1873,
+							3.3692,
+							4.3473,
+							2.988,
+							4.3496
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 223,
+							"length": 5
+						}
+					},
+					{
+						"content": "DESCRIPTION",
+						"polygon": [
+							0.6842,
+							5.006,
+							1.8372,
+							5.004,
+							1.8372,
+							5.1761,
+							0.6848,
+							5.1761
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 229,
+							"length": 11
+						}
+					},
+					{
+						"content": "QTY",
+						"polygon": [
+							4.8579,
+							5.0108,
+							5.2074,
+							5.0082,
+							5.2074,
+							5.1751,
+							4.8575,
+							5.1761
+						],
+						"confidence": 0.99,
+						"span": {
+							"offset": 241,
+							"length": 3
+						}
+					},
+					{
+						"content": "UNIT",
+						"polygon": [
+							5.827,
+							5.0073,
+							6.2181,
+							5.0068,
+							6.2179,
+							5.1744,
+							5.8273,
+							5.1761
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 245,
+							"length": 4
+						}
+					},
+					{
+						"content": "PRICE",
+						"polygon": [
+							6.2759,
+							5.0072,
+							6.79,
+							5.0054,
+							6.79,
+							5.1736,
+							6.2756,
+							5.1744
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 250,
+							"length": 5
+						}
+					},
+					{
+						"content": "TOTAL",
+						"polygon": [
+							7.0731,
+							5.0112,
+							7.6423,
+							5.0093,
+							7.6423,
+							5.1729,
+							7.0734,
+							5.1736
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 256,
+							"length": 5
+						}
+					},
+					{
+						"content": "Samsung",
+						"polygon": [
+							0.6868,
+							5.5714,
+							1.3307,
+							5.5714,
+							1.3308,
+							5.7495,
+							0.6868,
+							5.7507
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 262,
+							"length": 7
+						}
+					},
+					{
+						"content": "Refrigerator",
+						"polygon": [
+							1.389,
+							5.5713,
+							2.1902,
+							5.5687,
+							2.19,
+							5.7465,
+							1.3891,
+							5.7493
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 270,
+							"length": 12
+						}
+					},
+					{
+						"content": "500L",
+						"polygon": [
+							2.2339,
+							5.5683,
+							2.5732,
+							5.566,
+							2.5732,
+							5.7403,
+							2.2338,
+							5.7462
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 283,
+							"length": 4
+						}
+					},
+					{
+						"content": "1",
+						"polygon": [
+							4.869,
+							5.5829,
+							4.9417,
+							5.5829,
+							4.9417,
+							5.7162,
+							4.8688,
+							5.7163
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 288,
+							"length": 1
+						}
+					},
+					{
+						"content": "$1,200.00",
+						"polygon": [
+							5.8244,
+							5.5737,
+							6.5189,
+							5.573,
+							6.5189,
+							5.7386,
+							5.8249,
+							5.7408
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 290,
+							"length": 9
+						}
+					},
+					{
+						"content": "$1,200.00",
+						"polygon": [
+							7.0738,
+							5.5729,
+							7.7695,
+							5.5694,
+							7.7695,
+							5.738,
+							7.0743,
+							5.7408
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 300,
+							"length": 9
+						}
+					},
+					{
+						"content": "Subtotal:",
+						"polygon": [
+							4.8553,
+							6.4102,
+							5.4674,
+							6.4113,
+							5.4674,
+							6.5657,
+							4.8554,
+							6.5657
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 310,
+							"length": 9
+						}
+					},
+					{
+						"content": "$1,200.00",
+						"polygon": [
+							7.0747,
+							6.4089,
+							7.7695,
+							6.4075,
+							7.7695,
+							6.5734,
+							7.0757,
+							6.5767
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 320,
+							"length": 9
+						}
+					},
+					{
+						"content": "Tax",
+						"polygon": [
+							4.8529,
+							6.6834,
+							5.1133,
+							6.684,
+							5.1135,
+							6.862,
+							4.8531,
+							6.8614
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 330,
+							"length": 3
+						}
+					},
+					{
+						"content": "(10.0%):",
+						"polygon": [
+							5.1601,
+							6.6844,
+							5.7386,
+							6.6851,
+							5.7386,
+							6.8646,
+							5.1604,
+							6.8622
+						],
+						"confidence": 0.991,
+						"span": {
+							"offset": 334,
+							"length": 8
+						}
+					},
+					{
+						"content": "$120.00",
+						"polygon": [
+							7.0754,
+							6.6865,
+							7.6423,
+							6.6846,
+							7.6423,
+							6.8458,
+							7.0762,
+							6.848
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 343,
+							"length": 7
+						}
+					},
+					{
+						"content": "TOTAL:",
+						"polygon": [
+							4.8537,
+							7.1818,
+							5.5726,
+							7.1852,
+							5.5726,
+							7.3684,
+							4.8538,
+							7.3661
+						],
+						"confidence": 0.994,
+						"span": {
+							"offset": 351,
+							"length": 6
+						}
+					},
+					{
+						"content": "$1,320.00",
+						"polygon": [
+							7.0731,
+							7.1791,
+							7.9521,
+							7.1793,
+							7.9521,
+							7.3821,
+							7.0743,
+							7.3892
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 358,
+							"length": 9
+						}
+					},
+					{
+						"content": "PAYMENT",
+						"polygon": [
+							0.685,
+							8.0439,
+							1.4328,
+							8.0445,
+							1.4322,
+							8.2079,
+							0.6847,
+							8.2068
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 368,
+							"length": 7
+						}
+					},
+					{
+						"content": "METHOD:",
+						"polygon": [
+							1.4811,
+							8.0444,
+							2.17,
+							8.0446,
+							2.1693,
+							8.2091,
+							1.4804,
+							8.2077
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 376,
+							"length": 7
+						}
+					},
+					{
+						"content": "Credit",
+						"polygon": [
+							2.2236,
+							8.0444,
+							2.6283,
+							8.0458,
+							2.6277,
+							8.2094,
+							2.2229,
+							8.2091
+						],
+						"confidence": 0.996,
+						"span": {
+							"offset": 384,
+							"length": 6
+						}
+					},
+					{
+						"content": "Card",
+						"polygon": [
+							2.6739,
+							8.046,
+							3.0104,
+							8.0454,
+							3.0104,
+							8.2099,
+							2.6733,
+							8.2093
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 391,
+							"length": 4
+						}
+					},
+					{
+						"content": "Status:",
+						"polygon": [
+							0.6858,
+							8.2989,
+							1.1566,
+							8.3005,
+							1.1564,
+							8.4506,
+							0.6858,
+							8.4518
+						],
+						"confidence": 0.995,
+						"span": {
+							"offset": 396,
+							"length": 7
+						}
+					},
+					{
+						"content": "PAID",
+						"polygon": [
+							1.2186,
+							8.3002,
+							1.5716,
+							8.2984,
+							1.5716,
+							8.4513,
+							1.2182,
+							8.4506
+						],
+						"confidence": 0.989,
+						"span": {
+							"offset": 404,
+							"length": 4
+						}
+					},
+					{
+						"content": "Thank",
+						"polygon": [
+							0.6859,
+							9.0543,
+							1.0409,
+							9.0551,
+							1.0405,
+							9.2008,
+							0.6857,
+							9.2003
+						],
+						"confidence": 0.997,
+						"span": {
+							"offset": 409,
+							"length": 5
+						}
+					},
+					{
+						"content": "you",
+						"polygon": [
+							1.0742,
+							9.055,
+							1.272,
+							9.0544,
+							1.2716,
+							9.2008,
+							1.0739,
+							9.2008
+						],
+						"confidence": 0.999,
+						"span": {
+							"offset": 415,
+							"length": 3
+						}
+					},
+					{
+						"content": "for",
+						"polygon": [
+							1.3077,
+							9.0545,
+							1.4602,
+							9.0547,
+							1.4598,
+							9.2007,
+							1.3073,
+							9.2008
+						],
+						"confidence": 0.998,
+						"span": {
+							"offset": 419,
+							"length": 3
+						}
+					},
+					{
+						"content": "your",
+						"polygon": [
+							1.4912,
+							9.0547,
+							1.7246,
+							9.0545,
+							1.7242,
+							9.2008,
+							1.4908,
+							9.2006
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 423,
+							"length": 4
+						}
+					},
+					{
+						"content": "business!",
+						"polygon": [
+							1.7532,
+							9.0545,
+							2.3059,
+							9.0553,
+							2.3056,
+							9.1966,
+							1.7527,
+							9.2008
+						],
+						"confidence": 0.993,
+						"span": {
+							"offset": 428,
+							"length": 9
+						}
+					},
+					{
+						"content": "Questions?",
+						"polygon": [
+							0.685,
+							9.2576,
+							1.3207,
+							9.2586,
+							1.3206,
+							9.4016,
+							0.685,
+							9.4013
+						],
+						"confidence": 0.955,
+						"span": {
+							"offset": 438,
+							"length": 10
+						}
+					},
+					{
+						"content": "Contact:",
+						"polygon": [
+							1.3631,
+							9.2587,
+							1.8152,
+							9.2586,
+							1.8149,
+							9.4042,
+							1.363,
+							9.4021
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 449,
+							"length": 8
+						}
+					},
+					{
+						"content": "contact@electrohomeinc",
+						"polygon": [
+							1.8622,
+							9.2587,
+							3.1996,
+							9.2617,
+							3.1991,
+							9.4041,
+							1.8621,
+							9.4043
+						],
+						"confidence": 0.941,
+						"span": {
+							"offset": 458,
+							"length": 22
+						}
+					},
+					{
+						"content": "..",
+						"polygon": [
+							3.2278,
+							9.2616,
+							3.2749,
+							9.2616,
+							3.2744,
+							9.4043,
+							3.2274,
+							9.4042
+						],
+						"confidence": 0.992,
+						"span": {
+							"offset": 481,
+							"length": 2
+						}
+					},
+					{
+						"content": "com",
+						"polygon": [
+							3.3031,
+							9.2616,
+							3.5527,
+							9.2625,
+							3.5527,
+							9.4039,
+							3.3027,
+							9.4044
+						],
+						"confidence": 0.999,
+						"span": {
+							"offset": 484,
+							"length": 3
+						}
+					}
+				],
+				"lines": [
+					{
+						"content": "INVOICE",
+						"polygon": [
+							0.6958,
+							0.3465,
+							2.514,
+							0.3419,
+							2.515,
+							0.72,
+							0.6968,
+							0.7246
+						],
+						"spans": [
+							{
+								"offset": 0,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "#INV-2024-003",
+						"polygon": [
+							5.535,
+							0.5018,
+							7.0651,
+							0.5038,
+							7.0648,
+							0.7149,
+							5.5347,
+							0.7129
+						],
+						"spans": [
+							{
+								"offset": 8,
+								"length": 13
+							}
+						]
+					},
+					{
+						"content": "ElectroHome Inc.",
+						"polygon": [
+							0.6913,
+							1.3219,
+							2.7341,
+							1.3278,
+							2.7334,
+							1.5609,
+							0.6906,
+							1.5549
+						],
+						"spans": [
+							{
+								"offset": 22,
+								"length": 16
+							}
+						]
+					},
+					{
+						"content": "1234 Business Avenue, New York, NY 10001",
+						"polygon": [
+							0.6935,
+							1.7393,
+							3.7588,
+							1.7365,
+							3.759,
+							1.9073,
+							0.6937,
+							1.9099
+						],
+						"spans": [
+							{
+								"offset": 39,
+								"length": 40
+							}
+						]
+					},
+					{
+						"content": "Tax ID: 12-3456789",
+						"polygon": [
+							0.6819,
+							1.9905,
+							2.0504,
+							1.9901,
+							2.0505,
+							2.1473,
+							0.682,
+							2.1478
+						],
+						"spans": [
+							{
+								"offset": 80,
+								"length": 18
+							}
+						]
+					},
+					{
+						"content": "Phone: +1 (555) 123-4567",
+						"polygon": [
+							0.6866,
+							2.2407,
+							2.486,
+							2.2371,
+							2.4863,
+							2.4071,
+							0.687,
+							2.4108
+						],
+						"spans": [
+							{
+								"offset": 99,
+								"length": 24
+							}
+						]
+					},
+					{
+						"content": "Invoice #: INV-2024-003",
+						"polygon": [
+							0.6881,
+							3.0661,
+							2.4975,
+							3.0622,
+							2.4979,
+							3.231,
+							0.6884,
+							3.2349
+						],
+						"spans": [
+							{
+								"offset": 124,
+								"length": 23
+							}
+						]
+					},
+					{
+						"content": "Date: 2024-02-05",
+						"polygon": [
+							5.5478,
+							3.0649,
+							6.8583,
+							3.0637,
+							6.8584,
+							3.2319,
+							5.5479,
+							3.2331
+						],
+						"spans": [
+							{
+								"offset": 148,
+								"length": 16
+							}
+						]
+					},
+					{
+						"content": "BILL TO:",
+						"polygon": [
+							0.6917,
+							3.5043,
+							1.6258,
+							3.5047,
+							1.6254,
+							3.7141,
+							0.6914,
+							3.7127
+						],
+						"spans": [
+							{
+								"offset": 165,
+								"length": 8
+							}
+						]
+					},
+					{
+						"content": "Carlos Perez",
+						"polygon": [
+							0.6893,
+							3.8994,
+							1.6686,
+							3.9024,
+							1.6681,
+							4.0665,
+							0.6888,
+							4.0635
+						],
+						"spans": [
+							{
+								"offset": 174,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "Address: 123 Main Street, Miami, FL 33101",
+						"polygon": [
+							0.6817,
+							4.1912,
+							3.3651,
+							4.1873,
+							3.3653,
+							4.3464,
+							0.6819,
+							4.3502
+						],
+						"spans": [
+							{
+								"offset": 187,
+								"length": 41
+							}
+						]
+					},
+					{
+						"content": "DESCRIPTION",
+						"polygon": [
+							0.6842,
+							5.006,
+							1.8362,
+							5.0039,
+							1.8365,
+							5.1743,
+							0.6846,
+							5.1761
+						],
+						"spans": [
+							{
+								"offset": 229,
+								"length": 11
+							}
+						]
+					},
+					{
+						"content": "QTY",
+						"polygon": [
+							4.8562,
+							5.0103,
+							5.2065,
+							5.0076,
+							5.2074,
+							5.1721,
+							4.8575,
+							5.1748
+						],
+						"spans": [
+							{
+								"offset": 241,
+								"length": 3
+							}
+						]
+					},
+					{
+						"content": "UNIT PRICE",
+						"polygon": [
+							5.8269,
+							5.0073,
+							6.7848,
+							5.0047,
+							6.7852,
+							5.1717,
+							5.8273,
+							5.1742
+						],
+						"spans": [
+							{
+								"offset": 245,
+								"length": 10
+							}
+						]
+					},
+					{
+						"content": "TOTAL",
+						"polygon": [
+							7.0731,
+							5.0103,
+							7.6409,
+							5.0094,
+							7.6412,
+							5.1707,
+							7.0734,
+							5.1716
+						],
+						"spans": [
+							{
+								"offset": 256,
+								"length": 5
+							}
+						]
+					},
+					{
+						"content": "Samsung Refrigerator 500L",
+						"polygon": [
+							0.6863,
+							5.5714,
+							2.5714,
+							5.5661,
+							2.5719,
+							5.7438,
+							0.6868,
+							5.7492
+						],
+						"spans": [
+							{
+								"offset": 262,
+								"length": 25
+							}
+						]
+					},
+					{
+						"content": "1",
+						"polygon": [
+							4.869,
+							5.5829,
+							4.9374,
+							5.583,
+							4.9372,
+							5.7155,
+							4.8688,
+							5.7154
+						],
+						"spans": [
+							{
+								"offset": 288,
+								"length": 1
+							}
+						]
+					},
+					{
+						"content": "$1,200.00",
+						"polygon": [
+							5.8243,
+							5.5737,
+							6.5149,
+							5.5712,
+							6.5155,
+							5.7364,
+							5.8249,
+							5.7389
+						],
+						"spans": [
+							{
+								"offset": 290,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "$1,200.00",
+						"polygon": [
+							7.0734,
+							5.5729,
+							7.7687,
+							5.5693,
+							7.7695,
+							5.7364,
+							7.0743,
+							5.74
+						],
+						"spans": [
+							{
+								"offset": 300,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Subtotal:",
+						"polygon": [
+							4.8553,
+							6.4091,
+							5.4647,
+							6.411,
+							5.4642,
+							6.5657,
+							4.8548,
+							6.5639
+						],
+						"spans": [
+							{
+								"offset": 310,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "$1,200.00",
+						"polygon": [
+							7.0747,
+							6.4089,
+							7.7662,
+							6.4074,
+							7.7666,
+							6.5748,
+							7.0751,
+							6.5763
+						],
+						"spans": [
+							{
+								"offset": 320,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "Tax (10.0%):",
+						"polygon": [
+							4.8529,
+							6.682,
+							5.7357,
+							6.6849,
+							5.7351,
+							6.8623,
+							4.8524,
+							6.8594
+						],
+						"spans": [
+							{
+								"offset": 330,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "$120.00",
+						"polygon": [
+							7.0753,
+							6.6865,
+							7.6419,
+							6.6837,
+							7.6423,
+							6.8441,
+							7.0761,
+							6.8469
+						],
+						"spans": [
+							{
+								"offset": 343,
+								"length": 7
+							}
+						]
+					},
+					{
+						"content": "TOTAL:",
+						"polygon": [
+							4.8537,
+							7.1808,
+							5.5726,
+							7.1847,
+							5.5719,
+							7.3671,
+							4.8532,
+							7.3632
+						],
+						"spans": [
+							{
+								"offset": 351,
+								"length": 6
+							}
+						]
+					},
+					{
+						"content": "$1,320.00",
+						"polygon": [
+							7.0731,
+							7.1791,
+							7.9502,
+							7.1746,
+							7.9514,
+							7.3804,
+							7.0743,
+							7.3857
+						],
+						"spans": [
+							{
+								"offset": 358,
+								"length": 9
+							}
+						]
+					},
+					{
+						"content": "PAYMENT METHOD: Credit Card",
+						"polygon": [
+							0.6849,
+							8.0416,
+							3.0082,
+							8.0444,
+							3.008,
+							8.2076,
+							0.6847,
+							8.2048
+						],
+						"spans": [
+							{
+								"offset": 368,
+								"length": 27
+							}
+						]
+					},
+					{
+						"content": "Status: PAID",
+						"polygon": [
+							0.6857,
+							8.2984,
+							1.571,
+							8.298,
+							1.5711,
+							8.4488,
+							0.6858,
+							8.4492
+						],
+						"spans": [
+							{
+								"offset": 396,
+								"length": 12
+							}
+						]
+					},
+					{
+						"content": "Thank you for your business!",
+						"polygon": [
+							0.6857,
+							9.0543,
+							2.3031,
+							9.0542,
+							2.3031,
+							9.1994,
+							0.6858,
+							9.1995
+						],
+						"spans": [
+							{
+								"offset": 409,
+								"length": 28
+							}
+						]
+					},
+					{
+						"content": "Questions? Contact: contact@electrohomeinc .. com",
+						"polygon": [
+							0.685,
+							9.257,
+							3.5488,
+							9.2606,
+							3.5487,
+							9.404,
+							0.6849,
+							9.4004
+						],
+						"spans": [
+							{
+								"offset": 438,
+								"length": 49
+							}
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 0,
+						"length": 487
+					}
+				]
+			}
+		],
+		"tables": [
+			{
+				"rowCount": 2,
+				"columnCount": 4,
+				"cells": [
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"content": "DESCRIPTION",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6296,
+									4.9516,
+									3.717,
+									4.9516,
+									3.717,
+									5.4287,
+									0.6296,
+									5.4214
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 229,
+								"length": 11
+							}
+						],
+						"elements": [
+							"/paragraphs/6"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 1,
+						"content": "QTY",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.717,
+									4.9516,
+									5.521,
+									4.9516,
+									5.521,
+									5.4287,
+									3.717,
+									5.4287
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 241,
+								"length": 3
+							}
+						],
+						"elements": [
+							"/paragraphs/7"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 2,
+						"content": "UNIT PRICE",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.521,
+									4.9516,
+									6.8851,
+									4.959,
+									6.8851,
+									5.4287,
+									5.521,
+									5.4287
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 245,
+								"length": 10
+							}
+						],
+						"elements": [
+							"/paragraphs/8"
+						]
+					},
+					{
+						"kind": "columnHeader",
+						"rowIndex": 0,
+						"columnIndex": 3,
+						"content": "TOTAL",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.8851,
+									4.959,
+									7.8237,
+									4.959,
+									7.8237,
+									5.4287,
+									6.8851,
+									5.4287
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 256,
+								"length": 5
+							}
+						],
+						"elements": [
+							"/paragraphs/9"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "Samsung Refrigerator 500L",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									0.6296,
+									5.4214,
+									3.717,
+									5.4287,
+									3.7244,
+									6.1847,
+									0.6296,
+									6.1847
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 262,
+								"length": 25
+							}
+						],
+						"elements": [
+							"/paragraphs/10"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "1",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									3.717,
+									5.4287,
+									5.521,
+									5.4287,
+									5.521,
+									6.1847,
+									3.7244,
+									6.1847
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 288,
+								"length": 1
+							}
+						],
+						"elements": [
+							"/paragraphs/11"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 2,
+						"content": "$1,200.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									5.521,
+									5.4287,
+									6.8851,
+									5.4287,
+									6.8924,
+									6.1847,
+									5.521,
+									6.1847
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 290,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/12"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 3,
+						"content": "$1,200.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.8851,
+									5.4287,
+									7.8237,
+									5.4287,
+									7.8237,
+									6.1847,
+									6.8924,
+									6.1847
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 300,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/13"
+						]
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6661,
+							4.9766,
+							7.8197,
+							4.9764,
+							7.8195,
+							6.244,
+							0.6669,
+							6.243
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 229,
+						"length": 80
+					}
+				]
+			},
+			{
+				"rowCount": 3,
+				"columnCount": 2,
+				"cells": [
+					{
+						"rowIndex": 0,
+						"columnIndex": 0,
+						"content": "Subtotal:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.7979,
+									6.3608,
+									6.3916,
+									6.3608,
+									6.3916,
+									6.6266,
+									4.7979,
+									6.6266
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 310,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/14"
+						]
+					},
+					{
+						"rowIndex": 0,
+						"columnIndex": 1,
+						"content": "$1,200.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.3916,
+									6.3608,
+									7.8249,
+									6.3608,
+									7.8304,
+									6.6266,
+									6.3916,
+									6.6266
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 320,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/15"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 0,
+						"content": "Tax (10.0%):",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.7979,
+									6.6266,
+									6.3916,
+									6.6266,
+									6.3916,
+									7.0861,
+									4.7979,
+									7.0861
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 330,
+								"length": 12
+							}
+						],
+						"elements": [
+							"/paragraphs/16"
+						]
+					},
+					{
+						"rowIndex": 1,
+						"columnIndex": 1,
+						"content": "$120.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.3916,
+									6.6266,
+									7.8304,
+									6.6266,
+									7.8359,
+									7.0861,
+									6.3916,
+									7.0861
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 343,
+								"length": 7
+							}
+						],
+						"elements": [
+							"/paragraphs/17"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 0,
+						"content": "TOTAL:",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									4.7979,
+									7.0861,
+									6.3916,
+									7.0861,
+									6.3916,
+									7.4238,
+									4.7979,
+									7.4238
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 351,
+								"length": 6
+							}
+						],
+						"elements": [
+							"/paragraphs/18"
+						]
+					},
+					{
+						"rowIndex": 2,
+						"columnIndex": 1,
+						"content": "$1,320.00",
+						"boundingRegions": [
+							{
+								"pageNumber": 1,
+								"polygon": [
+									6.3916,
+									7.0861,
+									7.8359,
+									7.0861,
+									7.8415,
+									7.4182,
+									6.3916,
+									7.4238
+								]
+							}
+						],
+						"spans": [
+							{
+								"offset": 358,
+								"length": 9
+							}
+						],
+						"elements": [
+							"/paragraphs/19"
+						]
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.8074,
+							6.3872,
+							7.9215,
+							6.3857,
+							7.922,
+							7.4152,
+							4.8076,
+							7.4165
+						]
+					}
+				],
+				"spans": [
+					{
+						"offset": 310,
+						"length": 57
+					}
+				]
+			}
+		],
+		"paragraphs": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6958,
+							0.3465,
+							2.514,
+							0.3419,
+							2.515,
+							0.72,
+							0.6968,
+							0.7246
+						]
+					}
+				],
+				"role": "title",
+				"content": "INVOICE"
+			},
+			{
+				"spans": [
+					{
+						"offset": 8,
+						"length": 13
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.535,
+							0.5018,
+							7.0651,
+							0.5038,
+							7.0648,
+							0.7149,
+							5.5347,
+							0.7129
+						]
+					}
+				],
+				"content": "#INV-2024-003"
+			},
+			{
+				"spans": [
+					{
+						"offset": 22,
+						"length": 101
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6839,
+							1.3219,
+							3.7607,
+							1.3308,
+							3.7575,
+							2.4197,
+							0.6807,
+							2.4107
+						]
+					}
+				],
+				"content": "ElectroHome Inc. 1234 Business Avenue, New York, NY 10001 Tax ID: 12-3456789 Phone: +1 (555) 123-4567"
+			},
+			{
+				"spans": [
+					{
+						"offset": 124,
+						"length": 23
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6881,
+							3.0661,
+							2.4975,
+							3.0622,
+							2.4979,
+							3.231,
+							0.6884,
+							3.2349
+						]
+					}
+				],
+				"content": "Invoice #: INV-2024-003"
+			},
+			{
+				"spans": [
+					{
+						"offset": 148,
+						"length": 16
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.5478,
+							3.0649,
+							6.8583,
+							3.0637,
+							6.8584,
+							3.2319,
+							5.5479,
+							3.2331
+						]
+					}
+				],
+				"content": "Date: 2024-02-05"
+			},
+			{
+				"spans": [
+					{
+						"offset": 165,
+						"length": 63
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6807,
+							3.5043,
+							3.3641,
+							3.5004,
+							3.3653,
+							4.3464,
+							0.6819,
+							4.3502
+						]
+					}
+				],
+				"content": "BILL TO: Carlos Perez Address: 123 Main Street, Miami, FL 33101"
+			},
+			{
+				"spans": [
+					{
+						"offset": 229,
+						"length": 11
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6296,
+							4.9516,
+							3.717,
+							4.9516,
+							3.717,
+							5.4287,
+							0.6296,
+							5.4214
+						]
+					}
+				],
+				"content": "DESCRIPTION"
+			},
+			{
+				"spans": [
+					{
+						"offset": 241,
+						"length": 3
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.717,
+							4.9516,
+							5.521,
+							4.9516,
+							5.521,
+							5.4287,
+							3.717,
+							5.4287
+						]
+					}
+				],
+				"content": "QTY"
+			},
+			{
+				"spans": [
+					{
+						"offset": 245,
+						"length": 10
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.521,
+							4.9516,
+							6.8851,
+							4.959,
+							6.8851,
+							5.4287,
+							5.521,
+							5.4287
+						]
+					}
+				],
+				"content": "UNIT PRICE"
+			},
+			{
+				"spans": [
+					{
+						"offset": 256,
+						"length": 5
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.8851,
+							4.959,
+							7.8237,
+							4.959,
+							7.8237,
+							5.4287,
+							6.8851,
+							5.4287
+						]
+					}
+				],
+				"content": "TOTAL"
+			},
+			{
+				"spans": [
+					{
+						"offset": 262,
+						"length": 25
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6296,
+							5.4214,
+							3.717,
+							5.4287,
+							3.7244,
+							6.1847,
+							0.6296,
+							6.1847
+						]
+					}
+				],
+				"content": "Samsung Refrigerator 500L"
+			},
+			{
+				"spans": [
+					{
+						"offset": 288,
+						"length": 1
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							3.717,
+							5.4287,
+							5.521,
+							5.4287,
+							5.521,
+							6.1847,
+							3.7244,
+							6.1847
+						]
+					}
+				],
+				"content": "1"
+			},
+			{
+				"spans": [
+					{
+						"offset": 290,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							5.521,
+							5.4287,
+							6.8851,
+							5.4287,
+							6.8924,
+							6.1847,
+							5.521,
+							6.1847
+						]
+					}
+				],
+				"content": "$1,200.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 300,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.8851,
+							5.4287,
+							7.8237,
+							5.4287,
+							7.8237,
+							6.1847,
+							6.8924,
+							6.1847
+						]
+					}
+				],
+				"content": "$1,200.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 310,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.7979,
+							6.3608,
+							6.3916,
+							6.3608,
+							6.3916,
+							6.6266,
+							4.7979,
+							6.6266
+						]
+					}
+				],
+				"content": "Subtotal:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 320,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.3916,
+							6.3608,
+							7.8249,
+							6.3608,
+							7.8304,
+							6.6266,
+							6.3916,
+							6.6266
+						]
+					}
+				],
+				"content": "$1,200.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 330,
+						"length": 12
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.7979,
+							6.6266,
+							6.3916,
+							6.6266,
+							6.3916,
+							7.0861,
+							4.7979,
+							7.0861
+						]
+					}
+				],
+				"content": "Tax (10.0%):"
+			},
+			{
+				"spans": [
+					{
+						"offset": 343,
+						"length": 7
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.3916,
+							6.6266,
+							7.8304,
+							6.6266,
+							7.8359,
+							7.0861,
+							6.3916,
+							7.0861
+						]
+					}
+				],
+				"content": "$120.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 351,
+						"length": 6
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							4.7979,
+							7.0861,
+							6.3916,
+							7.0861,
+							6.3916,
+							7.4238,
+							4.7979,
+							7.4238
+						]
+					}
+				],
+				"content": "TOTAL:"
+			},
+			{
+				"spans": [
+					{
+						"offset": 358,
+						"length": 9
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							6.3916,
+							7.0861,
+							7.8359,
+							7.0861,
+							7.8415,
+							7.4182,
+							6.3916,
+							7.4238
+						]
+					}
+				],
+				"content": "$1,320.00"
+			},
+			{
+				"spans": [
+					{
+						"offset": 368,
+						"length": 40
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6849,
+							8.0416,
+							3.0082,
+							8.0444,
+							3.0077,
+							8.452,
+							0.6844,
+							8.4492
+						]
+					}
+				],
+				"content": "PAYMENT METHOD: Credit Card Status: PAID"
+			},
+			{
+				"spans": [
+					{
+						"offset": 409,
+						"length": 78
+					}
+				],
+				"boundingRegions": [
+					{
+						"pageNumber": 1,
+						"polygon": [
+							0.6853,
+							9.0522,
+							3.5491,
+							9.0558,
+							3.5487,
+							9.404,
+							0.6849,
+							9.4004
+						]
+					}
+				],
+				"content": "Thank you for your business! Questions? Contact: contact@electrohomeinc .. com"
+			}
+		],
+		"styles": [],
+		"contentFormat": "text",
+		"sections": [
+			{
+				"spans": [
+					{
+						"offset": 0,
+						"length": 487
+					}
+				],
+				"elements": [
+					"/paragraphs/0",
+					"/paragraphs/1",
+					"/paragraphs/2",
+					"/paragraphs/3",
+					"/paragraphs/4",
+					"/paragraphs/5",
+					"/tables/0",
+					"/tables/1",
+					"/paragraphs/20",
+					"/paragraphs/21"
+				]
+			}
+		]
+	}
+}

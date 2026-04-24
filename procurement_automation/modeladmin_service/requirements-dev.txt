@@ -1,0 +1,4 @@
+# Dev/test dependencies for modeladmin_service
+# Install with: pip install -r requirements-dev.txt
+pytest==8.3.5
+httpx==0.26.0
