@@ -13,8 +13,8 @@ os.environ.setdefault(
 os.environ.setdefault("DATABASE_URL", "sqlite:///./invoice_ocr.db")
 from app.modeladmin_core.boundary_contracts import CandidateCreatedV1Payload, CandidateCreatedV1Response
 from app.services.modeladmin_port import ExternalModelAdminPort, build_candidate_created_payload
-from modeladmin_service.config import get_modeladmin_service_settings
-from modeladmin_service.main import create_modeladmin_service_app
+from modeladmin_sidecar.config import get_modeladmin_sidecar_settings
+from modeladmin_sidecar.main import create_modeladmin_sidecar_app
 class _TestClientBoundaryAdapter:
     def __init__(self, client: TestClient, api_key: str) -> None:
         self.client = client
@@ -39,8 +39,8 @@ class _TestClientBoundaryAdapter:
         return CandidateCreatedV1Response.model_validate(body)
 def test_phase4_cutover_smoke_backend_boundary_to_modeladmin_lifecycle() -> None:
     os.environ["BOUNDARY_API_KEY"] = "cutover-shared-secret"
-    get_modeladmin_service_settings.cache_clear()
-    app = create_modeladmin_service_app()
+    get_modeladmin_sidecar_settings.cache_clear()
+    app = create_modeladmin_sidecar_app()
     with TestClient(app) as modeladmin_client:
         boundary_client = _TestClientBoundaryAdapter(modeladmin_client, "cutover-shared-secret")
         port = ExternalModelAdminPort(

@@ -1,24 +1,15 @@
-# Copied from original location. See backend/tests/conftest.py for full fixture and marker setup.
+# Repo-root backend test configuration.
 
 import sys
 from pathlib import Path
 from contextlib import contextmanager
 from typing import Generator, Optional
 
-# Ensure repo root is in sys.path for all tests
-REPO_ROOT = str(Path(__file__).resolve().parents[2])
-if REPO_ROOT not in sys.path:
-    sys.path.insert(0, REPO_ROOT)
-
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, sessionmaker, scoped_session
 from sqlalchemy.pool import StaticPool
-
-MODELADMIN_SRC = Path(__file__).resolve().parents[2] / "modeladmin_service" / "src"
-if str(MODELADMIN_SRC) not in sys.path:
-    sys.path.insert(0, str(MODELADMIN_SRC))
 
 def pytest_configure(config):
     config.addinivalue_line("markers", "unit: Unit test (no external dependencies, fast)")

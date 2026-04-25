@@ -5,8 +5,7 @@
 .env.production
 .env.development
 *.env
-!procurement_automation/.env.example
-!procurement_automation/.env.local.example
+!.env.example
 
 # Python Virtual Environments
 venv/

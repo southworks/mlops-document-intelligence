@@ -11,15 +11,15 @@ os.environ.setdefault(
     "TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;"
 )
 os.environ.setdefault("DATABASE_URL", "sqlite:///./invoice_ocr.db")
-from modeladmin_service.config import get_modeladmin_service_settings
-from modeladmin_service.main import create_modeladmin_service_app
-from modeladmin_service.database.connection import init_db
+from modeladmin_sidecar.config import get_modeladmin_sidecar_settings
+from modeladmin_sidecar.main import create_modeladmin_sidecar_app
+from modeladmin_sidecar.database.connection import init_db
 
 def test_demo_flow_candidate_marking_and_review_lifecycle() -> None:
     init_db()
     os.environ["BOUNDARY_API_KEY"] = "demo-shared-secret"
-    get_modeladmin_service_settings.cache_clear()
-    app = create_modeladmin_service_app()
+    get_modeladmin_sidecar_settings.cache_clear()
+    app = create_modeladmin_sidecar_app()
     client = TestClient(app)
     document_id = f"demo-{uuid.uuid4()}"
     payload = {

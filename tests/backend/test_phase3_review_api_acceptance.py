@@ -11,7 +11,7 @@ os.environ.setdefault(
 os.environ.setdefault("DATABASE_URL", "sqlite:///./invoice_ocr.db")
 from fastapi.testclient import TestClient
 from app.main import app
-from modeladmin_service.main import create_modeladmin_service_app
+from modeladmin_sidecar.main import create_modeladmin_sidecar_app
 from app.services import document_processor
 class _FakeBlobProperties:
     size = 128

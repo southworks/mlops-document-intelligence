@@ -10,8 +10,8 @@ os.environ.setdefault(
     "TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;"
 )
 os.environ.setdefault("DATABASE_URL", "sqlite:///./invoice_ocr.db")
-from modeladmin_service.config import get_modeladmin_service_settings
-from modeladmin_service.main import create_modeladmin_service_app
+from modeladmin_sidecar.config import get_modeladmin_sidecar_settings
+from modeladmin_sidecar.main import create_modeladmin_sidecar_app
 
 def _sample_payload() -> dict:
     return {
@@ -29,8 +29,8 @@ def _sample_payload() -> dict:
 
 def test_boundary_intake_rejects_when_api_key_is_configured_and_header_missing() -> None:
     os.environ["BOUNDARY_API_KEY"] = "service-secret"
-    get_modeladmin_service_settings.cache_clear()
-    app = create_modeladmin_service_app()
+    get_modeladmin_sidecar_settings.cache_clear()
+    app = create_modeladmin_sidecar_app()
     client = TestClient(app)
     response = client.post(
         "/boundary/modeladmin/candidate-created",
@@ -39,4 +39,4 @@ def test_boundary_intake_rejects_when_api_key_is_configured_and_header_missing()
     assert response.status_code == 401
     assert "Unauthorized" in response.json()["detail"]
     del os.environ["BOUNDARY_API_KEY"]
-    get_modeladmin_service_settings.cache_clear()
+    get_modeladmin_sidecar_settings.cache_clear()
