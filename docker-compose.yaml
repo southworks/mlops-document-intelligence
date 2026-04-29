@@ -80,8 +80,8 @@ services:
   # ModelAdmin: Standalone FastAPI runtime for candidate/review boundaries
   modeladmin-service:
     build:
-      context: ./modeladmin_sidecar
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: modeladmin_sidecar/Dockerfile
     container_name: modeladmin-container
     ports:
       - "8100:8100"

@@ -151,27 +151,27 @@ def test_start_training_on_ready_dataset_returns_201(tmp_path) -> None:
 
     with (
         patch(
-            "modeladmin_sidecar.routes.training_jobs.AzureBlobStorageService.get_container_sas_url",
+            "modeladmin_sidecar.services.training_job_orchestration.AzureBlobStorageService.get_container_sas_url",
             return_value="https://devstoreaccount1.blob.core.windows.net/training?sv=sas",
         ),
         patch(
-            "modeladmin_sidecar.routes.training_jobs.AzureBlobStorageService.list_available_doc_type_folders",
+            "modeladmin_sidecar.services.training_job_orchestration.AzureBlobStorageService.list_available_doc_type_folders",
             return_value=["invoice"],
         ),
         patch(
-            "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.begin_build_document_model",
+            "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.begin_build_document_model",
             return_value="https://adi.example.com/ops/ext-op-1",
         ),
         patch(
-            "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.begin_build_classifier",
+            "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.begin_build_classifier",
             return_value="https://adi.example.com/ops/cls-op-1",
         ),
         patch(
-            "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.document_model_exists",
+            "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.document_model_exists",
             return_value=False,
         ),
         patch(
-            "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.classifier_exists",
+            "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.classifier_exists",
             return_value=False,
         ),
     ):
@@ -258,7 +258,7 @@ def test_get_training_job_triggers_compose_when_components_complete(tmp_path) ->
 
     with (
         patch(
-            "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.get_operation_status",
+            "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.get_operation_status",
             side_effect=lambda operation_id: (
                 {"status": "succeeded", "model_id": "procurement-invoice-extractor.v1"}
                 if operation_id.endswith("ext-poll-1")
@@ -270,11 +270,11 @@ def test_get_training_job_triggers_compose_when_components_complete(tmp_path) ->
             ),
         ),
         patch(
-            "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.begin_compose_model",
+            "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.begin_compose_model",
             return_value="https://adi.example.com/ops/compose-poll-1",
         ),
         patch(
-            "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.get_compose_status",
+            "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.get_compose_status",
             return_value=("running", None, None),
         ),
     ):
@@ -329,7 +329,7 @@ def test_get_training_job_completes_and_creates_compose_model_cache(tmp_path) ->
     session.close()
 
     with patch(
-        "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.get_compose_status",
+        "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.get_compose_status",
         return_value=("succeeded", "procurement-compose.v1", None),
     ):
         response = client.get(f"/modeladmin/training-jobs/{job_id}")
@@ -385,7 +385,7 @@ def test_get_training_job_marks_failed_on_operation_error(tmp_path) -> None:
     session.close()
 
     with patch(
-        "modeladmin_sidecar.routes.training_jobs.DocumentIntelligenceService.get_operation_status",
+        "modeladmin_sidecar.services.training_job_orchestration.DocumentIntelligenceService.get_operation_status",
         return_value={"status": "failed", "error": "ADI model build failed"},
     ):
         response = client.get(f"/modeladmin/training-jobs/{job_id}")

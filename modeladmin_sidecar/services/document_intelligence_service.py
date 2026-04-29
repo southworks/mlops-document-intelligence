@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 import logging
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from modeladmin_sidecar.config import get_modeladmin_sidecar_settings
+from shared.adi_helpers import format_adi_error, redact_adi_url
 
 
 logger = logging.getLogger(__name__)
@@ -30,83 +30,6 @@ class DocumentIntelligenceService:
             raise ValueError("ADI_ENDPOINT is required")
         if not self.key:
             raise ValueError("ADI_KEY is required")
-
-    @staticmethod
-    def _redact_url(url: str) -> str:
-        """Redact secret-bearing query parameters when logging URLs."""
-        try:
-            parts = urlsplit(url)
-            if not parts.query:
-                return url
-            redacted = []
-            for key, value in parse_qsl(parts.query, keep_blank_values=True):
-                if key.lower() in {"sig", "se", "sp", "sr", "skoid", "sktid", "skt", "ske", "skv"}:
-                    redacted.append((key, "***"))
-                else:
-                    redacted.append((key, value))
-            return urlunsplit((parts.scheme, parts.netloc, parts.path, urlencode(redacted), parts.fragment))
-        except Exception:  # pylint: disable=broad-except
-            return "<redaction-failed>"
-
-    @staticmethod
-    def _format_adi_error(error_info: dict | None) -> str:
-        """Flatten ADI error payloads into a readable one-line message."""
-        if not isinstance(error_info, dict):
-            return "Unknown ADI error"
-
-        parts: list[str] = []
-
-        top_message = str(error_info.get("message") or "").strip()
-        if top_message:
-            parts.append(top_message)
-
-        code = str(error_info.get("code") or "").strip()
-        if code and code not in parts:
-            parts.append(f"code={code}")
-
-        details = error_info.get("details")
-        if isinstance(details, list):
-            for detail in details:
-                if not isinstance(detail, dict):
-                    continue
-                detail_message = str(detail.get("message") or "").strip()
-                detail_target = str(detail.get("target") or "").strip()
-                if detail_message and detail_target:
-                    parts.append(f"{detail_target}: {detail_message}")
-                elif detail_message:
-                    parts.append(detail_message)
-
-        inner = error_info.get("innererror")
-        if isinstance(inner, dict):
-            inner_message = str(inner.get("message") or "").strip()
-            inner_code = str(inner.get("code") or "").strip()
-            if inner_message:
-                parts.append(inner_message)
-            if inner_code:
-                parts.append(f"inner_code={inner_code}")
-
-            inner_details = inner.get("details")
-            if isinstance(inner_details, list):
-                for detail in inner_details:
-                    if isinstance(detail, dict):
-                        msg = str(detail.get("message") or "").strip()
-                        if msg:
-                            parts.append(msg)
-
-        # Preserve order but remove duplicates/noise.
-        deduped: list[str] = []
-        seen: set[str] = set()
-        for part in parts:
-            normalized = part.strip()
-            if not normalized:
-                continue
-            key = normalized.lower()
-            if key in seen:
-                continue
-            seen.add(key)
-            deduped.append(normalized)
-
-        return " | ".join(deduped) if deduped else "Unknown ADI error"
 
     def begin_compose_model(
         self,
@@ -145,7 +68,7 @@ class DocumentIntelligenceService:
             },
         }
 
-        redacted_url = self._redact_url(url)
+        redacted_url = redact_adi_url(url)
         doc_types = sorted(cleaned_doc_types.keys())
         logger.warning(
             "ADI compose request: url=%s model_id=%s classifier_id=%s doc_types=%s",
@@ -211,8 +134,8 @@ class DocumentIntelligenceService:
             "buildMode": "template",
             "azureBlobSource": source,
         }
-        redacted_url = self._redact_url(url)
-        redacted_sas_url = self._redact_url(sas_url)
+        redacted_url = redact_adi_url(url)
+        redacted_sas_url = redact_adi_url(sas_url)
         logger.warning(
             "ADI extractor build request: url=%s model_id=%s container_url=%s prefix=%s",
             redacted_url,
@@ -268,7 +191,7 @@ class DocumentIntelligenceService:
                 for doc_type, sas_url in sas_urls.items()
             },
         }
-        redacted_url = self._redact_url(url)
+        redacted_url = redact_adi_url(url)
         doc_types = sorted(sas_urls.keys())
         prefixes_by_type = {k: (prefixes or {}).get(k, "") for k in doc_types}
         logger.warning(
@@ -306,7 +229,7 @@ class DocumentIntelligenceService:
         """
         import requests  # pylint: disable=import-outside-toplevel
 
-        redacted_url = self._redact_url(operation_url)
+        redacted_url = redact_adi_url(operation_url)
         print(f"ADI_AUDIT get_operation_status url={redacted_url}", flush=True)
         headers = {"Ocp-Apim-Subscription-Key": self.key}
         response = requests.get(operation_url, headers=headers, timeout=30)
@@ -325,7 +248,7 @@ class DocumentIntelligenceService:
 
         if raw_status == "failed":
             error_info = data.get("error", {})
-            error_msg = self._format_adi_error(error_info)
+            error_msg = format_adi_error(error_info)
             print(f"ADI_AUDIT get_operation_status_failed error={error_msg} url={redacted_url}", flush=True)
             return {"status": "failed", "model_id": None, "error": error_msg}
 
@@ -340,7 +263,7 @@ class DocumentIntelligenceService:
             return False
 
         url = f"{self._api_base_url()}/documentModels/{model_id}?api-version=2024-11-30"
-        print(f"ADI_AUDIT document_model_exists model_id={model_id} url={self._redact_url(url)}", flush=True)
+        print(f"ADI_AUDIT document_model_exists model_id={model_id} url={redact_adi_url(url)}", flush=True)
         response = requests.get(url, headers={"Ocp-Apim-Subscription-Key": self.key}, timeout=30)
 
         if response.status_code == 200:
@@ -361,7 +284,7 @@ class DocumentIntelligenceService:
             return False
 
         url = f"{self._api_base_url()}/documentClassifiers/{classifier_id}?api-version=2024-11-30"
-        print(f"ADI_AUDIT classifier_exists classifier_id={classifier_id} url={self._redact_url(url)}", flush=True)
+        print(f"ADI_AUDIT classifier_exists classifier_id={classifier_id} url={redact_adi_url(url)}", flush=True)
         response = requests.get(url, headers={"Ocp-Apim-Subscription-Key": self.key}, timeout=30)
 
         if response.status_code == 200:

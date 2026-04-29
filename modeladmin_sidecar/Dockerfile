@@ -13,11 +13,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt requirements.txt
+COPY modeladmin_sidecar/requirements.txt requirements.txt
 RUN pip install --upgrade pip setuptools wheel \
     && pip install --no-cache-dir -r requirements.txt
 
-COPY . /app/modeladmin_sidecar/
+COPY shared/ /app/shared/
+COPY modeladmin_sidecar/. /app/modeladmin_sidecar/
 
 RUN useradd -m appuser \
   && mkdir -p /app/data \
