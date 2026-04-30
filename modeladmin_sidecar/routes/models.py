@@ -11,7 +11,7 @@ from modeladmin_sidecar.modeladmin_core.service_api_contracts import (
     BootstrapImportValidationResponse,
     ComposeModelListResponse,
 )
-from modeladmin_sidecar.repositories.active_model_config_store import ActiveModelConfigStore
+from modeladmin_sidecar.repositories.active_model_config_repository import ActiveModelConfigRepository
 from modeladmin_sidecar.repositories.compose_model_repository import ComposeModelRepository
 from modeladmin_sidecar.services.bootstrap_import_service import BootstrapImportService, BootstrapValidationError
 from modeladmin_sidecar.services.document_intelligence_service import DocumentIntelligenceService
@@ -29,8 +29,8 @@ def _serialize_active_model(config) -> dict:
 
 @router.get("/active")
 def get_active_model(db: Session = Depends(get_db)) -> ActiveModelConfigResponse:
-    store = ActiveModelConfigStore(db)
-    active_config = store.get_active_model_config()
+    repo = ActiveModelConfigRepository(db)
+    active_config = repo.get_active_model_config()
     if not active_config:
         raise HTTPException(status_code=404, detail="active model is not configured")
     return {"item": _serialize_active_model(active_config)}
@@ -39,7 +39,7 @@ def get_active_model(db: Session = Depends(get_db)) -> ActiveModelConfigResponse
 @router.post("/{model_id}/activate")
 def activate_compose_model(model_id: str, db: Session = Depends(get_db)):
     compose_repo = ComposeModelRepository(db)
-    active_store = ActiveModelConfigStore(db)
+    active_repo = ActiveModelConfigRepository(db)
 
     compose_model = compose_repo.get_by_id(model_id)
     if not compose_model:
@@ -51,7 +51,7 @@ def activate_compose_model(model_id: str, db: Session = Depends(get_db)):
     compose_repo.activate(model_id)
 
     # Update active config
-    active_config = active_store.upsert_active_model_config(active_model_id=model_id)
+    active_config = active_repo.upsert_active_model_config(active_model_id=model_id)
     return {"success": True, "item": _serialize_active_model(active_config)}
 
 

@@ -8,7 +8,7 @@ from modeladmin_sidecar.modeladmin_core.service_api_contracts import (
     ListRetrainJobsResponse,
     RetrainJobItemResponse,
 )
-from modeladmin_sidecar.repositories.retrain_job_store import RetrainJobStore
+from modeladmin_sidecar.repositories.retrain_job_repository import RetrainJobRepository
 from modeladmin_sidecar.services.document_intelligence_service import DocumentIntelligenceService
 
 router = APIRouter(prefix="/modeladmin/retrain-jobs", tags=["modeladmin"])
@@ -29,14 +29,14 @@ def _serialize_job(job) -> dict:
 @router.get("")
 @router.get("/")
 def list_retrain_jobs(db: Session = Depends(get_db)) -> ListRetrainJobsResponse:
-    store = RetrainJobStore(db)
-    return {"items": [_serialize_job(j) for j in store.list_jobs()]}
+    repo = RetrainJobRepository(db)
+    return {"items": [_serialize_job(j) for j in repo.list_jobs()]}
 
 
 @router.get("/{job_id}")
 def get_retrain_job(job_id: str, db: Session = Depends(get_db)) -> RetrainJobItemResponse:
-    store = RetrainJobStore(db)
-    job = store.get_job_by_id(job_id)
+    repo = RetrainJobRepository(db)
+    job = repo.get_job_by_id(job_id)
     if not job:
         raise HTTPException(status_code=404, detail=f"Retrain job not found: {job_id}")
 
@@ -49,9 +49,9 @@ def get_retrain_job(job_id: str, db: Session = Depends(get_db)) -> RetrainJobIte
             )
 
             if adi_status == "succeeded" and adi_model_id:
-                job = store.update_job_succeeded(job.id, adi_model_id=adi_model_id)
+                job = repo.update_job_succeeded(job.id, adi_model_id=adi_model_id)
             elif adi_status == "failed":
-                job = store.update_job_failed(
+                job = repo.update_job_failed(
                     job.id,
                     error_message=error_message or "ADI compose operation failed",
                 )
@@ -59,6 +59,6 @@ def get_retrain_job(job_id: str, db: Session = Depends(get_db)) -> RetrainJobIte
             # Missing ADI configuration in current environment; skip sync.
             pass
         except Exception as exc:  # pylint: disable=broad-except
-            job = store.update_job_failed(job.id, error_message=str(exc))
+            job = repo.update_job_failed(job.id, error_message=str(exc))
 
     return _serialize_job(job)

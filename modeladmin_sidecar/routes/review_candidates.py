@@ -18,7 +18,7 @@ from modeladmin_sidecar.modeladmin_core.service_api_contracts import (
     ReviewCandidateMutationResponse,
     ReviewCandidateResponse,
 )
-from modeladmin_sidecar.repositories.review_candidate_store import ReviewCandidateStore
+from modeladmin_sidecar.repositories.review_candidate_repository import ReviewCandidateRepository
 
 router = APIRouter(prefix="/modeladmin/review-candidates", tags=["modeladmin"])
 
@@ -108,7 +108,7 @@ def list_review_candidates(
     if sort_order.lower() not in {"asc", "desc"}:
         raise HTTPException(status_code=400, detail="sort_order must be 'asc' or 'desc'")
 
-    repository = ReviewCandidateStore(db)
+    repository = ReviewCandidateRepository(db)
     items, total = repository.list_candidates(
         status=status,
         document_type=document_type,
@@ -154,7 +154,7 @@ def get_review_candidate(
     candidate_id: str,
     db: Session = Depends(get_db),
 ) -> ReviewCandidateResponse:
-    repository = ReviewCandidateStore(db)
+    repository = ReviewCandidateRepository(db)
     candidate = repository.get_by_id(candidate_id)
 
     if not candidate:
@@ -174,7 +174,7 @@ def label_review_candidate(
     request: CandidateLabelRequest,
     db: Session = Depends(get_db),
 ) -> ReviewCandidateMutationResponse:
-    repository = ReviewCandidateStore(db)
+    repository = ReviewCandidateRepository(db)
     candidate, changes, error = repository.apply_label(
         candidate_id=candidate_id,
         label=to_storage_label(request.label),
@@ -207,7 +207,7 @@ def approve_review_candidate(
     db: Session = Depends(get_db),
 ) -> ReviewCandidateMutationResponse:
     _ = request
-    repository = ReviewCandidateStore(db)
+    repository = ReviewCandidateRepository(db)
     candidate, changes, error = repository.apply_approval(
         candidate_id=candidate_id,
     )
@@ -243,7 +243,7 @@ def reject_review_candidate(
 ) -> ReviewCandidateMutationResponse:
     _ = request
 
-    repository = ReviewCandidateStore(db)
+    repository = ReviewCandidateRepository(db)
     candidate, changes, error = repository.apply_rejection(
         candidate_id=candidate_id,
     )

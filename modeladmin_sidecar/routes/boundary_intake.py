@@ -13,7 +13,7 @@ from modeladmin_sidecar.modeladmin_core.boundary_contracts import (
     CandidateCreatedV1Payload,
     CandidateCreatedV1Response,
 )
-from modeladmin_sidecar.repositories.review_candidate_store import ReviewCandidateStore
+from modeladmin_sidecar.repositories.review_candidate_repository import ReviewCandidateRepository
 from modeladmin_sidecar.telemetry import increment_counter
 
 logger = logging.getLogger(__name__)
@@ -74,14 +74,14 @@ def intake_candidate_created(
             increment_counter("boundary_intake.unauthorized")
             raise HTTPException(status_code=401, detail="Unauthorized ModelAdmin boundary request")
 
-        store = ReviewCandidateStore(db)
+        repo = ReviewCandidateRepository(db)
         threshold = _get_threshold_for_type(payload.predicted_document_type)
         low_confidence_field_names = _extract_low_confidence_field_names(
             payload.structured_data,
             threshold,
         )
 
-        existing = store.get_by_document_and_compose_model(
+        existing = repo.get_by_document_and_compose_model(
             document_id=payload.document_id,
             compose_model_id=payload.compose_model_id,
         )
@@ -89,7 +89,7 @@ def intake_candidate_created(
             increment_counter("boundary_intake.duplicate")
             return CandidateCreatedV1Response(accepted=True, candidate_id=existing.id)
 
-        candidate = store.create_candidate(
+        candidate = repo.create_candidate(
             document_id=payload.document_id,
             blob_path=payload.blob_path,
             processed_blob_path=payload.processed_blob_path,

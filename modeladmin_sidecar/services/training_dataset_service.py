@@ -22,7 +22,7 @@ from modeladmin_sidecar.database.models import (
     TrainingDatasetModel,
 )
 from modeladmin_sidecar.modeladmin_core.doc_types import normalize_training_document_type
-from modeladmin_sidecar.repositories.retrain_job_store import RetrainJobStore
+from modeladmin_sidecar.repositories.retrain_job_repository import RetrainJobRepository
 from modeladmin_sidecar.repositories.training_dataset_repository import TrainingDatasetRepository
 from modeladmin_sidecar.services.azure_blob_storage_service import AzureBlobStorageService
 from modeladmin_sidecar.services.document_intelligence_service import DocumentIntelligenceService
@@ -271,8 +271,8 @@ class TrainingDatasetService:
         compose_model_id = compose_model_ids[0]
         classifier_model_id, doc_type_model_map = self._repo.get_compose_retrain_inputs(compose_model_id)
 
-        job_store = RetrainJobStore(self._db)
-        job = job_store.create_job(training_dataset_id=dataset_id)
+        job_repo = RetrainJobRepository(self._db)
+        job = job_repo.create_job(training_dataset_id=dataset_id)
 
         try:
             if classifier_model_id and doc_type_model_map:
@@ -282,12 +282,12 @@ class TrainingDatasetService:
                     doc_type_model_map=doc_type_model_map,
                     model_name=f"retrain-{dataset.id[:8]}",
                 )
-                job = job_store.update_job_running(job.id, adi_operation_id=operation_id)
+                job = job_repo.update_job_running(job.id, adi_operation_id=operation_id)
         except ValueError:
             # Missing ADI configuration in current environment; keep job queued.
             pass
         except Exception as exc:  # pylint: disable=broad-except
-            job = job_store.update_job_failed(job.id, error_message=str(exc))
+            job = job_repo.update_job_failed(job.id, error_message=str(exc))
 
         return job, None
 

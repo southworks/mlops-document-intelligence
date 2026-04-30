@@ -17,8 +17,8 @@ from modeladmin_sidecar.modeladmin_core.service_api_contracts import (
     TrainingDatasetMutationResponse,
     DatasetClassCountsResponse,
 )
-from modeladmin_sidecar.repositories.review_candidate_store import ReviewCandidateStore
-from modeladmin_sidecar.repositories.training_dataset_store import TrainingDatasetStore
+from modeladmin_sidecar.repositories.review_candidate_repository import ReviewCandidateRepository
+from modeladmin_sidecar.repositories.training_dataset_repository import TrainingDatasetRepository
 
 from modeladmin_sidecar.modeladmin_core.service_api_contracts import RetrainJobMutationResponse
 from modeladmin_sidecar.services.training_dataset_service import TrainingDatasetService
@@ -68,10 +68,10 @@ def create_training_dataset(
     if len(set(candidate_ids)) != len(candidate_ids):
         raise HTTPException(status_code=400, detail="candidate_ids must not contain duplicates")
 
-    candidate_store = ReviewCandidateStore(db)
+    candidate_repo = ReviewCandidateRepository(db)
     memberships = []
     for candidate_id in candidate_ids:
-        candidate = candidate_store.get_by_id(candidate_id)
+        candidate = candidate_repo.get_by_id(candidate_id)
         if not candidate:
             raise HTTPException(status_code=404, detail=f"Review candidate not found: {candidate_id}")
         if candidate.status != "approved_for_training":
@@ -83,14 +83,14 @@ def create_training_dataset(
             )
         memberships.append((candidate.id, candidate.compose_model_id))
 
-    dataset_store = TrainingDatasetStore(db)
+    dataset_repo = TrainingDatasetRepository(db)
 
     if request.parent_dataset_id:
-        parent = dataset_store.get_dataset_by_id(request.parent_dataset_id)
+        parent = dataset_repo.get_dataset_by_id(request.parent_dataset_id)
         if not parent:
             raise HTTPException(status_code=404, detail=f"Parent dataset not found: {request.parent_dataset_id}")
 
-    dataset = dataset_store.create_dataset(
+    dataset = dataset_repo.create_dataset(
         name=_to_dataset_name(base_name),
         created_by=created_by,
         memberships=memberships,
@@ -111,12 +111,12 @@ def list_training_datasets(
     limit: int = Query(50, ge=1, le=100, description="Items per page"),
     db: Session = Depends(get_db),
 ) -> ListTrainingDatasetsResponse:
-    dataset_store = TrainingDatasetStore(db)
-    items, total = dataset_store.list_datasets(page=page, limit=limit, status=status)
+    dataset_repo = TrainingDatasetRepository(db)
+    items, total = dataset_repo.list_datasets(page=page, limit=limit, status=status)
 
     serialized_items = []
     for dataset in items:
-        membership_count = len(dataset_store.list_memberships(dataset.id))
+        membership_count = len(dataset_repo.list_memberships(dataset.id))
         serialized_items.append(_serialize_dataset(dataset, membership_count=membership_count))
 
     return {
@@ -135,12 +135,12 @@ def get_training_dataset(
     dataset_id: str,
     db: Session = Depends(get_db),
 ) -> TrainingDatasetDetailResponse:
-    dataset_store = TrainingDatasetStore(db)
-    dataset = dataset_store.get_dataset_by_id(dataset_id)
+    dataset_repo = TrainingDatasetRepository(db)
+    dataset = dataset_repo.get_dataset_by_id(dataset_id)
     if not dataset:
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
 
-    enriched = dataset_store.list_enriched_memberships(dataset_id)
+    enriched = dataset_repo.list_enriched_memberships(dataset_id)
     return {
         "item": _serialize_dataset(dataset, membership_count=len(enriched)),
         "membership": enriched,
@@ -153,8 +153,8 @@ def remove_dataset_member(
     candidate_id: str,
     db: Session = Depends(get_db),
 ):
-    dataset_store = TrainingDatasetStore(db)
-    dataset = dataset_store.get_dataset_by_id(dataset_id)
+    dataset_repo = TrainingDatasetRepository(db)
+    dataset = dataset_repo.get_dataset_by_id(dataset_id)
     if not dataset:
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
 
@@ -164,14 +164,14 @@ def remove_dataset_member(
             detail="Cannot remove members from a non-draft dataset",
         )
 
-    removed = dataset_store.remove_member(dataset_id=dataset_id, candidate_id=candidate_id)
+    removed = dataset_repo.remove_member(dataset_id=dataset_id, candidate_id=candidate_id)
     if not removed:
         raise HTTPException(status_code=404, detail=f"Member not found in dataset: {candidate_id}")
 
-    enriched = dataset_store.list_enriched_memberships(dataset_id)
+    enriched = dataset_repo.list_enriched_memberships(dataset_id)
     return {
         "success": True,
-        "item": _serialize_dataset(dataset_store.get_dataset_by_id(dataset_id), membership_count=len(enriched)),
+        "item": _serialize_dataset(dataset_repo.get_dataset_by_id(dataset_id), membership_count=len(enriched)),
         "membership": enriched,
     }
 
@@ -192,7 +192,7 @@ def stage_training_dataset(
     if error == "copy_failed":
         raise HTTPException(status_code=500, detail="Failed to copy selected blobs into training-data container")
 
-    membership_count = len(TrainingDatasetStore(db).list_memberships(dataset_id))
+    membership_count = len(TrainingDatasetRepository(db).list_memberships(dataset_id))
     return {
         "success": True,
         "item": _serialize_dataset(dataset, membership_count=membership_count),
@@ -235,7 +235,7 @@ def mark_training_dataset_ready(
             detail="Failed to verify OCR and labels sidecars",
         )
 
-    membership_count = len(TrainingDatasetStore(db).list_memberships(dataset_id))
+    membership_count = len(TrainingDatasetRepository(db).list_memberships(dataset_id))
     return {
         "success": True,
         "item": _serialize_dataset(dataset, membership_count=membership_count),
@@ -247,8 +247,8 @@ def recheck_training_dataset_labels(
     dataset_id: str,
     db: Session = Depends(get_db),
 ) -> RecheckResponse:
-    dataset_store = TrainingDatasetStore(db)
-    dataset = dataset_store.get_dataset_by_id(dataset_id)
+    dataset_repo = TrainingDatasetRepository(db)
+    dataset = dataset_repo.get_dataset_by_id(dataset_id)
     if not dataset:
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
 
@@ -306,8 +306,8 @@ def get_dataset_class_counts(
     dataset_id: str,
     db: Session = Depends(get_db),
 ) -> DatasetClassCountsResponse:
-    dataset_store = TrainingDatasetStore(db)
-    dataset = dataset_store.get_dataset_by_id(dataset_id)
+    dataset_repo = TrainingDatasetRepository(db)
+    dataset = dataset_repo.get_dataset_by_id(dataset_id)
     if not dataset:
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
 

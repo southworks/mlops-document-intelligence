@@ -17,7 +17,7 @@ from modeladmin_sidecar.database.models import TrainedModelModel
 from modeladmin_sidecar.modeladmin_core.doc_types import normalize_training_document_type
 from modeladmin_sidecar.repositories.compose_model_repository import ComposeModelRepository
 from modeladmin_sidecar.repositories.compose_model_cache_repository import ComposeModelCacheRepository
-from modeladmin_sidecar.repositories.training_dataset_store import TrainingDatasetStore
+from modeladmin_sidecar.repositories.training_dataset_repository import TrainingDatasetRepository
 from modeladmin_sidecar.repositories.training_job_repository import TrainingJobRepository
 from modeladmin_sidecar.services.azure_blob_storage_service import AzureBlobStorageService
 from modeladmin_sidecar.services.document_intelligence_service import DocumentIntelligenceService
@@ -86,7 +86,7 @@ class TrainingJobOrchestration:
         a classifier, persists the async operation poll URLs, and returns the
         created job object with its per-operation rows.
         """
-        dataset_store = TrainingDatasetStore(self._db)
+        dataset_store = TrainingDatasetRepository(self._db)
         dataset = dataset_store.get_dataset_by_id(dataset_id)
         if not dataset:
             raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
@@ -487,7 +487,7 @@ class TrainingJobOrchestration:
                 error_message="No classifier model ID available for compose",
             )
 
-        dataset = TrainingDatasetStore(self._db).get_dataset_by_id(job.dataset_version_id)
+        dataset = TrainingDatasetRepository(self._db).get_dataset_by_id(job.dataset_version_id)
         version = dataset.version_number if dataset else 1
         compose_model_name = f"procurement-compose.v{version}"
 
@@ -559,7 +559,7 @@ class TrainingJobOrchestration:
 
             compose_repo = ComposeModelRepository(self._db)
             existing_compose = compose_repo.get_by_id(adi_model_id)
-            dataset = TrainingDatasetStore(self._db).get_dataset_by_id(job.dataset_version_id)
+            dataset = TrainingDatasetRepository(self._db).get_dataset_by_id(job.dataset_version_id)
             version_number = dataset.version_number if dataset else 1
 
             if existing_compose is None:
