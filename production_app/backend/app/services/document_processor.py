@@ -14,10 +14,10 @@ from app.config import get_settings
 from app.database import JobModel
 from app.model_registry import get_model_registry
 from app.models.job import JobStatus
-from app.services.modeladmin_intake import evaluate_candidate_trigger
-from app.services.modeladmin_port import (
-    build_candidate_created_payload,
-    intake_candidate_created,
+from app.services.confidence_gate import (
+    build_candidate_payload as build_candidate_created_payload,
+    compute_confidence,
+    notify_modeladmin,
     resolve_active_model_id,
 )
 from app.services.sas_helpers_service import build_upload_blob_sas_url, is_publicly_fetchable_url
@@ -249,11 +249,14 @@ def process_document_job(
             logger.warning("Failed to save to Azure Tables: %s", str(table_error))
 
         # Evaluate candidate triggers using the projected summary only (structured_data).
-        should_create_candidate, trigger_reason, has_low_confidence = evaluate_candidate_trigger(
+        score = compute_confidence(
             document_type=document_type,
             classification_confidence=confidence,
             structured_data=structured_data,
         )
+        should_create_candidate = score.should_notify
+        trigger_reason = score.trigger_reason
+        has_low_confidence = score.has_low_confidence
 
         if should_create_candidate and trigger_reason:
             if not table_saved:
@@ -277,7 +280,7 @@ def process_document_job(
                         error_details=compose_result.get("error"),
                         structured_data=structured_data,
                     )
-                    intake_candidate_created(intake_payload)
+                    notify_modeladmin(intake_payload)
                 except Exception as intake_error:
                     logger.warning("ModelAdmin candidate intake failed: %s", str(intake_error))
 
