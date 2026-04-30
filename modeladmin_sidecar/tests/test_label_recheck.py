@@ -96,9 +96,9 @@ def _create_staged_dataset(client: TestClient, *, label: str = "invoice", count:
     stage_blob_service.ensure_container.return_value = None
     stage_blob_service.copy_blob.return_value = None
 
-    import modeladmin_sidecar.routes.training_datasets as route_module
+    import modeladmin_sidecar.services.training_dataset_service as service_module
 
-    with patch.object(route_module, "AzureBlobStorageService", lambda conn_str: stage_blob_service):
+    with patch.object(service_module, "AzureBlobStorageService", lambda conn_str: stage_blob_service):
         stage_response = client.post(f"/modeladmin/training-datasets/{dataset_id}/stage")
     assert stage_response.status_code == 200
     assert stage_response.json()["item"]["status"] == "staged"
@@ -128,10 +128,10 @@ def test_recheck_happy_path_all_verified(tmp_path, monkeypatch) -> None:
 
         mock_blob_service.download_blob_text.side_effect = download_blob_text_side_effect
 
-        import modeladmin_sidecar.routes.training_datasets as route_module
+        import modeladmin_sidecar.services.training_dataset_service as service_module
 
         monkeypatch.setattr(
-            route_module,
+            service_module,
             "AzureBlobStorageService",
             lambda conn_str: mock_blob_service,
         )
@@ -187,10 +187,10 @@ def test_recheck_failure_path_missing_sidecars(tmp_path, monkeypatch) -> None:
 
         mock_blob_service.download_blob_text.side_effect = download_blob_text_side_effect
 
-        import modeladmin_sidecar.routes.training_datasets as route_module
+        import modeladmin_sidecar.services.training_dataset_service as service_module
 
         monkeypatch.setattr(
-            route_module,
+            service_module,
             "AzureBlobStorageService",
             lambda conn_str: mock_blob_service,
         )
@@ -232,10 +232,10 @@ def test_recheck_failure_path_missing_required_fields(tmp_path, monkeypatch) -> 
 
         mock_blob_service.download_blob_text.side_effect = download_blob_text_side_effect
 
-        import modeladmin_sidecar.routes.training_datasets as route_module
+        import modeladmin_sidecar.services.training_dataset_service as service_module
 
         monkeypatch.setattr(
-            route_module,
+            service_module,
             "AzureBlobStorageService",
             lambda conn_str: mock_blob_service,
         )
@@ -268,10 +268,10 @@ def test_recheck_failure_path_unexpected_fields(tmp_path, monkeypatch) -> None:
 
         mock_blob_service.download_blob_text.side_effect = download_blob_text_side_effect
 
-        import modeladmin_sidecar.routes.training_datasets as route_module
+        import modeladmin_sidecar.services.training_dataset_service as service_module
 
         monkeypatch.setattr(
-            route_module,
+            service_module,
             "AzureBlobStorageService",
             lambda conn_str: mock_blob_service,
         )
@@ -311,10 +311,10 @@ def test_recheck_failure_path_mixed_sidecar_and_schema(tmp_path, monkeypatch) ->
 
         mock_blob_service.download_blob_text.side_effect = download_blob_text_side_effect
 
-        import modeladmin_sidecar.routes.training_datasets as route_module
+        import modeladmin_sidecar.services.training_dataset_service as service_module
 
         monkeypatch.setattr(
-            route_module,
+            service_module,
             "AzureBlobStorageService",
             lambda conn_str: mock_blob_service,
         )
@@ -380,10 +380,10 @@ def test_recheck_returns_409_for_ready_for_retrain(tmp_path, monkeypatch) -> Non
 
         mock_blob_service.download_blob_text.side_effect = download_blob_text_side_effect
 
-        import modeladmin_sidecar.routes.training_datasets as route_module
+        import modeladmin_sidecar.services.training_dataset_service as service_module
 
         monkeypatch.setattr(
-            route_module,
+            service_module,
             "AzureBlobStorageService",
             lambda conn_str: mock_blob_service,
         )
@@ -437,10 +437,10 @@ def test_recheck_uses_configurable_training_data_container(tmp_path, monkeypatch
 
         mock_blob_service.download_blob_text.side_effect = download_blob_text_side_effect
 
-        import modeladmin_sidecar.routes.training_datasets as route_module
+        import modeladmin_sidecar.services.training_dataset_service as service_module
 
         monkeypatch.setattr(
-            route_module,
+            service_module,
             "AzureBlobStorageService",
             lambda conn_str: mock_blob_service,
         )
@@ -461,10 +461,10 @@ def test_recheck_empty_scan_is_not_verified(tmp_path, monkeypatch) -> None:
         mock_blob_service = MagicMock(spec=AzureBlobStorageService)
         mock_blob_service.list_blobs_by_prefix.return_value = []
 
-        import modeladmin_sidecar.routes.training_datasets as route_module
+        import modeladmin_sidecar.services.training_dataset_service as service_module
 
         monkeypatch.setattr(
-            route_module,
+            service_module,
             "AzureBlobStorageService",
             lambda conn_str: mock_blob_service,
         )

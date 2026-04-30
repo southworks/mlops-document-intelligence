@@ -1,5 +1,7 @@
 """Service-owned persistence adapter for training datasets."""
 
+__all__ = ["TrainingDatasetStore"]
+
 from typing import Optional, Sequence, Tuple
 from sqlalchemy.orm import Session
 
@@ -48,35 +50,6 @@ class TrainingDatasetStore:
 
     def remove_member(self, *, dataset_id: str, candidate_id: str) -> bool:
         return self._repo.remove_member(dataset_id=dataset_id, candidate_id=candidate_id)
-
-    def mark_ready_for_retrain(
-        self,
-        *,
-        dataset_id: str,
-        min_items_per_class: int,
-        blob_service,
-        training_data_container: str,
-    ):
-        return self._repo.mark_ready_for_retrain(
-            dataset_id=dataset_id,
-            min_items_per_class=min_items_per_class,
-            blob_service=blob_service,
-            training_data_container=training_data_container,
-        )
-
-    def stage_dataset(self, *, dataset_id: str, blob_service, training_data_container: str):
-        return self._repo.stage_dataset(
-            dataset_id=dataset_id,
-            blob_service=blob_service,
-            training_data_container=training_data_container,
-        )
-
-    def recheck_labels(self, *, dataset_id: str, blob_service, training_data_container: str):
-        return self._repo.recheck_labels(
-            dataset_id=dataset_id,
-            blob_service=blob_service,
-            training_data_container=training_data_container,
-        )
 
     def get_cumulative_class_counts(self, dataset_id: str) -> dict[str, int]:
         return self._repo.get_cumulative_class_counts(dataset_id)

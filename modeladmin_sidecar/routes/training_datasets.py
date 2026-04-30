@@ -21,11 +21,7 @@ from modeladmin_sidecar.repositories.review_candidate_store import ReviewCandida
 from modeladmin_sidecar.repositories.training_dataset_store import TrainingDatasetStore
 
 from modeladmin_sidecar.modeladmin_core.service_api_contracts import RetrainJobMutationResponse
-from modeladmin_sidecar.repositories.retrain_job_store import RetrainJobStore
-from modeladmin_sidecar.repositories.training_dataset_repository import TrainingDatasetRepository
-from modeladmin_sidecar.services.azure_blob_storage_service import AzureBlobStorageService
-from modeladmin_sidecar.services.document_intelligence_service import DocumentIntelligenceService
-from modeladmin_sidecar.config import get_modeladmin_sidecar_settings
+from modeladmin_sidecar.services.training_dataset_service import TrainingDatasetService
 
 router = APIRouter(prefix="/modeladmin/training-datasets", tags=["modeladmin"])
 
@@ -185,14 +181,7 @@ def stage_training_dataset(
     dataset_id: str,
     db: Session = Depends(get_db),
 ) -> TrainingDatasetMutationResponse:
-    settings = get_modeladmin_sidecar_settings()
-    blob_service = AzureBlobStorageService(settings.azure_storage_connection_string)
-    dataset_store = TrainingDatasetStore(db)
-    dataset, error = dataset_store.stage_dataset(
-        dataset_id=dataset_id,
-        blob_service=blob_service,
-        training_data_container=settings.training_data_container,
-    )
+    dataset, error = TrainingDatasetService(db).stage_dataset(dataset_id)
 
     if error == "not_found":
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
@@ -203,7 +192,7 @@ def stage_training_dataset(
     if error == "copy_failed":
         raise HTTPException(status_code=500, detail="Failed to copy selected blobs into training-data container")
 
-    membership_count = len(dataset_store.list_memberships(dataset_id))
+    membership_count = len(TrainingDatasetStore(db).list_memberships(dataset_id))
     return {
         "success": True,
         "item": _serialize_dataset(dataset, membership_count=membership_count),
@@ -219,14 +208,9 @@ def mark_training_dataset_ready(
     if request.min_items_per_class < 1:
         raise HTTPException(status_code=400, detail="min_items_per_class must be >= 1")
 
-    dataset_store = TrainingDatasetStore(db)
-    settings = get_modeladmin_sidecar_settings()
-    blob_service = AzureBlobStorageService(settings.azure_storage_connection_string)
-    dataset, error = dataset_store.mark_ready_for_retrain(
+    dataset, error = TrainingDatasetService(db).mark_ready_for_retrain(
         dataset_id=dataset_id,
         min_items_per_class=request.min_items_per_class,
-        blob_service=blob_service,
-        training_data_container=settings.training_data_container,
     )
 
     if error == "not_found":
@@ -251,7 +235,7 @@ def mark_training_dataset_ready(
             detail="Failed to verify OCR and labels sidecars",
         )
 
-    membership_count = len(dataset_store.list_memberships(dataset_id))
+    membership_count = len(TrainingDatasetStore(db).list_memberships(dataset_id))
     return {
         "success": True,
         "item": _serialize_dataset(dataset, membership_count=membership_count),
@@ -268,14 +252,7 @@ def recheck_training_dataset_labels(
     if not dataset:
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
 
-    settings = get_modeladmin_sidecar_settings()
-    blob_service = AzureBlobStorageService(settings.azure_storage_connection_string)
-
-    result, error = dataset_store.recheck_labels(
-        dataset_id=dataset_id,
-        blob_service=blob_service,
-        training_data_container=settings.training_data_container,
-    )
+    result, error = TrainingDatasetService(db).recheck_labels(dataset_id)
 
     if error == "not_found":
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
@@ -303,19 +280,16 @@ def start_retrain_job(
     dataset_id: str,
     db: Session = Depends(get_db),
 ) -> RetrainJobMutationResponse:
-    dataset_store = TrainingDatasetStore(db)
-    dataset = dataset_store.get_dataset_by_id(dataset_id)
-    if not dataset:
+    job, error = TrainingDatasetService(db).start_retrain_job(dataset_id)
+
+    if error == "not_found":
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
-    if dataset.status != "ready_for_retrain":
+    if error == "invalid_state":
         raise HTTPException(
             status_code=409,
             detail="Dataset must be in ready_for_retrain status to start retraining",
         )
-
-    repo = TrainingDatasetRepository(db)
-    compose_model_ids = repo.list_compose_component_model_ids(dataset_id)
-    if not compose_model_ids:
+    if error == "no_compose_models":
         raise HTTPException(
             status_code=409,
             detail=(
@@ -323,27 +297,6 @@ def start_retrain_job(
                 "Ensure dataset members have non-null compose_model_id."
             ),
         )
-
-    compose_model_id = compose_model_ids[0]
-    classifier_model_id, doc_type_model_map = repo.get_compose_retrain_inputs(compose_model_id)
-
-    job_store = RetrainJobStore(db)
-    job = job_store.create_job(training_dataset_id=dataset_id)
-
-    try:
-        if classifier_model_id and doc_type_model_map:
-            document_intelligence_service = DocumentIntelligenceService()
-            operation_id = document_intelligence_service.begin_compose_model(
-                classifier_model_id=classifier_model_id,
-                doc_type_model_map=doc_type_model_map,
-                model_name=f"retrain-{dataset.id[:8]}",
-            )
-            job = job_store.update_job_running(job.id, adi_operation_id=operation_id)
-    except ValueError:
-        # Missing ADI configuration in current environment; keep job queued.
-        pass
-    except Exception as exc:  # pylint: disable=broad-except
-        job = job_store.update_job_failed(job.id, error_message=str(exc))
 
     return {"success": True, "item": _serialize_job(job)}
 
@@ -358,17 +311,7 @@ def get_dataset_class_counts(
     if not dataset:
         raise HTTPException(status_code=404, detail=f"Training dataset not found: {dataset_id}")
 
-    # Build ancestry chain for response transparency
-    chain_ids: list[str] = []
-    current_id = dataset_id
-    visited: set[str] = set()
-    while current_id and current_id not in visited:
-        visited.add(current_id)
-        chain_ids.append(current_id)
-        d = dataset_store.get_dataset_by_id(current_id)
-        current_id = d.parent_dataset_id if d else None
-
-    per_class_counts = dataset_store.get_cumulative_class_counts(dataset_id)
+    chain_ids, per_class_counts = TrainingDatasetService(db).get_class_counts_with_chain(dataset_id)
     return {
         "dataset_id": dataset_id,
         "chain_ids": chain_ids,

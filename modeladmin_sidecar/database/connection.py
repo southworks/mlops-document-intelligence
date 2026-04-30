@@ -1,4 +1,9 @@
-"""Database setup and connection management for ModelAdmin service."""
+"""Database setup and connection management for ModelAdmin service.
+
+NOTE: intentional sync SQLAlchemy (not async).  The modeladmin_sidecar is a
+lightweight admin service where sync I/O is sufficient.  Do not migrate to
+asyncio/async sessions without a clear concurrency requirement.
+"""
 
 import os
 

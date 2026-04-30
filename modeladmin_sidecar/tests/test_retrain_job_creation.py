@@ -88,9 +88,9 @@ def _stage_dataset_with_mocked_storage(client: TestClient, dataset_id: str) -> N
     stage_blob_service.ensure_container.return_value = None
     stage_blob_service.copy_blob.return_value = None
 
-    import modeladmin_sidecar.routes.training_datasets as route_module
+    import modeladmin_sidecar.services.training_dataset_service as service_module
 
-    with patch.object(route_module, "AzureBlobStorageService", lambda conn_str: stage_blob_service):
+    with patch.object(service_module, "AzureBlobStorageService", lambda conn_str: stage_blob_service):
         stage_response = client.post(f"/modeladmin/training-datasets/{dataset_id}/stage")
     assert stage_response.status_code == 200
 
@@ -107,9 +107,9 @@ def _mark_ready_with_mocked_sidecars(client: TestClient, dataset_id: str) -> Non
 
     verify_blob_service.download_blob_text.side_effect = _download_blob_text
 
-    import modeladmin_sidecar.routes.training_datasets as route_module
+    import modeladmin_sidecar.services.training_dataset_service as service_module
 
-    with patch.object(route_module, "AzureBlobStorageService", lambda conn_str: verify_blob_service):
+    with patch.object(service_module, "AzureBlobStorageService", lambda conn_str: verify_blob_service):
         ready_response = client.post(
             f"/modeladmin/training-datasets/{dataset_id}/mark-ready",
             json={},

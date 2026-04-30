@@ -1,6 +1,5 @@
 """Shared document processing pipeline used by API and worker runtimes."""
 
-import ipaddress
 import json
 import logging
 from datetime import datetime, timezone
@@ -21,6 +20,7 @@ from app.services.modeladmin_port import (
     intake_candidate_created,
     resolve_active_model_id,
 )
+from app.services.sas_helpers_service import build_upload_blob_sas_url, is_publicly_fetchable_url
 from app.services.upload_location import UploadLocation
 from processing.compose_extractor import extract_with_compose, extract_with_compose_from_url, parse_compose_result
 from processing.storage import (
@@ -42,48 +42,6 @@ def get_blob_client() -> BlobServiceClient:
     if not settings.azure_storage_connection_string:
         raise ValueError("Azure Storage connection string not configured")
     return BlobServiceClient.from_connection_string(settings.azure_storage_connection_string)
-
-
-def build_upload_blob_sas_url(blob_path: str) -> str:
-    """Build a short-lived SAS URL for the uploaded blob."""
-    if not settings.azure_storage_connection_string:
-        raise ValueError("Azure Storage account credentials not configured")
-
-    return upload_location.build_read_sas_url(
-        blob_path=blob_path,
-        account_name=None,
-        account_key=None,
-        ttl_minutes=DOCUMENT_INTELLIGENCE_SAS_TTL_MINUTES,
-        connection_string=settings.azure_storage_connection_string,
-    )
-
-
-def is_publicly_fetchable_url(url: str) -> bool:
-    """Return True if URL host appears reachable by Azure DI URL-source API."""
-    parsed = urlparse(url)
-    host = (parsed.hostname or "").lower()
-
-    if not host:
-        return False
-
-    local_hosts = {
-        "localhost",
-        "127.0.0.1",
-        "::1",
-        "azurite-service",
-        "host.docker.internal",
-    }
-    if host in local_hosts:
-        return False
-
-    try:
-        ip = ipaddress.ip_address(host)
-        if ip.is_private or ip.is_loopback or ip.is_link_local or ip.is_reserved:
-            return False
-    except ValueError:
-        pass
-
-    return True
 
 
 def resolve_blob_path(blob_path_or_url: str) -> str:

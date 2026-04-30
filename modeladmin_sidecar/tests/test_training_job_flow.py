@@ -115,9 +115,9 @@ def _create_ready_dataset(client: TestClient, *, name: str, label: str = "invoic
     stage_blob_service.ensure_container.return_value = None
     stage_blob_service.copy_blob.return_value = None
 
-    import modeladmin_sidecar.routes.training_datasets as route_module
+    import modeladmin_sidecar.services.training_dataset_service as service_module
 
-    with patch.object(route_module, "AzureBlobStorageService", lambda conn_str: stage_blob_service):
+    with patch.object(service_module, "AzureBlobStorageService", lambda conn_str: stage_blob_service):
         stage_r = client.post(f"/modeladmin/training-datasets/{dataset_id}/stage")
     assert stage_r.status_code == 200
 
@@ -132,7 +132,7 @@ def _create_ready_dataset(client: TestClient, *, name: str, label: str = "invoic
 
     verify_blob_service.download_blob_text.side_effect = _download_blob_text
 
-    with patch.object(route_module, "AzureBlobStorageService", lambda conn_str: verify_blob_service):
+    with patch.object(service_module, "AzureBlobStorageService", lambda conn_str: verify_blob_service):
         ready_r = client.post(
             f"/modeladmin/training-datasets/{dataset_id}/mark-ready",
             json={},
