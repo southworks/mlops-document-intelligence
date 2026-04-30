@@ -66,9 +66,6 @@ export const documentsAPI = {
   // Get document details
   get: (blobName) => apiClient.get(`/documents/${blobName}`),
 
-  // Get document statistics
-  getStats: () => apiClient.get('/documents/stats'),
-
   // Generate SAS URL for document
   generateSasUrl: (blobName) => apiClient.post('/documents/generate-sas-url', { blob_names: [blobName] }),
 

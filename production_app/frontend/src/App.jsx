@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import DocumentList from './pages/DocumentList';
-import DocumentDetail from './pages/DocumentDetail';
 import Upload from './pages/Upload';
 import './App.css'
 
@@ -16,12 +14,6 @@ function App() {
               📄 Document Processing Platform
             </Link>
             <div className="nav-links">
-              <Link to="/" className="nav-link">
-                Uploads
-              </Link>
-              <Link to="/documents" className="nav-link">
-                Documents
-              </Link>
             </div>
           </div>
         </nav>
@@ -29,9 +21,6 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Upload />} />
-            <Route path="/documents" element={<DocumentList />} />
-            <Route path="/documents/:blobName" element={<DocumentDetail />} />
-            <Route path="/upload" element={<Upload />} />
           </Routes>
         </main>
       </div>

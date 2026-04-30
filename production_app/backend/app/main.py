@@ -91,7 +91,6 @@ async def root():
             "/jobs": "List all jobs",
             "/documents": "List all documents (invoices, POs, unknown)",
             "/documents/{blob_name}": "Get document details",
-            "/documents/stats": "Get document statistics by type",
             "/docs": "Interactive API documentation"
         }
     }

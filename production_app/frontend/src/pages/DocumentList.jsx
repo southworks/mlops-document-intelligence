@@ -2,23 +2,16 @@ import { Fragment, useState, useEffect } from 'react';
 import './DocumentList.css';
 import { API_BASE_URL } from '../api/client';
 
-function DocumentList() {
+function DocumentList({ refreshSignal }) {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [stats, setStats] = useState(null);
   const [expandedRows, setExpandedRows] = useState(new Set());
   const [rowDetailStates, setRowDetailStates] = useState({});
 
   useEffect(() => {
     loadDocuments();
-    loadStats();
-    return () => {
-      Object.values(rowDetailStates).forEach((state) => {
-        if (state.abortController) state.abortController.abort();
-      });
-    };
-  }, []);
+  }, [refreshSignal]);
 
   const loadDocuments = async () => {
     try {
@@ -35,17 +28,6 @@ function DocumentList() {
     }
   };
 
-  const loadStats = async () => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/documents/stats`);
-      if (!response.ok) throw new Error('Failed to fetch stats');
-      const data = await response.json();
-      setStats(data);
-    } catch (err) {
-      console.error('Failed to load stats:', err);
-    }
-  };
-
   const asPercent = (value) => {
     if (value === null || value === undefined) return 0;
     const num = Number(value);
@@ -54,10 +36,8 @@ function DocumentList() {
   };
 
   const getDocumentTypeLabel = (docType) => {
-    if (docType === 'invoice') return 'Invoice';
-    if (docType === 'purchase-order') return 'Purchase Order';
-    if (docType === 'goods-receipt-note') return 'Goods Receipt Note';
-    return 'Unknown';
+    if (!docType || docType === 'unknown') return 'Unknown';
+    return docType.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
   const getProcessingState = (doc) => {
@@ -194,27 +174,6 @@ function DocumentList() {
     <div className="document-list-container">
       <div className="document-header">
         <h1>Documents</h1>
-
-        {stats && (
-          <div className="stats-summary">
-            <div className="stat-card">
-              <div className="stat-value">{stats.by_type?.invoice?.total || 0}</div>
-              <div className="stat-label">Invoices</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-value">{stats.by_type?.['purchase-order']?.total || 0}</div>
-              <div className="stat-label">Purchase Orders</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-value">{stats.by_type?.['goods-receipt-note']?.total || 0}</div>
-              <div className="stat-label">GRNs</div>
-            </div>
-            <div className="stat-card">
-              <div className="stat-value">{stats.by_type?.unknown?.total || 0}</div>
-              <div className="stat-label">Unknown</div>
-            </div>
-          </div>
-        )}
       </div>
 
       {loading && <div className="loading">Loading documents...</div>}

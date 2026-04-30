@@ -1,16 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { uploadAPI } from '../api/client';
+import DocumentList from './DocumentList';
 import './Upload.css';
 
-// API URL - uses /api which is proxied by Nginx to the backend service
-const API_URL = import.meta.env.VITE_API_URL || '/api';
-
 function Upload() {
-  const navigate = useNavigate();
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState({});
+  const [refreshSignal, setRefreshSignal] = useState(0);
 
   const handleFileSelect = (event) => {
     const files = Array.from(event.target.files);
@@ -68,6 +65,7 @@ function Upload() {
     }
 
     setUploading(false);
+    setRefreshSignal((n) => n + 1);
   };
 
   const handleClearFiles = () => {
@@ -79,67 +77,10 @@ function Upload() {
     setSelectedFiles((prev) => prev.filter((f) => f.id !== fileId));
   };
 
-  const getDocumentTypeBadge = (type) => {
-    switch (type) {
-      case 'invoice':
-        return { icon: '📄', label: 'Invoice', color: '#3498db' };
-      case 'purchase-order':
-        return { icon: '📋', label: 'Purchase Order', color: '#9b59b6' };
-      case 'unknown':
-        return { icon: '❓', label: 'Unknown', color: '#95a5a6' };
-      default:
-        return { icon: '📄', label: 'Document', color: '#7f8c8d' };
-    }
-  };
-
-  const getConfidenceBadge = (confidence) => {
-    if (!confidence) return null;
-    const percentage = (confidence * 100).toFixed(0);
-    const colorClass =
-      confidence >= 0.8 ? 'confidence-high' : confidence >= 0.6 ? 'confidence-medium' : 'confidence-low';
-    return { percentage, colorClass };
-  };
-
-  const successfulUploads = selectedFiles.filter((f) => f.status === 'success').length;
   const pendingUploads = selectedFiles.filter((f) => f.status === 'pending').length;
 
   return (
     <div className="upload-container">
-      <div className="page-header">
-        <h1>📤 Upload Documents</h1>
-        <p className="page-description">
-          Upload invoice, purchase order, or goods receipt documents (PDF or images).
-          Files will be securely stored and you'll receive a unique ID for each document.
-          Go to the Documents page to review document details and extracted fields.
-        </p>
-      </div>
-
-      <div className="upload-status">
-        <div className="status-card">
-          <div className="status-icon">📄</div>
-          <div className="status-info">
-            <div className="status-value">{selectedFiles.length}</div>
-            <div className="status-label">Selected Files</div>
-          </div>
-        </div>
-
-        <div className="status-card">
-          <div className="status-icon">⏳</div>
-          <div className="status-info">
-            <div className="status-value">{pendingUploads}</div>
-            <div className="status-label">Pending Upload</div>
-          </div>
-        </div>
-
-        <div className="status-card success">
-          <div className="status-icon">✅</div>
-          <div className="status-info">
-            <div className="status-value">{successfulUploads}</div>
-            <div className="status-label">Uploaded</div>
-          </div>
-        </div>
-      </div>
-
       <section className="upload-section">
         <div className="upload-area">
           <input
@@ -183,16 +124,7 @@ function Upload() {
                       {fileItem.status === 'uploading' && `⬆️ ${uploadProgress[fileItem.id] || 0}%`}
                       {fileItem.status === 'success' && (
                         <span className="classification-result">
-                          ✅ Uploaded to storage
-                          {fileItem.blobName && (
-                            <button
-                              onClick={() => navigate(`/documents/${encodeURIComponent(fileItem.blobName)}`)}
-                              className="btn-view-document"
-                              title="Categorize and validate this document"
-                            >
-                              Categorize →
-                            </button>
-                          )}
+                          ✅ Uploaded
                         </span>
                       )}
                       {fileItem.status === 'error' && `❌ Failed: ${fileItem.error}`}
@@ -221,19 +153,9 @@ function Upload() {
           </div>
         )}
 
-        {successfulUploads > 0 && (
-          <div className="info-message">
-            <strong>ℹ️ Next Steps:</strong> Your documents have been uploaded successfully!
-            <br />
-            Go to the <a href="/documents" style={{ color: '#3498db', textDecoration: 'underline' }}>Documents page</a> to:
-            <ul style={{ marginTop: '0.5rem', marginBottom: '0', paddingLeft: '1.5rem' }}>
-              <li>✅ Verify document type (Invoice/PO/GRN)</li>
-              <li>✅ Review extracted fields</li>
-              <li>✅ Open document details for validation</li>
-            </ul>
-          </div>
-        )}
-      </section>
+        </section>
+
+      <DocumentList refreshSignal={refreshSignal} />
     </div>
   );
 }

@@ -5,7 +5,6 @@
 from fastapi import APIRouter, HTTPException, Body, Query, Depends
 from typing import List, Dict, Any
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import SQLAlchemyError
 
 from app.config import get_settings
 from app.services.upload_location import UploadLocation
@@ -16,8 +15,6 @@ from app.services.storage_clients_service import (
     get_documents_table_client,
 )
 from app.services.documents_query_service import (
-    count_pending_unknown_jobs,
-    count_documents_by_type_from_table,
     list_inflight_job_documents,
     query_documents_from_table,
 )
@@ -28,7 +25,6 @@ from app.services.blob_parse_service import (
 )
 from app.services.sas_helpers_service import build_read_sas_url_for_blob_path
 from app.database import get_db
-from app.database.connection import SessionLocal
 from app.models.document_type import DocumentType, normalize_document_type_value
 
 router = APIRouter(prefix="/documents", tags=["documents"])
@@ -95,61 +91,6 @@ async def list_documents(
         raise HTTPException(
             status_code=500,
             detail=f"Error listing documents: {str(e)}"
-        ) from e
-
-
-async def _compute_document_stats() -> Dict[str, Any]:
-    """Compute fast document stats (count-only)."""
-    blob_client = get_blob_client()
-    container_client = get_container_client_safe(blob_client, DOCUMENTS_CONTAINER_NAME)
-    table_client = get_documents_table_client()
-
-    stats = {
-        "invoice": {"total": 0},
-        "purchase-order": {"total": 0},
-        "goods-receipt-note": {"total": 0},
-        "unknown": {"total": 0}
-    }
-
-    table_counts = count_documents_by_type_from_table(table_client)
-    if table_counts is not None:
-        for doc_type, count in table_counts.items():
-            stats[doc_type]["total"] = count
-    elif container_client:
-        parsed_docs = await _load_documents_from_container(container_client, "all")
-        for doc in parsed_docs:
-            doc_type = doc.get("document_type", "unknown")
-            if doc_type not in stats:
-                doc_type = "unknown"
-            stats[doc_type]["total"] += 1
-
-    pending_uploads = 0
-    try:
-        with SessionLocal() as db_session:
-            pending_uploads = count_pending_unknown_jobs(db_session)
-    except SQLAlchemyError:
-        pending_uploads = 0
-
-    stats["unknown"]["pending_processing"] = pending_uploads
-    stats["unknown"]["total"] += pending_uploads
-
-    total_documents = sum(s["total"] for s in stats.values())
-    return {
-        "total_documents": total_documents,
-        "pending_uploads": pending_uploads,
-        "by_type": stats,
-    }
-
-
-@router.get("/stats")
-async def get_document_stats():
-    """Get fast document stats (count-focused)."""
-    try:
-        return await _compute_document_stats()
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error getting stats: {str(e)}"
         ) from e
 
 
