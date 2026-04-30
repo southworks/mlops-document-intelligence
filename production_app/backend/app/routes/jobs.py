@@ -35,7 +35,7 @@ async def get_job_status(
     if job.result:
         try:
             result = json.loads(job.result)
-        except:
+        except (json.JSONDecodeError, ValueError):
             result = {"raw": job.result}
     
     return JobResponse(

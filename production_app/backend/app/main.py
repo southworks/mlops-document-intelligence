@@ -1,5 +1,6 @@
 """FastAPI application with Azure integration"""
 
+import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -14,28 +15,29 @@ from app.routes import upload_router, jobs_router, health_router
 from app.routes.documents import router as documents_router
 
 settings = get_settings()
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     """Application lifespan events"""
     # Startup
-    print("🚀 Starting Invoice OCR API...")
-    print(f"Environment: {settings.environment}")
-    print("Storage: Azure Blob Storage")
+    logger.info("Starting Invoice OCR API")
+    logger.info("Environment: %s", settings.environment)
+    logger.info("Storage: Azure Blob Storage")
 
     # Initialize database
     init_db()
-    print("✓ Database initialized")
+    logger.info("Database initialized")
 
     # Initialize model registry from config
     initialize_from_config(compose_model_id=settings.azure_compose_model_id)
-    print("✓ Model registry initialized")
+    logger.info("Model registry initialized")
 
     yield
 
     # Shutdown
-    print("👋 Shutting down Invoice OCR API...")
+    logger.info("Shutting down Invoice OCR API")
 
 
 # Create FastAPI app

@@ -1,10 +1,13 @@
 """Local filesystem storage adapter"""
 
+import logging
 import aiofiles
 import os
 from pathlib import Path
 from typing import BinaryIO, Optional, List
 from .base import StorageAdapter
+
+logger = logging.getLogger(__name__)
 
 
 class LocalStorage(StorageAdapter):
@@ -61,7 +64,7 @@ class LocalStorage(StorageAdapter):
                 return True
             return False
         except Exception as e:
-            print(f"Error deleting file {file_path}: {e}")
+            logger.error("Error deleting file %s: %s", file_path, e)
             return False
     
     async def exists(self, file_path: str) -> bool:

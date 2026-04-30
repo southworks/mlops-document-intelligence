@@ -1,9 +1,12 @@
 """Container runtime switch for API or worker mode."""
 
+import logging
 import os
 import sys
 
 from app.worker import run_worker
+
+logger = logging.getLogger(__name__)
 
 
 def run_api() -> None:
@@ -38,7 +41,7 @@ def main() -> None:
         run_worker()
         return
 
-    print(f"Unsupported MODE '{mode}'. Expected 'api' or 'worker'.", file=sys.stderr)
+    logger.error("Unsupported MODE '%s'. Expected 'api' or 'worker'.", mode)
     sys.exit(1)
 
 

@@ -1,5 +1,3 @@
 """Repository layer for data access abstraction"""
 
-from app.repositories.document_repository import DocumentRepository
-
-__all__ = ["DocumentRepository"]
+__all__: list[str] = []

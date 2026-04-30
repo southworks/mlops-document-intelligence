@@ -13,22 +13,13 @@ from modeladmin_sidecar.modeladmin_core.boundary_contracts import (
     CandidateCreatedV1Payload,
     CandidateCreatedV1Response,
 )
+from modeladmin_sidecar.modeladmin_core import get_threshold_for_type, normalize_document_type
 from modeladmin_sidecar.repositories.review_candidate_repository import ReviewCandidateRepository
 from modeladmin_sidecar.telemetry import increment_counter
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/boundary/modeladmin", tags=["modeladmin-boundary"])
-
-
-def _get_threshold_for_type(document_type: Optional[str]) -> float:
-    if document_type in {"invoice", "invoices"}:
-        return 0.70
-    if document_type == "purchase-order":
-        return 0.70
-    if document_type == "goods-receipt-note":
-        return 0.70
-    return 0.70
 
 
 def _extract_low_confidence_field_names(
@@ -75,7 +66,12 @@ def intake_candidate_created(
             raise HTTPException(status_code=401, detail="Unauthorized ModelAdmin boundary request")
 
         repo = ReviewCandidateRepository(db)
-        threshold = _get_threshold_for_type(payload.predicted_document_type)
+        threshold = get_threshold_for_type(
+            normalize_document_type(payload.predicted_document_type),
+            threshold_invoice=settings.confidence_threshold_invoice,
+            threshold_po=settings.confidence_threshold_po,
+            threshold_grn=settings.confidence_threshold_grn,
+        )
         low_confidence_field_names = _extract_low_confidence_field_names(
             payload.structured_data,
             threshold,

@@ -1,9 +1,12 @@
 """Azure Blob Storage adapter"""
 
+import logging
 from typing import BinaryIO, Optional, List
 from azure.storage.blob.aio import BlobServiceClient
 from azure.core.exceptions import ResourceNotFoundError
 from .base import StorageAdapter
+
+logger = logging.getLogger(__name__)
 
 
 class AzureBlobStorage(StorageAdapter):
@@ -24,7 +27,7 @@ class AzureBlobStorage(StorageAdapter):
                 if not await container_client.exists():
                     await container_client.create_container()
             except Exception as e:
-                print(f"Warning: Could not verify/create container: {e}")
+                logger.warning("Could not verify/create container: %s", e)
         return self._client
     
     def _get_blob_name(self, file_path: str) -> str:
@@ -78,7 +81,7 @@ class AzureBlobStorage(StorageAdapter):
         except ResourceNotFoundError:
             return False
         except Exception as e:
-            print(f"Error deleting blob {file_path}: {e}")
+            logger.error("Error deleting blob %s: %s", file_path, e)
             return False
     
     async def exists(self, file_path: str) -> bool:

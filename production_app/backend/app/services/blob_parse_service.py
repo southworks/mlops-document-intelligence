@@ -1,8 +1,11 @@
 """Blob parsing helpers for document read/list endpoints."""
 
+import logging
 from typing import Any, Optional
 
 from app.config import get_settings
+
+logger = logging.getLogger(__name__)
 from app.models.document_type import DocumentType, normalize_document_type_value
 
 
@@ -104,7 +107,7 @@ def parse_document_data(blob_name: str, blob_data: dict, document_type: str) -> 
         return response
 
     except Exception as e:
-        print(f"Error parsing document data: {str(e)}")
+        logger.error("Error parsing document data: %s", e)
         return {
             "blob_name": blob_name,
             "document_type": document_type,

@@ -295,7 +295,7 @@ def verify(modeladmin_endpoint: str, backend_endpoint: str, dry_run: bool) -> No
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Prepare FinOpt demo environment from model v0")
+    parser = argparse.ArgumentParser(description="Prepare MLOps Platform demo environment from model v0")
     parser.add_argument("--no-restart", action="store_true", help="Skip restarting containers")
     parser.add_argument("--dry-run", action="store_true", help="Print actions without mutating state")
     parser.add_argument("--skip-bootstrap", action="store_true", help="Skip bootstrap apply step")
