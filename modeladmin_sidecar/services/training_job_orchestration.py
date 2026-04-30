@@ -21,9 +21,9 @@ from modeladmin_sidecar.repositories.training_dataset_store import TrainingDatas
 from modeladmin_sidecar.repositories.training_job_repository import TrainingJobRepository
 from modeladmin_sidecar.services.azure_blob_storage_service import AzureBlobStorageService
 from modeladmin_sidecar.services.document_intelligence_service import DocumentIntelligenceService
+from shared.logging_helpers import audit_log
 
 logger = logging.getLogger(__name__)
-audit_logger = logging.getLogger("sqlalchemy.engine.Engine")
 
 
 # ---------------------------------------------------------------------------
@@ -113,26 +113,14 @@ class TrainingJobOrchestration:
 
         version = dataset.version_number
         job = self._job_repo.create_job(dataset_version_id=dataset_id)
-        logger.warning(
-            "Start training requested: dataset_id=%s status=%s version=%s doc_types=%s job_id=%s",
-            dataset_id,
-            dataset.status,
-            version,
-            doc_types,
-            job.id,
-        )
-        audit_logger.warning(
-            "Start training requested: dataset_id=%s status=%s version=%s doc_types=%s job_id=%s",
-            dataset_id,
-            dataset.status,
-            version,
-            doc_types,
-            job.id,
-        )
-        print(
-            f"TRAINING_AUDIT start_training dataset_id={dataset_id} status={dataset.status} "
-            f"version={version} doc_types={doc_types} job_id={job.id}",
-            flush=True,
+        audit_log(
+            logger,
+            "start_training",
+            dataset_id=dataset_id,
+            status=dataset.status,
+            version=version,
+            doc_types=doc_types,
+            job_id=job.id,
         )
 
         # Pre-create all operation rows before any ADI calls
@@ -287,24 +275,13 @@ class TrainingJobOrchestration:
                     sas_url, model_id, prefix=f"{doc_type}/"
                 )
                 self._job_repo.update_operation_running(op.id, adi_operation_id=operation_url)
-                logger.warning(
-                    "Extractor operation submitted: job_id=%s op_id=%s doc_type=%s model_id=%s",
-                    job.id,
-                    op.id,
-                    doc_type,
-                    model_id,
-                )
-                audit_logger.warning(
-                    "Extractor operation submitted: job_id=%s op_id=%s doc_type=%s model_id=%s",
-                    job.id,
-                    op.id,
-                    doc_type,
-                    model_id,
-                )
-                print(
-                    f"TRAINING_AUDIT extractor_submitted job_id={job.id} op_id={op.id} "
-                    f"doc_type={doc_type} model_id={model_id}",
-                    flush=True,
+                audit_log(
+                    logger,
+                    "extractor_submitted",
+                    job_id=job.id,
+                    op_id=op.id,
+                    doc_type=doc_type,
+                    model_id=model_id,
                 )
             except RuntimeError as exc:
                 if "409" in str(exc) or "ModelExists" in str(exc):
@@ -350,24 +327,13 @@ class TrainingJobOrchestration:
             self._job_repo.update_operation_running(
                 classifier_op.id, adi_operation_id=classifier_url
             )
-            logger.warning(
-                "Classifier operation submitted: job_id=%s op_id=%s classifier_id=%s doc_types=%s",
-                job.id,
-                classifier_op.id,
-                classifier_model_id,
-                sorted(all_doc_types),
-            )
-            audit_logger.warning(
-                "Classifier operation submitted: job_id=%s op_id=%s classifier_id=%s doc_types=%s",
-                job.id,
-                classifier_op.id,
-                classifier_model_id,
-                sorted(all_doc_types),
-            )
-            print(
-                f"TRAINING_AUDIT classifier_submitted job_id={job.id} op_id={classifier_op.id} "
-                f"classifier_id={classifier_model_id} doc_types={sorted(all_doc_types)}",
-                flush=True,
+            audit_log(
+                logger,
+                "classifier_submitted",
+                job_id=job.id,
+                op_id=classifier_op.id,
+                classifier_id=classifier_model_id,
+                doc_types=sorted(all_doc_types),
             )
         except RuntimeError as exc:
             if "409" in str(exc) or "ClassifierExists" in str(exc):
@@ -536,23 +502,14 @@ class TrainingJobOrchestration:
                 compose_op.id, adi_operation_id=continuation_token
             )
             job = self._job_repo.update_job_status(job.id, "building_compose")
-            logger.warning(
-                "Compose operation submitted: job_id=%s op_id=%s compose_model_name=%s "
-                "classifier_id=%s doc_types=%s",
-                job.id,
-                compose_op.id,
-                compose_model_name,
-                classifier_model_id,
-                sorted(doc_type_model_map.keys()),
-            )
-            audit_logger.warning(
-                "Compose operation submitted: job_id=%s op_id=%s compose_model_name=%s "
-                "classifier_id=%s doc_types=%s",
-                job.id,
-                compose_op.id,
-                compose_model_name,
-                classifier_model_id,
-                sorted(doc_type_model_map.keys()),
+            audit_log(
+                logger,
+                "compose_submitted",
+                job_id=job.id,
+                op_id=compose_op.id,
+                compose_model_name=compose_model_name,
+                classifier_id=classifier_model_id,
+                doc_types=sorted(doc_type_model_map.keys()),
             )
         except Exception as exc:  # pylint: disable=broad-except
             job = self._job_repo.update_job_status(job.id, "failed", error_message=str(exc))

@@ -8,7 +8,6 @@ from shared.adi_helpers import format_adi_error, redact_adi_url
 
 
 logger = logging.getLogger(__name__)
-audit_logger = logging.getLogger("sqlalchemy.engine.Engine")
 
 
 class DocumentIntelligenceService:
@@ -70,23 +69,12 @@ class DocumentIntelligenceService:
 
         redacted_url = redact_adi_url(url)
         doc_types = sorted(cleaned_doc_types.keys())
-        logger.warning(
+        logger.info(
             "ADI compose request: url=%s model_id=%s classifier_id=%s doc_types=%s",
             redacted_url,
             model_id,
             classifier_id,
             doc_types,
-        )
-        audit_logger.warning(
-            "ADI compose request: url=%s model_id=%s classifier_id=%s doc_types=%s",
-            redacted_url,
-            model_id,
-            classifier_id,
-            doc_types,
-        )
-        print(
-            f"ADI_AUDIT compose url={redacted_url} model_id={model_id} classifier_id={classifier_id} doc_types={doc_types}",
-            flush=True,
         )
 
         response = requests.post(url, json=body, headers=headers, timeout=30)
@@ -136,23 +124,12 @@ class DocumentIntelligenceService:
         }
         redacted_url = redact_adi_url(url)
         redacted_sas_url = redact_adi_url(sas_url)
-        logger.warning(
+        logger.info(
             "ADI extractor build request: url=%s model_id=%s container_url=%s prefix=%s",
             redacted_url,
             model_id,
             redacted_sas_url,
             normalized_prefix,
-        )
-        audit_logger.warning(
-            "ADI extractor build request: url=%s model_id=%s container_url=%s prefix=%s",
-            redacted_url,
-            model_id,
-            redacted_sas_url,
-            normalized_prefix,
-        )
-        print(
-            f"ADI_AUDIT extractor_build url={redacted_url} model_id={model_id} container_url={redacted_sas_url} prefix={normalized_prefix}",
-            flush=True,
         )
         response = requests.post(url, json=body, headers=headers, timeout=30)
         if response.status_code not in (201, 202):
@@ -194,23 +171,12 @@ class DocumentIntelligenceService:
         redacted_url = redact_adi_url(url)
         doc_types = sorted(sas_urls.keys())
         prefixes_by_type = {k: (prefixes or {}).get(k, "") for k in doc_types}
-        logger.warning(
+        logger.info(
             "ADI classifier build request: url=%s classifier_id=%s doc_types=%s prefixes=%s",
             redacted_url,
             model_id,
             doc_types,
             prefixes_by_type,
-        )
-        audit_logger.warning(
-            "ADI classifier build request: url=%s classifier_id=%s doc_types=%s prefixes=%s",
-            redacted_url,
-            model_id,
-            doc_types,
-            prefixes_by_type,
-        )
-        print(
-            f"ADI_AUDIT classifier_build url={redacted_url} classifier_id={model_id} doc_types={doc_types} prefixes={prefixes_by_type}",
-            flush=True,
         )
         response = requests.post(url, json=body, headers=headers, timeout=30)
         if response.status_code not in (201, 202):
@@ -230,11 +196,11 @@ class DocumentIntelligenceService:
         import requests  # pylint: disable=import-outside-toplevel
 
         redacted_url = redact_adi_url(operation_url)
-        print(f"ADI_AUDIT get_operation_status url={redacted_url}", flush=True)
+        logger.info("ADI get_operation_status url=%s", redacted_url)
         headers = {"Ocp-Apim-Subscription-Key": self.key}
         response = requests.get(operation_url, headers=headers, timeout=30)
         if response.status_code != 200:
-            print(f"ADI_AUDIT get_operation_status_failed status_code={response.status_code} url={redacted_url}", flush=True)
+            logger.info("ADI get_operation_status failed status_code=%s url=%s", response.status_code, redacted_url)
             return {"status": "failed", "model_id": None, "error": response.text}
 
         data = response.json()
@@ -243,16 +209,16 @@ class DocumentIntelligenceService:
         if raw_status in ("succeeded", "completed"):
             result = data.get("result", {})
             model_id = result.get("modelId") or result.get("classifierId")
-            print(f"ADI_AUDIT get_operation_status_succeeded model_id={model_id} url={redacted_url}", flush=True)
+            logger.info("ADI get_operation_status succeeded model_id=%s url=%s", model_id, redacted_url)
             return {"status": "succeeded", "model_id": model_id, "error": None}
 
         if raw_status == "failed":
             error_info = data.get("error", {})
             error_msg = format_adi_error(error_info)
-            print(f"ADI_AUDIT get_operation_status_failed error={error_msg} url={redacted_url}", flush=True)
+            logger.info("ADI get_operation_status failed error=%s url=%s", error_msg, redacted_url)
             return {"status": "failed", "model_id": None, "error": error_msg}
 
-        print(f"ADI_AUDIT get_operation_status_running url={redacted_url}", flush=True)
+        logger.info("ADI get_operation_status running url=%s", redacted_url)
         return {"status": "running", "model_id": None, "error": None}
 
     def document_model_exists(self, model_id: str) -> bool:
@@ -263,17 +229,15 @@ class DocumentIntelligenceService:
             return False
 
         url = f"{self._api_base_url()}/documentModels/{model_id}?api-version=2024-11-30"
-        print(f"ADI_AUDIT document_model_exists model_id={model_id} url={redact_adi_url(url)}", flush=True)
+        logger.info("ADI document_model_exists model_id=%s url=%s", model_id, redact_adi_url(url))
         response = requests.get(url, headers={"Ocp-Apim-Subscription-Key": self.key}, timeout=30)
 
         if response.status_code == 200:
-            print(f"ADI_AUDIT document_model_exists_found model_id={model_id}", flush=True)
             return True
         if response.status_code == 404:
-            print(f"ADI_AUDIT document_model_exists_not_found model_id={model_id}", flush=True)
             return False
 
-        print(f"ADI_AUDIT document_model_exists_error model_id={model_id} status_code={response.status_code}", flush=True)
+        logger.info("ADI document_model_exists error model_id=%s status_code=%s", model_id, response.status_code)
         raise RuntimeError(f"ADI model lookup failed for '{model_id}' ({response.status_code}): {response.text}")
 
     def classifier_exists(self, classifier_id: str) -> bool:
@@ -284,17 +248,15 @@ class DocumentIntelligenceService:
             return False
 
         url = f"{self._api_base_url()}/documentClassifiers/{classifier_id}?api-version=2024-11-30"
-        print(f"ADI_AUDIT classifier_exists classifier_id={classifier_id} url={redact_adi_url(url)}", flush=True)
+        logger.info("ADI classifier_exists classifier_id=%s url=%s", classifier_id, redact_adi_url(url))
         response = requests.get(url, headers={"Ocp-Apim-Subscription-Key": self.key}, timeout=30)
 
         if response.status_code == 200:
-            print(f"ADI_AUDIT classifier_exists_found classifier_id={classifier_id}", flush=True)
             return True
         if response.status_code == 404:
-            print(f"ADI_AUDIT classifier_exists_not_found classifier_id={classifier_id}", flush=True)
             return False
 
-        print(f"ADI_AUDIT classifier_exists_error classifier_id={classifier_id} status_code={response.status_code}", flush=True)
+        logger.info("ADI classifier_exists error classifier_id=%s status_code=%s", classifier_id, response.status_code)
         raise RuntimeError(
             f"ADI classifier lookup failed for '{classifier_id}' ({response.status_code}): {response.text}"
         )
