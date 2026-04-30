@@ -234,6 +234,73 @@ def get_processed_job_ids_from_table(table_client) -> Optional[Set[str]]:
         return None
 
 
+def get_document_from_table(table_client, blob_name: str) -> Optional[Dict[str, Any]]:
+    """Look up a single processed document from the Azure Table index by blob path.
+
+    Args:
+        table_client: Azure Table client for the Documents table.
+        blob_name: Blob path with or without the container prefix.
+
+    Returns:
+        Parsed document dict if found; otherwise None.
+    """
+    if not table_client:
+        return None
+
+    settings = get_settings()
+    container_prefix = f"{settings.azure_storage_container_name}/"
+    full_blob_path = (
+        blob_name if blob_name.startswith(container_prefix)
+        else f"{container_prefix}{blob_name}"
+    )
+
+    try:
+        entities = table_client.query_entities(
+            query_filter=f"blob_path eq '{full_blob_path}'"
+        )
+        entity = next(iter(entities), None)
+        if entity is None:
+            return None
+
+        blob_path = entity.get("blob_path", full_blob_path)
+        display_blob_name = blob_path
+        if display_blob_name.startswith(container_prefix):
+            display_blob_name = display_blob_name[len(container_prefix):]
+
+        try:
+            projection = json.loads(entity.get("summary_json") or "{}")
+        except json.JSONDecodeError:
+            projection = {}
+
+        raw_confidence = _to_float(entity.get("classification_confidence"), default=0.0)
+        if raw_confidence > 1.0:
+            raw_confidence = raw_confidence / 100.0
+
+        blob_data = dict(projection)
+        blob_data["document_type"] = normalize_document_type_value(
+            blob_data.get("document_type") or entity.get("document_type") or "unknown"
+        )
+        blob_data["confidence"] = _to_float(blob_data.get("confidence"), default=raw_confidence)
+        blob_data["job_id"] = entity.get("job_id")
+        blob_data["processed_at"] = _to_iso_datetime(entity.get("Timestamp"))
+
+        parsed = parse_document_data(
+            blob_name=display_blob_name,
+            blob_data=blob_data,
+            document_type=normalize_document_type_value(entity.get("document_type") or "unknown"),
+        )
+        parsed["pending_processing"] = False
+        parsed["status"] = JobStatus.COMPLETED.value
+        parsed["processing_state"] = build_processing_state(
+            status=JobStatus.COMPLETED.value,
+            document_type=parsed.get("document_type", "unknown"),
+            pending_processing=False,
+        )
+        return parsed
+    except Exception:
+        return None
+
+
 def count_pending_uploads_by_job_id(uploads_container_client, processed_job_ids: Set[str]) -> int:
     """Count uploads whose job_id is not present in processed job_ids index."""
     if not uploads_container_client:
@@ -244,7 +311,7 @@ def count_pending_uploads_by_job_id(uploads_container_client, processed_job_ids:
         blob_name = blob.name or ""
         if not blob_name:
             continue
-        if blob_name.endswith(".json") or blob_name.startswith("thumbnails/"):
+        if blob_name.endswith(".json"):
             continue
         upload_job_id = blob_name.split("_", 1)[0] if "_" in blob_name else blob_name
         if upload_job_id not in processed_job_ids:
@@ -282,7 +349,7 @@ def build_pending_upload_documents(uploads_container_client, processed_job_ids: 
         blob_name = blob.name
         if not blob_name:
             continue
-        if blob_name.endswith(".json") or blob_name.startswith("thumbnails/"):
+        if blob_name.endswith(".json"):
             continue
 
         upload_job_id = blob_name.split("_", 1)[0] if "_" in blob_name else blob_name

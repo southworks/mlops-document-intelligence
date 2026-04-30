@@ -5,25 +5,14 @@
 #   - Backend API: http://localhost:3000/api/ (proxied through Nginx)
 #   - Backend Direct: http://localhost:8000 (for debugging)
 #   - ModelAdmin Direct: http://localhost:8100
-#   - Azurite Blob: http://localhost:10000
 #
 # Run: docker-compose up -d
 # Stop: docker-compose down
 # Logs: docker-compose logs -f [service-name]
 
-services:
-  # Azurite: Azure Storage Emulator for local development
-  azurite-service:
-    image: mcr.microsoft.com/azure-storage/azurite
-    container_name: azurite-container
-    command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 --skipApiVersionCheck"
-    ports:
-      - "10000:10000"  # Blob storage
-      - "10001:10001"  # Queue storage
-      - "10002:10002"  # Table storage
-    networks:
-      - local-dev
+name: mlopsplatform
 
+services:
   # Frontend: React + Vite application served with Nginx
   frontend-service:
     build:
@@ -35,7 +24,6 @@ services:
     networks:
       - local-dev
     depends_on:
-      - azurite-service
       - backend-service
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1/health"]
@@ -65,11 +53,9 @@ services:
       - MODELADMIN_EXTERNAL_API_KEY=${MODELADMIN_EXTERNAL_API_KEY:-modeladmin-local-key}
     volumes:
       # Shared SQLite volume used by both API and worker so they observe the same job state.
-      - finopt-backend-data:/app/data
+      - mlops-backend-data:/app/data
     networks:
       - local-dev
-    depends_on:
-      - azurite-service
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
       interval: 10s
@@ -94,11 +80,9 @@ services:
       - MODELADMIN_SERVICE_PORT=8100
       - BOUNDARY_API_KEY=${BOUNDARY_API_KEY:-modeladmin-local-key}
     volumes:
-      - finopt-modeladmin-data:/app/data
+      - mlops-modeladmin-data:/app/data
     networks:
       - local-dev
-    depends_on:
-      - azurite-service
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8100/health/"]
       interval: 10s
@@ -123,12 +107,11 @@ services:
       MODELADMIN_EXTERNAL_API_KEY: ${MODELADMIN_EXTERNAL_API_KEY:-modeladmin-local-key}
     volumes:
       # Mount the same backend DB volume as API to keep job status and metadata consistent.
-      - finopt-backend-data:/app/data
+      - mlops-backend-data:/app/data
     networks:
       - local-dev
     depends_on:
       - backend-service
-      - azurite-service
 
 
 networks:
@@ -136,7 +119,7 @@ networks:
     driver: bridge
 
 volumes:
-  finopt-backend-data:
-    name: finopt-backend-data
-  finopt-modeladmin-data:
-    name: finopt-modeladmin-data
+  mlops-backend-data:
+    name: mlops-backend-data
+  mlops-modeladmin-data:
+    name: mlops-modeladmin-data

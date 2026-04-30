@@ -1,6 +1,5 @@
 """Compose model extractor with JMESPath-driven field mapping."""
 
-import base64
 import json
 import logging
 from pathlib import Path
@@ -36,25 +35,6 @@ def parse_compose_result(raw_adi: dict) -> dict:
         "confidence": confidence,
         "structured_data": structured_data,
     }
-
-
-def extract_with_compose(
-    client: Any,
-    file_bytes: bytes,
-    compose_model_id: str,
-) -> dict:
-    """Call Azure Document Intelligence and return the raw ADI response dict."""
-    logger.info("Starting unified compose model extraction...")
-    logger.info("File size: %s bytes", len(file_bytes))
-    logger.info("Using compose model: %s", compose_model_id)
-
-    base64_source = base64.b64encode(file_bytes).decode("utf-8")
-    poller = client.begin_analyze_document(
-        model_id=compose_model_id,
-        analyze_request={"base64Source": base64_source},
-    )
-    result = poller.result(timeout=300)
-    return result.as_dict() if hasattr(result, "as_dict") else {}
 
 
 def extract_with_compose_from_url(

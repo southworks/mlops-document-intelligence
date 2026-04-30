@@ -1,8 +1,6 @@
 """Blob parsing helpers for document read/list endpoints."""
 
-import asyncio
-import json
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 from app.config import get_settings
 from app.models.document_type import DocumentType, normalize_document_type_value
@@ -114,50 +112,3 @@ def parse_document_data(blob_name: str, blob_data: dict, document_type: str) -> 
             "fields": blob_data.get("structured_data") or {},
             "has_low_confidence": False,
         }
-
-
-async def _download_and_parse_document(container_client, blob_name: str) -> Optional[Dict[str, Any]]:
-    def _read_blob_data() -> dict:
-        return json.loads(container_client.download_blob(blob_name).readall())
-
-    try:
-        doc_json = await asyncio.to_thread(_read_blob_data)
-        doc_type = get_document_type(blob_name)
-        return parse_document_data(blob_name, doc_json, doc_type)
-    except Exception as e:
-        print(f"Error processing blob {blob_name}: {str(e)}")
-        return None
-
-
-async def _load_documents_from_container(
-    container_client,
-    requested_type: DocumentTypeFilter,
-) -> List[Dict[str, Any]]:
-    if not container_client:
-        return []
-
-    blob_names: List[str] = []
-    for blob in container_client.list_blobs():
-        blob_name = blob.name or ""
-        if not blob_name.endswith(".json"):
-            continue
-        if blob_name.startswith("thumbnails/"):
-            continue
-        if not blob_name.endswith("_parsed.json"):
-            continue
-        blob_names.append(blob_name)
-
-    semaphore = asyncio.Semaphore(MAX_PARALLEL_BLOB_DOWNLOADS)
-
-    async def _worker(name: str) -> Optional[Dict[str, Any]]:
-        async with semaphore:
-            return await _download_and_parse_document(container_client, name)
-
-    results = await asyncio.gather(*(_worker(name) for name in blob_names), return_exceptions=False)
-    documents = [item for item in results if item is not None]
-
-    if requested_type != "all":
-        requested_type = normalize_document_type_value(requested_type)
-        documents = [doc for doc in documents if normalize_document_type_value(doc.get("document_type")) == requested_type]
-
-    return documents

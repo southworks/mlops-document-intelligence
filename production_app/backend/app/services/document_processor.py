@@ -6,7 +6,6 @@ from datetime import datetime, timezone
 from typing import Optional
 from urllib.parse import urlparse
 
-from azure.storage.blob import BlobServiceClient
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
@@ -20,28 +19,15 @@ from app.services.confidence_gate import (
     notify_modeladmin,
     resolve_active_model_id,
 )
-from app.services.sas_helpers_service import build_upload_blob_sas_url, is_publicly_fetchable_url
+from app.services.sas_helpers_service import build_upload_blob_sas_url
 from app.services.upload_location import UploadLocation
-from processing.compose_extractor import extract_with_compose, extract_with_compose_from_url, parse_compose_result
-from processing.storage import (
-    save_raw_adi_to_blob,
-    save_to_azure_tables,
-    save_parsed_compose_to_blob,
-)
-from processing.thumbnail import generate_thumbnail
-
+from processing.compose_extractor import extract_with_compose_from_url, parse_compose_result
+from processing.storage import save_to_azure_tables
 settings = get_settings()
 upload_location = UploadLocation(settings.azure_storage_container_name)
 DOCUMENT_INTELLIGENCE_SAS_TTL_MINUTES = settings.document_intelligence_sas_ttl_minutes
 
 logger = logging.getLogger(__name__)
-
-
-def get_blob_client() -> BlobServiceClient:
-    """Initialize Azure Blob Storage client."""
-    if not settings.azure_storage_connection_string:
-        raise ValueError("Azure Storage connection string not configured")
-    return BlobServiceClient.from_connection_string(settings.azure_storage_connection_string)
 
 
 def resolve_blob_path(blob_path_or_url: str) -> str:
@@ -110,12 +96,6 @@ def process_document_job(
     """Process one uploaded document and persist outputs."""
     try:
         blob_path = resolve_blob_path(blob_path_or_url)
-        blob_client = get_blob_client()
-        uploads_container = upload_location.get_container_client(blob_client)
-
-        blob_name = upload_location.extract_blob_name(blob_path)
-        if not blob_name:
-            raise ValueError("Invalid blob path")
 
         if not settings.azure_document_intelligence_endpoint or not settings.azure_document_intelligence_key:
             raise ValueError("Azure Document Intelligence credentials not configured")
@@ -156,67 +136,25 @@ def process_document_job(
         if not compose_model_id:
             raise ValueError("Azure Compose Model ID not configured")
 
-        file_bytes = None
         sas_url = build_upload_blob_sas_url(blob_path)
 
         # Step 1: Extract — call Azure Document Intelligence, get back the raw response
-        if is_publicly_fetchable_url(sas_url):
-            raw_adi = extract_with_compose_from_url(
-                doc_intel_client,
-                sas_url,
-                compose_model_id,
-            )
-        else:
-            blob_data = uploads_container.download_blob(blob_name).readall()
-            file_bytes = blob_data if isinstance(blob_data, bytes) else blob_data.encode()
-            raw_adi = extract_with_compose(
-                doc_intel_client,
-                file_bytes,
-                compose_model_id,
-            )
+        raw_adi = extract_with_compose_from_url(
+            doc_intel_client,
+            sas_url,
+            compose_model_id,
+        )
 
-        # Step 2: Persist raw ADI response to blob storage
-        raw_adi_blob_path = None
-        try:
-            raw_adi_blob_path = save_raw_adi_to_blob(
-                blob_service_client=blob_client,
-                source_blob_path=blob_path,
-                raw_adi_response=raw_adi,
-            )
-        except Exception as raw_blob_error:
-            logger.warning("Failed to save raw ADI response blob: %s", str(raw_blob_error))
-
-        # Step 3: Parse the raw response into a structured summary
+        # Step 2: Parse the raw response into a structured summary
         compose_result = parse_compose_result(raw_adi)
         document_type = compose_result.get("document_type", "unknown")
         confidence = compose_result.get("confidence", 0.0)
         structured_data = compose_result.get("structured_data")
 
-        # Persist the parsed compose result as a sidecar file next to the original blob
-        parsed_compose_blob_path = None
-        try:
-            parsed_compose_blob_path = save_parsed_compose_to_blob(
-                blob_service_client=blob_client,
-                source_blob_path=blob_path,
-                parsed_compose_result=compose_result,
-            )
-        except Exception as parsed_blob_error:
-            logger.warning("Failed to save parsed compose sidecar: %s", str(parsed_blob_error))
-
-        try:
-            if file_bytes is None:
-                blob_data = uploads_container.download_blob(blob_name).readall()
-                file_bytes = blob_data if isinstance(blob_data, bytes) else blob_data.encode()
-            thumbnail_url = generate_thumbnail(file_bytes, blob_client, original_filename, document_id)
-        except Exception as thumb_error:
-            logger.warning("Thumbnail generation failed: %s", str(thumb_error))
-            thumbnail_url = None
-
         result_data = {
             "job_id": document_id,
             "original_filename": original_filename,
             "blob_path": blob_path,
-            "thumbnail_url": thumbnail_url,
             "classification": {
                 "document_type": document_type,
                 "confidence": confidence,
@@ -227,8 +165,7 @@ def process_document_job(
             "structured_data": structured_data,
         }
 
-        # Use parsed-sidecar as the canonical processed artifact (no separate processed JSON)
-        output_path = parsed_compose_blob_path or blob_path
+        output_path = blob_path
 
         # Persist the projected summary into Azure Tables synchronously. Candidate triggers
         # should be evaluated against this stored projection only. If table persistence fails
@@ -242,7 +179,6 @@ def process_document_job(
                 output_path,
                 document_id,
                 original_filename,
-                raw_adi_blob_path=raw_adi_blob_path,
             )
             table_saved = True
         except Exception as table_error:
@@ -290,7 +226,6 @@ def process_document_job(
             "document_type": document_type,
             "classification_confidence": confidence,
             "output_path": output_path,
-            "thumbnail_url": thumbnail_url,
             "processed_at": result_data["processed_at"],
             "structured_data": structured_data,
             "fields_extracted": len([v for v in (structured_data or {}).values() if v]),

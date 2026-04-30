@@ -10,18 +10,13 @@ from app.config import get_settings
 from app.services.upload_location import UploadLocation
 from app.services.document_processor import process_document_job
 from app.services.storage_clients_service import (
-    get_blob_client,
     get_container_client_safe,
     get_documents_table_client,
 )
 from app.services.documents_query_service import (
+    get_document_from_table,
     list_inflight_job_documents,
     query_documents_from_table,
-)
-from app.services.blob_parse_service import (
-    get_document_type,
-    parse_document_data,
-    _load_documents_from_container,
 )
 from app.services.sas_helpers_service import build_read_sas_url_for_blob_path
 from app.database import get_db
@@ -109,9 +104,8 @@ async def process_new_document(
     This endpoint is retained for manual processing/debug scenarios and handles:
     1. Document classification (invoice vs purchase-order vs goods-receipt-note)
     2. Structured field extraction
-    3. Thumbnail generation
-    4. Results saved to documents container
-    5. Metadata saved to Azure Tables
+    3. Results saved to documents container
+    4. Metadata saved to Azure Tables
     
     Args:
         blob_path: Path to blob in documents container (e.g., "documents/job_id_timestamp_file.pdf")
@@ -125,7 +119,6 @@ async def process_new_document(
         - classification_confidence
         - structured_data (extracted fields)
         - output_path (where JSON was saved)
-        - thumbnail_url
     """
     try:
         return process_document_job(
@@ -146,25 +139,19 @@ async def process_new_document(
 async def get_document(blob_name: str):
     """
     Get detailed document data by blob name (with folder path)
-    
+
     Args:
-        blob_name: Full path of blob in documents container (e.g., "invoices/abc123.json")
-        
+        blob_name: Full path of blob (e.g., "documents/abc123.pdf")
+
     Returns:
         Detailed document data with all fields and confidence scores
     """
     try:
-        # Use DocumentRepository for local/azure abstraction
-        from app.repositories.document_repository import DocumentRepository
-        repo = DocumentRepository()
-        
-        doc = await repo.get_document_by_blob_name(blob_name)
+        table_client = get_documents_table_client()
+        doc = get_document_from_table(table_client, blob_name)
         if not doc:
             raise HTTPException(status_code=404, detail=f"Document not found: {blob_name}")
-        
-        doc_type = get_document_type(blob_name)
-        parsed_doc = parse_document_data(blob_name, doc, doc_type)
-        return parsed_doc
+        return doc
     except HTTPException:
         raise
     except Exception as e:
@@ -180,7 +167,7 @@ async def generate_sas_url(blob_path: str = Body(..., embed=True)):
     Generate SAS URL for secure blob access
     
     Args:
-        blob_path: Full path to blob (e.g., "documents/file.pdf" or "thumbnails/thumb.jpg")
+        blob_path: Full path to blob (e.g., "documents/file.pdf")
         
     Returns:
         Secure URL with SAS token (expires in 1 hour)
