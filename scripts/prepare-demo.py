@@ -69,40 +69,29 @@ def list_existing_containers() -> set[str]:
         return set()
 
 
-def reset_databases(dry_run: bool) -> None:
-    logger.info("=== Reset local DBs ===")
+def reset_demo(
+    modeladmin_endpoint: str,
+    bootstrap_config: dict[str, Any],
+    dry_run: bool,
+) -> dict[str, Any]:
+    """POST /admin/reset-demo — drops/recreates modeladmin DB and seeds bootstrap data."""
+    payload = {
+        "compose_model_id": bootstrap_config["compose_model_id"],
+        "classifier_model_id": bootstrap_config["classifier_model_id"],
+        "extractors": bootstrap_config["extractors"],
+        "activate": bootstrap_config.get("activate", True),
+    }
+    url = f"{modeladmin_endpoint.rstrip('/')}/admin/reset-demo"
+    logger.info("=== Reset demo ===")
+    logger.info("reset_url=%s", url)
+    logger.info("reset_payload=%s", json.dumps(payload))
 
-    modeladmin_cmd = [
-        "docker",
-        "exec",
-        "modeladmin-container",
-        "python",
-        "-c",
-        (
-            "import modeladmin_sidecar.database.models; "
-            "from modeladmin_sidecar.database.connection import Base, engine; "
-            "Base.metadata.drop_all(bind=engine); "
-            "Base.metadata.create_all(bind=engine); "
-            "print('modeladmin db reset complete')"
-        ),
-    ]
-    run_command(modeladmin_cmd, dry_run=dry_run)
+    if dry_run:
+        return {"success": True, "dry_run": True, "payload": payload}
 
-    backend_cmd = [
-        "docker",
-        "exec",
-        "backend-container",
-        "python",
-        "-c",
-        (
-            "import app.database.models; "
-            "from app.database.connection import Base, engine; "
-            "Base.metadata.drop_all(bind=engine); "
-            "Base.metadata.create_all(bind=engine); "
-            "print('backend db reset complete')"
-        ),
-    ]
-    run_command(backend_cmd, dry_run=dry_run)
+    response = requests.post(url, json=payload, timeout=60)
+    response.raise_for_status()
+    return response.json()
 
 
 def clear_containers(blob_service: BlobServiceClient, container_names: list[str], dry_run: bool) -> None:
@@ -207,62 +196,8 @@ def upload_dataset_files(
     return {"uploaded": uploaded, "skipped": skipped}
 
 
-def apply_bootstrap(modeladmin_endpoint: str, bootstrap_config: dict[str, Any], dry_run: bool) -> dict[str, Any]:
-    payload = {
-        "compose_model_id": bootstrap_config["compose_model_id"],
-        "classifier_model_id": bootstrap_config["classifier_model_id"],
-        "extractors": bootstrap_config["extractors"],
-        "activate": bootstrap_config.get("activate", True),
-    }
-
-    url = f"{modeladmin_endpoint.rstrip('/')}/modeladmin/models/bootstrap/apply"
-    logger.info("=== Apply bootstrap ===")
-    logger.info("bootstrap_url=%s", url)
-    logger.info("bootstrap_payload=%s", json.dumps(payload))
-
-    if dry_run:
-        return {"success": True, "dry_run": True, "payload": payload}
-
-    response = requests.post(url, json=payload, timeout=60)
-    response.raise_for_status()
-    return response.json()
-
-
 def verify(modeladmin_endpoint: str, backend_endpoint: str, dry_run: bool) -> None:
     logger.info("=== Verify local state ===")
-
-    modeladmin_counts_cmd = [
-        "docker",
-        "exec",
-        "modeladmin-container",
-        "python",
-        "-c",
-        (
-            "from modeladmin_sidecar.database.connection import SESSION_LOCAL; "
-            "from modeladmin_sidecar.database.models import ReviewCandidateModel, TrainingDatasetModel; "
-            "s=SESSION_LOCAL(); "
-            "print('review_candidates=' + str(s.query(ReviewCandidateModel).count())); "
-            "print('training_datasets=' + str(s.query(TrainingDatasetModel).count())); "
-            "s.close()"
-        ),
-    ]
-    run_command(modeladmin_counts_cmd, dry_run=dry_run)
-
-    backend_counts_cmd = [
-        "docker",
-        "exec",
-        "backend-container",
-        "python",
-        "-c",
-        (
-            "from app.database.connection import SessionLocal; "
-            "from app.database.models import JobModel; "
-            "s=SessionLocal(); "
-            "print('jobs=' + str(s.query(JobModel).count())); "
-            "s.close()"
-        ),
-    ]
-    run_command(backend_counts_cmd, dry_run=dry_run)
 
     if dry_run:
         logger.info("[dry-run] would call verification APIs")
@@ -298,7 +233,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Prepare MLOps Platform demo environment from model v0")
     parser.add_argument("--no-restart", action="store_true", help="Skip restarting containers")
     parser.add_argument("--dry-run", action="store_true", help="Print actions without mutating state")
-    parser.add_argument("--skip-bootstrap", action="store_true", help="Skip bootstrap apply step")
+    parser.add_argument("--skip-reset", action="store_true", help="Skip demo reset step")
     return parser.parse_args()
 
 
@@ -339,7 +274,6 @@ def main() -> int:
     blob_service = BlobServiceClient.from_connection_string(connection_string)
     table_service = TableServiceClient.from_connection_string(connection_string)
 
-    reset_databases(dry_run=args.dry_run)
     clear_containers(blob_service, [documents_container_name, container_name], dry_run=args.dry_run)
     recreate_tables(table_service, ["Documents", "DocumentMatches"], dry_run=args.dry_run)
     upload_dataset_files(
@@ -349,11 +283,11 @@ def main() -> int:
         dry_run=args.dry_run,
     )
 
-    if args.skip_bootstrap:
-        logger.info("=== Skip bootstrap (requested) ===")
+    if args.skip_reset:
+        logger.info("=== Skip demo reset (requested) ===")
     else:
-        bootstrap_result = apply_bootstrap(modeladmin_endpoint, bootstrap_config, dry_run=args.dry_run)
-        logger.info("bootstrap_result=%s", json.dumps(bootstrap_result))
+        reset_result = reset_demo(modeladmin_endpoint, bootstrap_config, dry_run=args.dry_run)
+        logger.info("reset_result=%s", json.dumps(reset_result))
 
     if args.no_restart:
         logger.info("=== Skip service restart (requested) ===")

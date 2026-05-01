@@ -210,23 +210,6 @@ class ActiveModelConfigModel(Base):
     )
 
 
-class ComposeModelCacheModel(Base):
-    """Lightweight cache of compose models produced by the training pipeline (PBI 4)."""
-
-    __tablename__ = "compose_model_cache"
-    __table_args__ = (Index("idx_compose_model_cache_available", "is_available"),)
-
-    model_id = Column(String(255), primary_key=True)
-    classifier_model_id = Column(String(255), nullable=True)
-    is_available = Column(Boolean, nullable=False, default=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
-    updated_at = Column(
-        DateTime(timezone=True),
-        server_default=func.now(),
-        onupdate=func.now(),
-        nullable=False,
-    )
-
 
 class TrainingJobModel(Base):
     __tablename__ = "training_jobs"

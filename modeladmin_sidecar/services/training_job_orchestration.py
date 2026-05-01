@@ -16,7 +16,6 @@ from modeladmin_sidecar.config import get_modeladmin_sidecar_settings
 from modeladmin_sidecar.database.models import TrainedModelModel
 from modeladmin_sidecar.modeladmin_core.doc_types import normalize_training_document_type
 from modeladmin_sidecar.repositories.compose_model_repository import ComposeModelRepository
-from modeladmin_sidecar.repositories.compose_model_cache_repository import ComposeModelCacheRepository
 from modeladmin_sidecar.repositories.training_dataset_repository import TrainingDatasetRepository
 from modeladmin_sidecar.repositories.training_job_repository import TrainingJobRepository
 from modeladmin_sidecar.services.azure_blob_storage_service import AzureBlobStorageService
@@ -549,14 +548,6 @@ class TrainingJobOrchestration:
                 ),
                 None,
             )
-            ComposeModelCacheRepository(self._db).upsert_compose_model(
-                model_id=adi_model_id,
-                adi_created_at=datetime.now(timezone.utc),
-                classifier_model_id=classifier_model_id,
-                extractor_models=extractor_model_ids,
-                is_available=True,
-            )
-
             compose_repo = ComposeModelRepository(self._db)
             existing_compose = compose_repo.get_by_id(adi_model_id)
             dataset = TrainingDatasetRepository(self._db).get_dataset_by_id(job.dataset_version_id)

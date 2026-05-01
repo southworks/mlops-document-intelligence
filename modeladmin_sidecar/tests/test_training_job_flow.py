@@ -21,7 +21,7 @@ from modeladmin_sidecar.config import get_modeladmin_sidecar_settings
 from modeladmin_sidecar.database.connection import get_db
 from modeladmin_sidecar.database.models import (
     Base,
-    ComposeModelCacheModel,
+    ComposeModelModel,
     TrainingJobModel,
     TrainingJobOperationModel,
 )
@@ -287,7 +287,7 @@ def test_get_training_job_triggers_compose_when_components_complete(tmp_path) ->
 
 
 # ---------------------------------------------------------------------------
-# Test 4: GET job completes compose; ComposeModelCacheModel row created
+# Test 4: GET job completes compose; ComposeModelModel row created
 # ---------------------------------------------------------------------------
 
 def test_get_training_job_completes_and_creates_compose_model_cache(tmp_path) -> None:
@@ -338,15 +338,15 @@ def test_get_training_job_completes_and_creates_compose_model_cache(tmp_path) ->
     body = response.json()
     assert body["status"] == "completed"
 
-    # Verify ComposeModelCacheModel row was inserted
+    # Verify ComposeModelModel row was created
     verify_session = SessionLocal()
-    cache_row = (
-        verify_session.query(ComposeModelCacheModel)
-        .filter(ComposeModelCacheModel.model_id == "procurement-compose.v1")
+    compose_row = (
+        verify_session.query(ComposeModelModel)
+        .filter(ComposeModelModel.compose_model_id == "procurement-compose.v1")
         .first()
     )
     verify_session.close()
-    assert cache_row is not None
+    assert compose_row is not None
 
 
 # ---------------------------------------------------------------------------

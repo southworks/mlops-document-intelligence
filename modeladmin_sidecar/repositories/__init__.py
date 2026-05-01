@@ -2,7 +2,6 @@
 
 __all__ = [
     "active_model_config_repository",
-    "compose_model_cache_repository",
     "compose_model_repository",
     "retrain_job_repository",
     "review_candidate_repository",
