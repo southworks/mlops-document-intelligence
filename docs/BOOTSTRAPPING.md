@@ -44,51 +44,29 @@ be created through the normal review → retrain pipeline.
 
 ---
 
-## Endpoints
+## Endpoint
 
-### Validate (schema + ADI existence)
-`POST /modeladmin/models/bootstrap/validate`
+### Reset and seed
+`POST /admin/reset-demo`
 
-- Checks all model IDs exist in ADI.
-- Returns `success: true/false` and any `missing_model_ids`.
-- No DB writes.
-
-### Apply
-`POST /modeladmin/models/bootstrap/apply`
-
-- Re-validates all model IDs in ADI.
+- Drops and recreates all ModelAdmin SQLite tables.
+- Re-validates all model IDs exist in ADI.
 - Upserts DB entities in one transaction:
-  - `trained_models` (classifier + extractors, no dataset FK)
-  - `compose_models`
-  - `compose_model_extractors`
+  - `trained_models` (classifier + extractors)
+  - `compose_models` + `compose_model_extractors`
   - `active_model_config` (when `activate=true`)
-- On validation failure, no DB writes are committed.
-- Idempotent — safe to re-run if the compose model already exists.
+- On ADI validation failure, returns HTTP 409 and writes nothing.
+- Idempotent — safe to re-run; each call starts from a clean schema.
 
----
-
-## CLI Execution
-
-From `procurement_automation/modeladmin_service`:
-
-Validate only (no writes):
-```bash
-python -m modeladmin_service.bootstrap --file ./bootstrap.json --validate-only
-```
-
-Apply:
-```bash
-python -m modeladmin_service.bootstrap --file ./bootstrap.json
-```
+> The separate `/models/bootstrap/validate` and `/models/bootstrap/apply` endpoints were removed in Phase 4. `POST /admin/reset-demo` combines validation, schema reset, and seeding in one call.
 
 ---
 
 ## Operator Runbook
 1. Create compose model, classifier, and extractor models in ADI Studio.
-2. Build `bootstrap.json` using the contract above.
-3. Call `POST /modeladmin/models/bootstrap/validate` — fix any `missing_model_ids`.
-4. Call `POST /modeladmin/models/bootstrap/apply`.
-5. Verify active model via `GET /modeladmin/models/active`.
+2. Build `scripts/bootstrap.json` using the contract above.
+3. Call `POST /admin/reset-demo` with the bootstrap payload.
+4. Verify active model via `GET /modeladmin/models/active`.
 
 ---
 
@@ -105,7 +83,8 @@ python -m modeladmin_service.bootstrap --file ./bootstrap.json
 
 ### Apply returns 409
 - Symptom: `One or more model IDs were not found in ADI`.
-- Run `validate` to identify exact missing IDs, correct the payload, and retry.
+- Verify IDs in `bootstrap.json` match exactly what exists in your ADI resource.
+- Correct the payload and retry `POST /admin/reset-demo`.
 
 ### Model still running / not ready
 - Symptom: compose or extractor model exists in ADI but shows status `running` or `building`.

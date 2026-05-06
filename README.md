@@ -110,6 +110,26 @@ Promotion to production happens via indirection, enabling fast rollback without 
 
 ---
 
+## Find the Code
+
+Reading the article and want to jump straight to the relevant file? Use this map.
+
+| Pipeline stage | Article section | Source file |
+|---|---|---|
+| 1 · Ingestion | "Document Ingestion: Upload, Queue, and Worker" | [`production_app/backend/document_processor.py`](production_app/backend/document_processor.py) |
+| 2 · Confidence Gate | "Confidence Scoring and Triage" | [`production_app/backend/confidence_gate.py`](production_app/backend/confidence_gate.py) |
+| 3 · Review Candidates | "Human-in-the-Loop (HITL): Labeling and Approval" | [`modeladmin_sidecar/routes/review_candidates.py`](modeladmin_sidecar/routes/review_candidates.py) |
+| 4 · Dataset Curation | "Training Requirements: Curating the Dataset" | [`modeladmin_sidecar/routes/training_datasets.py`](modeladmin_sidecar/routes/training_datasets.py) |
+| 5–6 · Staging & Labeling | "Training Requirements: The Data Staging" | [`modeladmin_sidecar/services/training_dataset_service.py`](modeladmin_sidecar/services/training_dataset_service.py) |
+| 7 · Training | "Triggering a Training Job with ADI Custom Models" | [`modeladmin_sidecar/services/training_job_orchestration.py`](modeladmin_sidecar/services/training_job_orchestration.py) |
+| 8 · Model Lineage | "Model Governance: Tracking Trained and Compose Models" | [`modeladmin_sidecar/repositories/`](modeladmin_sidecar/repositories/) |
+| 9–10 · Promotion & Registry | "Model Governance: Promoting a New Active Model" | [`modeladmin_sidecar/routes/models.py`](modeladmin_sidecar/routes/models.py) |
+| 11 · Improved Ingestion | "Closing the Loop: The Next Iteration" | [`production_app/backend/confidence_gate.py`](production_app/backend/confidence_gate.py) |
+
+Full diagram with all implementation details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+---
+
 ## Getting Started
 
 This repository is a **reference implementation**, not a turnkey solution.
