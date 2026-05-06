@@ -1,5 +1,20 @@
 # Training Data for ADI Compose Model
 
+## Article context: v0 and v1 datasets
+
+This directory contains two versioned datasets that map directly to the article's iterative MLOps lifecycle.
+
+| Dataset | Role in the article | Used by |
+|---------|--------------------|---------:|
+| `procurement-dataset.v0` | **Seed dataset** — pre-labeled data used to train the initial v0 compose model. Represents the team's existing model before the iterative cycle begins. | `bootstrap.json` seeds this into ModelAdmin at demo reset; `prepare-demo.py` uploads it to blob storage. |
+| `procurement-dataset.v1` | **Post-HITL dataset** — represents the curated training data that would emerge after a complete Human-in-the-Loop review cycle (Stages 3–6 in the concept pipeline). Staging and labeling this dataset triggers the v1 training run, closing the first loop. | Manually staged via the ModelAdmin UI to demonstrate Stage 5 "Data Staging" and the subsequent training job. |
+
+This maps to the article sections:
+- **"Training Requirements: The Data Staging"** — describes how v1 data is assembled from approved review candidates and staged for ADI training.
+- **"Closing the Loop: The Next Iteration"** — the promoted v1 compose model becomes the new active model, improving confidence scores on future ingested documents.
+
+---
+
 ## Overview
 
 This directory contains organized training data for Azure Document Intelligence (ADI) Compose Model development. The data has been consolidated from multiple test folders to provide comprehensive samples for custom model training.
