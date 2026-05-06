@@ -1,6 +1,6 @@
 """Upload endpoint for receiving invoice files"""
 
-from fastapi import APIRouter, File, UploadFile, HTTPException, Query, Depends
+from fastapi import APIRouter, BackgroundTasks, File, UploadFile, HTTPException, Query, Depends
 from datetime import datetime, timezone
 import uuid
 
@@ -8,7 +8,7 @@ from app.storage import get_storage
 from app.config import get_settings
 from app.database import get_db, JobModel
 from app.models.job import JobStatus
-from app.services.queue_jobs import enqueue_document_job
+from app.services.document_processor import process_document_job
 from app.services.upload_location import UploadLocation
 from sqlalchemy.orm import Session
 
@@ -26,19 +26,20 @@ def validate_file_type(filename: str) -> bool:
 
 @router.post("/")
 async def upload_invoice(
+    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     lang: str = Query("eng", description="Language for OCR (eng, spa, etc.)"),
     document_type: str = Query(None, description="Type of document (invoice, receipt, etc.)"),
     db: Session = Depends(get_db)
 ):
     """
-    Upload a document and enqueue it for asynchronous worker processing.
-    
+    Upload a document and schedule it for background processing.
+
     Args:
         file: Document file (PDF or image)
         lang: OCR language code (for future use)
         document_type: Optional - will be auto-detected by classifier
-        
+
     Returns:
         JSON with job_id, filename, and file_path
     """
@@ -92,18 +93,20 @@ async def upload_invoice(
         db.add(job)
         db.commit()
 
-        enqueue_document_job(
-            document_id=job_id,
-            blob_url=blob_url,
-            original_filename=file.filename,
-            blob_path=blob_path,
-        )
-
         job.status = JobStatus.PROCESSING
         db.commit()
-        
-        message = "File uploaded and queued for worker processing."
-        
+
+        background_tasks.add_task(
+            process_document_job,
+            document_id=job_id,
+            blob_path_or_url=blob_path,
+            original_filename=file.filename,
+            db=None,
+            source_channel="background-task",
+        )
+
+        message = "File uploaded and scheduled for background processing."
+
         return {
             "job_id": job_id,
             "filename": file.filename,

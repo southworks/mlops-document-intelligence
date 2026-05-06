@@ -22,9 +22,6 @@ class Settings(BaseSettings):
     # Azure Storage (required)
     azure_storage_connection_string: Optional[str] = None
     azure_storage_container_name: str = "documents"
-    azure_storage_queue_name: str = "document-processing"
-    worker_poll_interval_seconds: int = 5
-    worker_visibility_timeout_seconds: int = 120
     
     # Database
     database_url: str = "sqlite:///./invoice_ocr.db"

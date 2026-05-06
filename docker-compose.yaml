@@ -43,16 +43,13 @@ services:
     env_file:
       - ./.env.local
     environment:
-      - MODE=api
       - ENVIRONMENT=development
       - DEBUG=true
       - DATABASE_URL=sqlite:////app/data/invoice_ocr.db
       - AZURE_STORAGE_CONTAINER_NAME=${AZURE_STORAGE_CONTAINER_NAME:-documents}
-      - AZURE_STORAGE_QUEUE_NAME=${AZURE_STORAGE_QUEUE_NAME:-document-processing}
       - MODELADMIN_EXTERNAL_ENDPOINT=${MODELADMIN_EXTERNAL_ENDPOINT:-http://modeladmin-service:8100}
       - MODELADMIN_EXTERNAL_API_KEY=${MODELADMIN_EXTERNAL_API_KEY:-modeladmin-local-key}
     volumes:
-      # Shared SQLite volume used by both API and worker so they observe the same job state.
       - mlops-backend-data:/app/data
     networks:
       - local-dev
@@ -90,30 +87,6 @@ services:
       retries: 5
       start_period: 10s
   
-  # Worker: Queue-driven document processing runtime
-  worker-service:
-    build:
-      context: ./production_app/backend
-      dockerfile: Dockerfile
-    container_name: worker-container
-    env_file:
-      - ./.env.local
-    environment:
-      MODE: worker
-      DATABASE_URL: sqlite:////app/data/invoice_ocr.db
-      AZURE_STORAGE_CONTAINER_NAME: ${AZURE_STORAGE_CONTAINER_NAME:-documents}
-      AZURE_STORAGE_QUEUE_NAME: ${AZURE_STORAGE_QUEUE_NAME:-document-processing}
-      MODELADMIN_EXTERNAL_ENDPOINT: ${MODELADMIN_EXTERNAL_ENDPOINT:-http://modeladmin-service:8100}
-      MODELADMIN_EXTERNAL_API_KEY: ${MODELADMIN_EXTERNAL_API_KEY:-modeladmin-local-key}
-    volumes:
-      # Mount the same backend DB volume as API to keep job status and metadata consistent.
-      - mlops-backend-data:/app/data
-    networks:
-      - local-dev
-    depends_on:
-      - backend-service
-
-
 networks:
   local-dev:
     driver: bridge

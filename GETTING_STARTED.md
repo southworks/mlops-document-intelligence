@@ -11,7 +11,7 @@ Step-by-step instructions to run the platform locally and walk through the full 
 | Docker Desktop | Compose V2 required |
 | Azure subscription | Free tier is sufficient for low-volume testing |
 | Azure Document Intelligence resource | Custom Neural model tier (S0) |
-| Azure Storage account | Blob + Queue + Tables all used |
+| Azure Storage account | Blob + Tables used |
 | Pre-trained ADI compose model | See note below |
 
 > **Pre-trained model requirement**: The demo starts from Stage 10 — a model already exists and is active. You need a compose model (`procurement-compose-model.v0`), a classifier, and three extractor sub-models already created in ADI Studio before running the bootstrap step. `training-data/procurement-dataset.v0` contains the labeled data to train them. See the article section "Bootstrapping an Existing Model" for details.
@@ -33,7 +33,7 @@ Open `.env.local` and fill in:
 AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT=https://<your-resource>.cognitiveservices.azure.com/
 AZURE_DOCUMENT_INTELLIGENCE_KEY=<key>
 
-# Azure Storage (used for documents, queue, training data, and table metadata)
+# Azure Storage (used for documents, training data, and table metadata)
 AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...
 
 # Active compose model ID — must match an existing model in your ADI resource
@@ -63,8 +63,7 @@ Four services start:
 | Service | URL | Role |
 |---|---|---|
 | `frontend-service` | http://localhost:3000 | Upload UI + document list |
-| `backend-service` | http://localhost:8000 | FastAPI API + queue worker |
-| `worker-service` | — | Azure Queue consumer |
+| `backend-service` | http://localhost:8000 | FastAPI API + BackgroundTasks |
 | `modeladmin-service` | http://localhost:8100 | MLOps control plane |
 
 Wait for all health checks to pass:
@@ -108,7 +107,7 @@ curl http://localhost:8100/modeladmin/models/active
 ### Stage 1–2: Ingest a document
 
 1. Open http://localhost:3000 and upload a PDF from `training-data/`.
-2. The worker picks it up from the Azure queue, runs ADI extraction, and applies the confidence gate.
+2. A FastAPI background task runs ADI extraction and applies the confidence gate.
 3. A low-confidence result creates a review candidate in ModelAdmin.
 
 ### Stage 3: Label a review candidate
@@ -155,6 +154,6 @@ This drops and recreates both SQLite databases, clears blob storage, re-uploads 
 | Symptom | Likely cause |
 |---|---|
 | `POST /admin/reset-demo` returns 409 | Model IDs in `bootstrap.json` do not exist in your ADI resource |
-| Worker processes no messages | `AZURE_STORAGE_CONNECTION_STRING` is wrong or the queue name doesn't match |
+| Background processing never completes | Check `backend-service` logs — the background task runs in-process |
 | Confidence gate never fires | Thresholds are too low — raise `CONFIDENCE_THRESHOLD_*` above your model's typical score |
 | ModelAdmin DB empty after restart | Volume `mlops-modeladmin-data` was wiped — re-run `POST /admin/reset-demo` |

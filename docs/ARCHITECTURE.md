@@ -1,6 +1,6 @@
 # FinOptPlatform — Architecture Reference
 
-> Diagrams reflect the codebase as of Phase 4 simplification (May 2026).
+> Diagrams reflect the codebase as of Phase 5 simplification (May 2026).
 > Rendered by GitHub Markdown, VS Code Markdown Preview (with Mermaid extension), and MkDocs.
 
 ---
@@ -60,9 +60,8 @@ graph TB
 
         FE["Frontend  :3000\nReact + Vite · Nginx\n(production_app/frontend)"]
 
-        subgraph backend_group["production_app/backend — one image, two roles"]
-            BAPI["Backend API  :8000\nFastAPI async"]
-            WRK["Worker\nAzure Queue consumer"]
+        subgraph backend_group["production_app/backend"]
+            BAPI["Backend API  :8000\nFastAPI async\n+ BackgroundTasks"]
         end
 
         MA["ModelAdmin Sidecar  :8100\nFastAPI sync\n(modeladmin_sidecar)"]
@@ -73,7 +72,6 @@ graph TB
 
     subgraph azure["☁️  Azure"]
         AZ_BLOB["Blob Storage\ndocuments · training-data"]
-        AZ_QUEUE["Queue Storage\ndocument-processing-queue"]
         AZ_TABLE["Table Storage\ndocument metadata index"]
         ADI["Azure Document Intelligence\nOCR · Extraction\nClassifier + Compose training"]
     end
@@ -84,14 +82,11 @@ graph TB
     FE -->|"REST"| BAPI
 
     BAPI -->|"POST /boundary/modeladmin/candidate-created"| MA
-    WRK  -->|"POST /boundary/..."| MA
 
-    BAPI <-->|"Blob / Queue / Table"| AZ_BLOB
-    WRK  <-->|"Blob / Queue"| AZ_BLOB
+    BAPI <-->|"Blob / Table"| AZ_BLOB
     MA   <-->|"Blob (training data)"| AZ_BLOB
 
     BAPI --- DB_B
-    WRK  --- DB_B
     MA   --- DB_M
 
     MA   -->|"Admin API — build / poll / compose"| ADI
@@ -152,7 +147,7 @@ graph LR
     SVC1 --> SHARED
 ```
 
-### Backend API + Worker
+### Backend API
 
 ```mermaid
 graph LR
@@ -167,10 +162,9 @@ graph LR
         end
 
         subgraph b_services["Services"]
-            BS1["document_processor\n  OCR + extraction pipeline"]
+            BS1["document_processor\n  OCR + extraction pipeline\n  (runs as BackgroundTask)"]
             BS2["confidence_gate\n  compute_confidence()\n  notify_modeladmin()"]
-            BS3["queue_jobs  Azure Queue helpers"]
-            BS4["blob_parse · documents_query\nsas_helpers · storage_clients\nupload_location"]
+            BS3["blob_parse · documents_query\nsas_helpers · storage_clients\nupload_location"]
         end
 
         subgraph b_storage["Storage Adapters"]
@@ -241,19 +235,18 @@ sequenceDiagram
 sequenceDiagram
     participant Client
     participant Upload as upload route
-    participant Queue as Azure Queue
-    participant Worker
+    participant BG as FastAPI BackgroundTask
     participant DocProc as document_processor
     participant ADI as Azure Document Intelligence
     participant ConfGate as confidence_gate
     participant Sidecar as ModelAdmin Sidecar
 
     Client->>Upload: POST /upload (file)
-    Upload->>Queue: enqueue job message
+    Upload->>Upload: upload blob, create DB job
+    Upload->>BG: add_task(process_document_job)
     Upload-->>Client: 202 {job_id}
 
-    Worker->>Queue: dequeue message
-    Worker->>DocProc: process(blob_path)
+    BG->>DocProc: process(blob_path)
     DocProc->>ADI: analyze_document (compose model)
     ADI-->>DocProc: extraction result
     DocProc->>ConfGate: compute_confidence(result)

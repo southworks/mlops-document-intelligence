@@ -33,5 +33,4 @@ USER appuser
 
 EXPOSE 8000
 
-# Start API or worker based on MODE env var (api|worker)
-CMD ["python", "-m", "app.runtime"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "--workers", "2", "--timeout", "600", "app.main:app"]
