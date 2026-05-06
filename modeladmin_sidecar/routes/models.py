@@ -6,15 +6,10 @@ from sqlalchemy.orm import Session
 from modeladmin_sidecar.database.connection import get_db
 from modeladmin_sidecar.modeladmin_core.service_api_contracts import (
     ActiveModelConfigResponse,
-    BootstrapImportApplyResponse,
-    BootstrapImportRequest,
-    BootstrapImportValidationResponse,
     ComposeModelListResponse,
 )
 from modeladmin_sidecar.repositories.active_model_config_repository import ActiveModelConfigRepository
 from modeladmin_sidecar.repositories.compose_model_repository import ComposeModelRepository
-from modeladmin_sidecar.services.bootstrap_import_service import BootstrapImportService, BootstrapValidationError
-from modeladmin_sidecar.services.document_intelligence_service import DocumentIntelligenceService
 
 router = APIRouter(prefix="/modeladmin/models", tags=["modeladmin"])
 
@@ -75,22 +70,3 @@ def list_compose_models(db: Session = Depends(get_db)) -> ComposeModelListRespon
             for item in items
         ]
     }
-
-
-@router.post("/bootstrap/validate")
-def validate_bootstrap_request(payload: BootstrapImportRequest) -> BootstrapImportValidationResponse:
-    """Validate payload shape and confirm all model IDs exist in ADI."""
-    service = BootstrapImportService(db=None, adi_service=DocumentIntelligenceService())
-    return service.validate_against_adi(payload)
-
-
-@router.post("/bootstrap/apply")
-def apply_bootstrap_request(
-    payload: BootstrapImportRequest,
-    db: Session = Depends(get_db),
-) -> BootstrapImportApplyResponse:
-    try:
-        service = BootstrapImportService(db=db, adi_service=DocumentIntelligenceService())
-        return service.apply(payload)
-    except BootstrapValidationError as exc:
-        raise HTTPException(status_code=409, detail=str(exc)) from exc

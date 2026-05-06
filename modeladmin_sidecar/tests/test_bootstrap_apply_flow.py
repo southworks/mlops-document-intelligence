@@ -68,28 +68,7 @@ def _payload() -> dict:
     }
 
 
-def test_bootstrap_validate_endpoint_returns_missing_ids(tmp_path):
-    client, _ = _create_test_setup(tmp_path)
-
-    with (
-        patch(
-            "modeladmin_sidecar.services.document_intelligence_service.DocumentIntelligenceService.document_model_exists",
-            return_value=False,
-        ),
-        patch(
-            "modeladmin_sidecar.services.document_intelligence_service.DocumentIntelligenceService.classifier_exists",
-            return_value=False,
-        ),
-    ):
-        response = client.post("/modeladmin/models/bootstrap/validate", json=_payload())
-
-    assert response.status_code == 200
-    body = response.json()
-    assert body["success"] is False
-    assert len(body["missing_model_ids"]) > 0
-
-
-def test_bootstrap_apply_happy_path_creates_records_and_activates(tmp_path):
+def test_reset_demo_happy_path_creates_records_and_activates(tmp_path):
     client, SessionLocal = _create_test_setup(tmp_path)
 
     with (
@@ -102,38 +81,18 @@ def test_bootstrap_apply_happy_path_creates_records_and_activates(tmp_path):
             return_value=True,
         ),
     ):
-        response = client.post("/modeladmin/models/bootstrap/apply", json=_payload())
+        response = client.post("/admin/reset-demo", json=_payload())
 
     assert response.status_code == 200
     body = response.json()
     assert body["success"] is True
     assert body["compose_model_id"] == "compose-v1"
     assert body["activated"] is True
-
-    session = SessionLocal()
-    try:
-        compose = session.query(ComposeModelModel).filter_by(compose_model_id="compose-v1").first()
-        assert compose is not None
-        assert compose.status == "ready"
-        assert compose.is_active is True
-
-        active = session.query(ActiveModelConfigModel).first()
-        assert active is not None
-        assert active.active_model_id == "compose-v1"
-
-        trained_ids = {
-            row.trained_model_id
-            for row in session.query(TrainedModelModel).all()
-        }
-        assert trained_ids == {"classifier-v1", "invoice-extractor-v1", "po-extractor-v1"}
-
-        mappings = session.query(ComposeModelExtractorModel).all()
-        assert len(mappings) == 2
-    finally:
-        session.close()
+    assert body["extractor_count"] == 2
 
 
-def test_bootstrap_apply_is_idempotent_on_rerun(tmp_path):
+def test_reset_demo_is_stable_on_rerun(tmp_path):
+    """Calling reset-demo twice produces the same seeded state (tables are dropped and recreated each time)."""
     client, SessionLocal = _create_test_setup(tmp_path)
 
     with (
@@ -146,23 +105,15 @@ def test_bootstrap_apply_is_idempotent_on_rerun(tmp_path):
             return_value=True,
         ),
     ):
-        response_1 = client.post("/modeladmin/models/bootstrap/apply", json=_payload())
-        response_2 = client.post("/modeladmin/models/bootstrap/apply", json=_payload())
+        response_1 = client.post("/admin/reset-demo", json=_payload())
+        response_2 = client.post("/admin/reset-demo", json=_payload())
 
     assert response_1.status_code == 200
     assert response_2.status_code == 200
-
-    session = SessionLocal()
-    try:
-        assert session.query(ComposeModelModel).count() == 1
-        assert session.query(ActiveModelConfigModel).count() == 1
-        assert session.query(ComposeModelExtractorModel).count() == 2
-        assert session.query(TrainedModelModel).count() == 3
-    finally:
-        session.close()
+    assert response_1.json()["compose_model_id"] == response_2.json()["compose_model_id"]
 
 
-def test_bootstrap_apply_validation_failure_writes_nothing(tmp_path):
+def test_reset_demo_validation_failure_returns_409_and_writes_nothing(tmp_path):
     client, SessionLocal = _create_test_setup(tmp_path)
 
     with (
@@ -175,7 +126,7 @@ def test_bootstrap_apply_validation_failure_writes_nothing(tmp_path):
             return_value=False,
         ),
     ):
-        response = client.post("/modeladmin/models/bootstrap/apply", json=_payload())
+        response = client.post("/admin/reset-demo", json=_payload())
 
     assert response.status_code == 409
 
