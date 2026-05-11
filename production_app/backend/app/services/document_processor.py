@@ -10,7 +10,8 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
-from app.database import JobModel
+from app.database import JobModel, ProcessedDocumentModel
+from app.database.connection import SessionLocal
 from app.model_registry import get_model_registry
 from app.models.job import JobStatus
 from app.services.confidence_gate import (
@@ -22,7 +23,6 @@ from app.services.confidence_gate import (
 from app.services.sas_helpers_service import build_upload_blob_sas_url
 from app.services.upload_location import UploadLocation
 from processing.compose_extractor import extract_with_compose_from_url, parse_compose_result
-from processing.storage import save_to_azure_tables
 settings = get_settings()
 upload_location = UploadLocation(settings.azure_storage_container_name)
 DOCUMENT_INTELLIGENCE_SAS_TTL_MINUTES = settings.document_intelligence_sas_ttl_minutes
@@ -85,15 +85,57 @@ def _sync_job_failure(db: Optional[Session], job_id: str, error_message: str) ->
         logger.warning("Jobs failure sync skipped: %s", str(db_sync_error))
 
 
+def _upsert_processed_document(
+    db: Session,
+    *,
+    blob_path: str,
+    document_type: str,
+    compose_result: dict,
+    job_id: str,
+    original_filename: str,
+) -> None:
+    """Persist or update processed document projection in backend Postgres index."""
+    confidence = compose_result.get("confidence", 0.0)
+    row = db.query(ProcessedDocumentModel).filter(ProcessedDocumentModel.blob_path == blob_path).first()
+
+    if row is None:
+        row = ProcessedDocumentModel(
+            blob_path=blob_path,
+            document_type=document_type,
+            job_id=job_id,
+            original_filename=original_filename,
+            classification_confidence=float(confidence or 0.0),
+            summary_json=json.dumps(compose_result or {}, default=str, sort_keys=True),
+            processed_at=datetime.now(timezone.utc),
+        )
+        db.add(row)
+    else:
+        row.document_type = document_type
+        row.job_id = job_id
+        row.original_filename = original_filename
+        row.classification_confidence = float(confidence or 0.0)
+        row.summary_json = json.dumps(compose_result or {}, default=str, sort_keys=True)
+        row.processed_at = datetime.now(timezone.utc)
+
+    db.commit()
+
+
 def process_document_job(
     *,
     document_id: str,
     blob_path_or_url: str,
     original_filename: str,
     db: Optional[Session] = None,
-    source_channel: str = "queue-worker",
+    source_channel: str = "background-task",
 ) -> dict:
     """Process one uploaded document and persist outputs."""
+    owns_session = False
+    active_db = db
+
+    if active_db is None:
+        active_db = SessionLocal()
+        owns_session = True
+
     try:
         blob_path = resolve_blob_path(blob_path_or_url)
 
@@ -167,22 +209,21 @@ def process_document_job(
 
         output_path = blob_path
 
-        # Persist the projected summary into Azure Tables synchronously. Candidate triggers
-        # should be evaluated against this stored projection only. If table persistence fails
-        # we will log and skip candidate intake to avoid downstream races.
-        table_saved = False
+        # Persist the projected summary into backend Postgres synchronously. Candidate triggers
+        # are evaluated only after persistence succeeds to keep list/detail/index consistency.
+        index_saved = False
         try:
-            save_to_azure_tables(
-                settings.azure_storage_connection_string,
-                document_type,
-                compose_result,
-                output_path,
-                document_id,
-                original_filename,
+            _upsert_processed_document(
+                active_db,
+                blob_path=output_path,
+                document_type=document_type,
+                compose_result=compose_result,
+                job_id=document_id,
+                original_filename=original_filename,
             )
-            table_saved = True
-        except Exception as table_error:
-            logger.warning("Failed to save to Azure Tables: %s", str(table_error))
+            index_saved = True
+        except Exception as index_error:
+            logger.warning("Failed to save processed document index row: %s", str(index_error))
 
         # Evaluate candidate triggers using the projected summary only (structured_data).
         score = compute_confidence(
@@ -195,9 +236,9 @@ def process_document_job(
         has_low_confidence = score.has_low_confidence
 
         if should_create_candidate and trigger_reason:
-            if not table_saved:
+            if not index_saved:
                 logger.warning(
-                    "Candidate trigger detected but Azure Table persistence failed; skipping intake for %s",
+                    "Candidate trigger detected but processed document index persistence failed; skipping intake for %s",
                     document_id,
                 )
             else:
@@ -231,10 +272,13 @@ def process_document_job(
             "fields_extracted": len([v for v in (structured_data or {}).values() if v]),
         }
 
-        _sync_job_success(db, document_id, response_payload, document_type)
+        _sync_job_success(active_db, document_id, response_payload, document_type)
         return response_payload
 
     except Exception as exc:
         logger.exception("Document processing failed for %s", document_id)
-        _sync_job_failure(db, document_id, str(exc))
+        _sync_job_failure(active_db, document_id, str(exc))
         raise
+    finally:
+        if owns_session and active_db is not None:
+            active_db.close()

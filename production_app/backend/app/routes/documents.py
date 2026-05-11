@@ -3,20 +3,16 @@
 # pylint: disable=broad-exception-caught
 
 from fastapi import APIRouter, HTTPException, Body, Query, Depends
-from typing import List, Dict, Any
+from typing import List, Dict
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
 from app.services.upload_location import UploadLocation
 from app.services.document_processor import process_document_job
-from app.services.storage_clients_service import (
-    get_container_client_safe,
-    get_documents_table_client,
-)
 from app.services.documents_query_service import (
-    get_document_from_table,
+    get_document_from_db,
     list_inflight_job_documents,
-    query_documents_from_table,
+    query_documents_from_db,
 )
 from app.services.sas_helpers_service import build_read_sas_url_for_blob_path
 from app.database import get_db
@@ -62,11 +58,8 @@ async def list_documents(
 
         normalized_type = "all" if requested_type == "all" else normalize_document_type_value(requested_type)
 
-        # TABLE-ONLY MODE: List rendering uses persisted table data + inflight jobs only.
-        # Blob fallback has been removed to ensure consistent, fast list performance.
-        table_client = get_documents_table_client()
-        table_documents = query_documents_from_table(table_client, normalized_type)
-        documents = table_documents or []
+        # DB-INDEX MODE: List rendering uses persisted Postgres index rows + inflight jobs.
+        documents = query_documents_from_db(db, normalized_type)
 
         # Merge inflight job documents (uploads still processing) with completed table records
         documents.extend(list_inflight_job_documents(db, normalized_type))
@@ -99,13 +92,13 @@ async def process_new_document(
     """
     Process a newly uploaded document for initial classification and field extraction.
     
-    Process one document immediately using the same pipeline used by the queue worker.
+    Process one document immediately using the same pipeline used by background processing.
 
     This endpoint is retained for manual processing/debug scenarios and handles:
     1. Document classification (invoice vs purchase-order vs goods-receipt-note)
     2. Structured field extraction
     3. Results saved to documents container
-    4. Metadata saved to Azure Tables
+    4. Metadata indexed in backend Postgres
     
     Args:
         blob_path: Path to blob in documents container (e.g., "documents/job_id_timestamp_file.pdf")
@@ -136,7 +129,7 @@ async def process_new_document(
 
 
 @router.get("/{blob_name:path}")
-async def get_document(blob_name: str):
+async def get_document(blob_name: str, db: Session = Depends(get_db)):
     """
     Get detailed document data by blob name (with folder path)
 
@@ -147,8 +140,7 @@ async def get_document(blob_name: str):
         Detailed document data with all fields and confidence scores
     """
     try:
-        table_client = get_documents_table_client()
-        doc = get_document_from_table(table_client, blob_name)
+        doc = get_document_from_db(db, blob_name)
         if not doc:
             raise HTTPException(status_code=404, detail=f"Document not found: {blob_name}")
         return doc

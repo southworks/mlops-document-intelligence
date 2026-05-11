@@ -7,8 +7,7 @@ asyncio/async sessions without a clear concurrency requirement.
 
 import os
 
-from sqlalchemy import create_engine, inspect, text
-from sqlalchemy.exc import OperationalError
+from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, declarative_base, sessionmaker
 
 from modeladmin_sidecar.config import get_modeladmin_sidecar_settings
@@ -36,33 +35,4 @@ def get_db() -> Session:
 
 
 def init_db() -> None:
-    try:
-        Base.metadata.create_all(bind=engine)
-    except OperationalError as exc:
-        if "already exists" in str(exc).lower():
-            Base.metadata.create_all(bind=engine, checkfirst=True)
-        else:
-            raise
-
-    _ensure_review_candidate_columns()
-
-
-def _ensure_review_candidate_columns() -> None:
-    inspector = inspect(engine)
-    table_names = set(inspector.get_table_names())
-    if "review_candidates" not in table_names:
-        return
-
-    columns = {column["name"] for column in inspector.get_columns("review_candidates")}
-    required_columns = {
-        "low_confidence_field_names": "TEXT",
-        "low_confidence_field_count": "INTEGER",
-    }
-
-    with engine.begin() as connection:
-        for column_name, sql_type in required_columns.items():
-            if column_name in columns:
-                continue
-            connection.execute(
-                text(f"ALTER TABLE review_candidates ADD COLUMN {column_name} {sql_type}")
-            )
+    Base.metadata.create_all(bind=engine)

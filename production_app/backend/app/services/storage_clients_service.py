@@ -4,7 +4,6 @@ Handles creation and safe access to Azure Blob and Table Service clients.
 """
 
 from azure.storage.blob import BlobServiceClient
-from azure.data.tables import TableServiceClient
 from azure.core.exceptions import ResourceNotFoundError, ResourceExistsError
 
 from app.config import get_settings
@@ -50,19 +49,3 @@ def get_container_client_safe(blob_client: BlobServiceClient, container_name: st
         return container_client
 
 
-def get_documents_table_client():
-    """Get Azure Table client for document index table.
-    
-    Returns:
-        Table client if configured, None if Azure Storage not configured.
-    """
-    settings = get_settings()
-    documents_table_name = "Documents"
-    
-    if not settings.azure_storage_connection_string:
-        return None
-    try:
-        table_service = TableServiceClient.from_connection_string(settings.azure_storage_connection_string)
-        return table_service.get_table_client(table_name=documents_table_name)
-    except Exception:
-        return None

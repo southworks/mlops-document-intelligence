@@ -1,7 +1,6 @@
 """Database setup and connection management"""
 
-from sqlalchemy import create_engine, text
-from sqlalchemy.exc import OperationalError
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session, declarative_base
 from app.config import get_settings
 
@@ -10,7 +9,7 @@ settings = get_settings()
 # Create engine
 engine = create_engine(
     settings.database_url,
-    connect_args={"check_same_thread": False} if "sqlite" in settings.database_url else {},
+    pool_pre_ping=True,
     echo=settings.debug
 )
 
@@ -34,7 +33,5 @@ def get_db() -> Session:
 
 
 def init_db():
-    """Initialize database tables and run lightweight SQLite migrations."""
+    """Initialize database tables for current schema."""
     Base.metadata.create_all(bind=engine)
-    # Demo environment: do not run lightweight migrations (rely on full reset).
-    # Tables are created above; avoid ALTER TABLE migration steps in demo code.

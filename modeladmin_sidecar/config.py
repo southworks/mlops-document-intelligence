@@ -1,16 +1,11 @@
 """Configuration for ModelAdmin dedicated service runtime."""
 
 from functools import lru_cache
-from pathlib import Path
 
 from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings
 
-
-SERVICE_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_MODELADMIN_DATABASE_URL = (
-    f"sqlite:///{(SERVICE_ROOT / 'modeladmin_sidecar.db').as_posix()}"
-)
+DEFAULT_MODELADMIN_DATABASE_URL = "postgresql+psycopg2://postgres:postgres@localhost:5432/mlops_modeladmin"
 
 
 class ModelAdminServiceSettings(BaseSettings):

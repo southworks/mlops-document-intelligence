@@ -2,7 +2,7 @@
 """Prepare a clean local demo environment starting from model v0.
 
 This script merges reset + setup responsibilities:
-- Reset backend and modeladmin databases in Docker containers
+- Reset modeladmin database in Docker container (backend Postgres is not dropped)
 - Clear storage containers and recreate required Azure tables
 - Seed training-data container with procurement-dataset.v0 files only
 - Apply ModelAdmin bootstrap payload from scripts/bootstrap.json
@@ -16,13 +16,11 @@ import json
 import logging
 import subprocess
 import sys
-import time
 from pathlib import Path
 from typing import Any
 
 import requests
 from azure.core.exceptions import HttpResponseError, ResourceNotFoundError
-from azure.data.tables import TableServiceClient
 from azure.storage.blob import BlobServiceClient
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -114,41 +112,6 @@ def clear_containers(blob_service: BlobServiceClient, container_names: list[str]
             deleted += 1
 
         logger.info("container:%s:deleted=%s", container_name, deleted)
-
-
-def recreate_tables(table_service: TableServiceClient, table_names: list[str], dry_run: bool) -> None:
-    logger.info("=== Recreate required tables ===")
-    for table_name in table_names:
-        if dry_run:
-            logger.info("[dry-run] would recreate table: %s", table_name)
-            continue
-
-        try:
-            table_service.delete_table(table_name)
-            logger.info("table:%s:deleted", table_name)
-        except HttpResponseError as exc:
-            logger.info("table:%s:delete_skipped:%s", table_name, exc)
-
-        for _ in range(30):
-            try:
-                table_service.create_table(table_name)
-                logger.info("table:%s:created", table_name)
-                break
-            except HttpResponseError as exc:
-                message = str(exc)
-                if "TableBeingDeleted" in message:
-                    time.sleep(2)
-                    continue
-                if "TableAlreadyExists" in message:
-                    logger.info("table:%s:already_exists", table_name)
-                    break
-                raise
-        else:
-            raise RuntimeError(f"failed to recreate table {table_name}")
-
-        table_client = table_service.get_table_client(table_name)
-        count = sum(1 for _ in table_client.list_entities())
-        logger.info("table:%s:count=%s", table_name, count)
 
 
 def upload_dataset_files(
@@ -272,10 +235,7 @@ def main() -> int:
     logger.info("modeladmin_endpoint=%s", modeladmin_endpoint)
 
     blob_service = BlobServiceClient.from_connection_string(connection_string)
-    table_service = TableServiceClient.from_connection_string(connection_string)
-
     clear_containers(blob_service, [documents_container_name, container_name], dry_run=args.dry_run)
-    recreate_tables(table_service, ["Documents", "DocumentMatches"], dry_run=args.dry_run)
     upload_dataset_files(
         blob_service=blob_service,
         container_name=container_name,

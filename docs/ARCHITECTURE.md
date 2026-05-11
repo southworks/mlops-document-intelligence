@@ -1,6 +1,6 @@
 # FinOptPlatform — Architecture Reference
 
-> Diagrams reflect the codebase as of Phase 5 simplification (May 2026).
+> Diagrams reflect the current codebase implementation.
 > Rendered by GitHub Markdown, VS Code Markdown Preview (with Mermaid extension), and MkDocs.
 
 ---
@@ -33,7 +33,7 @@ flowchart TD
 
 | Stage | Article section | Primary source file(s) |
 |-------|----------------|------------------------|
-| 1 · Ingestion | "Document Ingestion: Upload, Queue, and Worker" | `production_app/backend/document_processor.py` |
+| 1 · Ingestion | "Document Ingestion: Upload and Background Processing" | `production_app/backend/document_processor.py` |
 | 2 · Confidence Gate | "Confidence Scoring and Triage" | `production_app/backend/confidence_gate.py` |
 | 3 · Review Candidates | "Human-in-the-Loop (HITL): Labeling and Approval" | `modeladmin_sidecar/routes/review_candidates.py` |
 | 4 · Dataset Curation | "Training Requirements: Curating the Dataset" | `modeladmin_sidecar/routes/training_datasets.py` |
@@ -66,13 +66,12 @@ graph TB
 
         MA["ModelAdmin Sidecar  :8100\nFastAPI sync\n(modeladmin_sidecar)"]
 
-        DB_B[("mlops-backend-data\nSQLite · jobs")]
-        DB_M[("mlops-modeladmin-data\nSQLite · 10 tables")]
+        DB_B[("postgres-service\nmlops_backend · jobs")]
+        DB_M[("postgres-service\nmlops_modeladmin · 10 tables")]
     end
 
     subgraph azure["☁️  Azure"]
         AZ_BLOB["Blob Storage\ndocuments · training-data"]
-        AZ_TABLE["Table Storage\ndocument metadata index"]
         ADI["Azure Document Intelligence\nOCR · Extraction\nClassifier + Compose training"]
     end
 
@@ -83,7 +82,7 @@ graph TB
 
     BAPI -->|"POST /boundary/modeladmin/candidate-created"| MA
 
-    BAPI <-->|"Blob / Table"| AZ_BLOB
+    BAPI <-->|"Blob"| AZ_BLOB
     MA   <-->|"Blob (training data)"| AZ_BLOB
 
     BAPI --- DB_B
@@ -133,7 +132,7 @@ graph LR
             MC["boundary_contracts · doc_types\nnormalization · policy\ntraining_dataset_contracts\nservice_api_contracts"]
         end
 
-        DB_M[("SQLite\nreview_candidates · training_datasets\ntraining_dataset_memberships\ntraining_jobs · training_job_operations\nretrain_jobs · trained_models\ncompose_models · active_model_config")]
+        DB_M[("PostgreSQL\nreview_candidates · training_datasets\ntraining_dataset_memberships\ntraining_jobs · training_job_operations\nretrain_jobs · trained_models\ncompose_models · active_model_config")]
 
         routes --> services
         routes --> core
@@ -172,7 +171,7 @@ graph LR
         end
 
         REPO["document_repository"]
-        DB_B[("SQLite\njobs")]
+        DB_B[("PostgreSQL\njobs · processed_documents")]
 
         b_routes --> b_services
         b_services --> REPO
@@ -195,7 +194,7 @@ sequenceDiagram
     participant Blob as AzureBlobStorageService
     participant ADI as DocumentIntelligenceService
     participant Repo as TrainingJobRepository
-    participant DB as SQLite
+    participant DB as PostgreSQL
 
     Client->>Routes: POST /training-datasets/{id}/start-training
     Routes->>Orch: .start_training(dataset_id)

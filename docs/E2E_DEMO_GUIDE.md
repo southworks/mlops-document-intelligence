@@ -35,9 +35,9 @@ python procurement_automation/scripts/prepare-demo.py
 
 Expected outcomes:
 
-1. Backend and ModelAdmin DBs are reset.
+1. ModelAdmin DB is reset (backend Postgres DB remains intact).
 2. Blob containers `documents` and `training-data` are cleared.
-3. Azure Tables `Documents` and `DocumentMatches` are recreated.
+3. Backend processed-document index is rebuilt from new processing runs.
 4. `training-data` container is seeded from `training-data/procurement-dataset.v0` only.
 5. Bootstrap is applied and v0 compose model is active.
 6. Verification checks print healthy counts and API responses.

@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     azure_storage_container_name: str = "documents"
     
     # Database
-    database_url: str = "sqlite:///./invoice_ocr.db"
+    database_url: str = "postgresql+psycopg2://postgres:postgres@localhost:5432/mlops_backend"
     
     # Webhooks
     webhook_enabled: bool = False

@@ -32,4 +32,4 @@ EXPOSE 8100
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:8100/health/ || exit 1
 
-CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8100", "--workers", "2", "--timeout", "600", "--graceful-timeout", "120", "modeladmin_sidecar.main:app"]
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8100", "--workers", "1", "--timeout", "600", "--graceful-timeout", "120", "modeladmin_sidecar.main:app"]

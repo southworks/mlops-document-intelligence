@@ -13,6 +13,26 @@
 name: mlopsplatform
 
 services:
+  postgres-service:
+    image: postgres:16-alpine
+    container_name: postgres-container
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/postgres/init-databases.sql:/docker-entrypoint-initdb.d/init-databases.sql:ro
+    networks:
+      - local-dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mlops_backend"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
   # Frontend: React + Vite application served with Nginx
   frontend-service:
     build:
@@ -45,14 +65,15 @@ services:
     environment:
       - ENVIRONMENT=development
       - DEBUG=true
-      - DATABASE_URL=sqlite:////app/data/invoice_ocr.db
+      - DATABASE_URL=postgresql+psycopg2://postgres:postgres@postgres-service:5432/mlops_backend
       - AZURE_STORAGE_CONTAINER_NAME=${AZURE_STORAGE_CONTAINER_NAME:-documents}
       - MODELADMIN_EXTERNAL_ENDPOINT=${MODELADMIN_EXTERNAL_ENDPOINT:-http://modeladmin-service:8100}
       - MODELADMIN_EXTERNAL_API_KEY=${MODELADMIN_EXTERNAL_API_KEY:-modeladmin-local-key}
-    volumes:
-      - mlops-backend-data:/app/data
     networks:
       - local-dev
+    depends_on:
+      postgres-service:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
       interval: 10s
@@ -73,13 +94,14 @@ services:
     environment:
       - ENVIRONMENT=development
       - DEBUG=true
-      - MODELADMIN_DATABASE_URL=sqlite:////app/data/modeladmin_service.db
+      - MODELADMIN_DATABASE_URL=postgresql+psycopg2://postgres:postgres@postgres-service:5432/mlops_modeladmin
       - MODELADMIN_SERVICE_PORT=8100
       - BOUNDARY_API_KEY=${BOUNDARY_API_KEY:-modeladmin-local-key}
-    volumes:
-      - mlops-modeladmin-data:/app/data
     networks:
       - local-dev
+    depends_on:
+      postgres-service:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8100/health/"]
       interval: 10s
@@ -90,9 +112,3 @@ services:
 networks:
   local-dev:
     driver: bridge
-
-volumes:
-  mlops-backend-data:
-    name: mlops-backend-data
-  mlops-modeladmin-data:
-    name: mlops-modeladmin-data

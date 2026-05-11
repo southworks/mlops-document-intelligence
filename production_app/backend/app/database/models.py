@@ -2,7 +2,7 @@
 
 # pylint: disable=not-callable
 
-from sqlalchemy import Column, String, DateTime, Text, Integer, Enum as SQLEnum
+from sqlalchemy import Column, String, DateTime, Text, Integer, Float, Enum as SQLEnum
 from sqlalchemy.sql import func
 import uuid
 from app.database.connection import Base
@@ -38,3 +38,20 @@ class JobModel(Base):
     
     def __repr__(self):
         return f"<Job(id={self.id}, filename={self.filename}, status={self.status})>"
+
+
+class ProcessedDocumentModel(Base):
+    """SQLAlchemy model for processed document index rows."""
+    __tablename__ = "processed_documents"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    blob_path = Column(String(512), nullable=False, unique=True, index=True)
+    document_type = Column(String(50), nullable=False, index=True)
+    job_id = Column(String(36), nullable=True, index=True)
+    original_filename = Column(String(255), nullable=True)
+    classification_confidence = Column(Float, nullable=False, default=0.0)
+    summary_json = Column(Text, nullable=False, default="{}")
+    processed_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    def __repr__(self):
+        return f"<ProcessedDocument(blob_path={self.blob_path}, type={self.document_type})>"

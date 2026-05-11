@@ -5,9 +5,8 @@
 Prepares local runtime state for repeated demo/test cycles in one command:
 
 - Resets ModelAdmin DB schema/data
-- Resets backend DB schema/data
+- Keeps backend Postgres runtime state intact (does not drop/recreate backend DB)
 - Clears storage containers (`documents`, `training-data`) using `AZURE_STORAGE_CONNECTION_STRING` from `.env.local`
-- Recreates `Documents` and `DocumentMatches` Azure Tables
 - Seeds `training-data` from `training-data/procurement-dataset.v0`
 - Applies bootstrap from `bootstrap.json`
 - Restarts `backend-container` and `modeladmin-container`

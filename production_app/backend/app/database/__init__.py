@@ -3,6 +3,7 @@
 from .connection import Base, engine, get_db, init_db
 from .models import (
     JobModel,
+    ProcessedDocumentModel,
 )
 
 __all__ = [
@@ -11,4 +12,5 @@ __all__ = [
     "get_db",
     "init_db",
     "JobModel",
+    "ProcessedDocumentModel",
 ]

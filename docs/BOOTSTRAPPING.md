@@ -49,7 +49,7 @@ be created through the normal review → retrain pipeline.
 ### Reset and seed
 `POST /admin/reset-demo`
 
-- Drops and recreates all ModelAdmin SQLite tables.
+- Drops and recreates all ModelAdmin tables.
 - Re-validates all model IDs exist in ADI.
 - Upserts DB entities in one transaction:
   - `trained_models` (classifier + extractors)
@@ -58,7 +58,7 @@ be created through the normal review → retrain pipeline.
 - On ADI validation failure, returns HTTP 409 and writes nothing.
 - Idempotent — safe to re-run; each call starts from a clean schema.
 
-> The separate `/models/bootstrap/validate` and `/models/bootstrap/apply` endpoints were removed in Phase 4. `POST /admin/reset-demo` combines validation, schema reset, and seeding in one call.
+> The separate `/models/bootstrap/validate` and `/models/bootstrap/apply` endpoints were removed. `POST /admin/reset-demo` combines validation, schema reset, and seeding in one call.
 
 ---
 

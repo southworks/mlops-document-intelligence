@@ -6,8 +6,10 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
+from sqlalchemy.orm import Session
+
 from app.config import get_settings
-from app.database.models import JobModel
+from app.database.models import JobModel, ProcessedDocumentModel
 from app.models.document_type import DocumentType, normalize_document_type_value
 from app.models.job import JobStatus
 from app.services.blob_parse_service import parse_document_data
@@ -62,72 +64,60 @@ def _to_float(value: Any, default: float = 0.0) -> float:
         return default
 
 
-def query_documents_from_table(table_client, requested_type: str) -> Optional[List[Dict[str, Any]]]:
-    """Load processed document summaries from Azure Table index.
-
-    Returns:
-        Parsed document list when table query succeeds; otherwise None.
-    """
-    if not table_client:
-        return None
-
+def query_documents_from_db(db_session: Session, requested_type: str) -> List[Dict[str, Any]]:
+    """Load processed document summaries from backend Postgres index."""
     settings = get_settings()
     container_prefix = f"{settings.azure_storage_container_name}/"
 
-    try:
-        if requested_type == "all":
-            entities = table_client.list_entities()
-        else:
-            entities = table_client.query_entities(
-                query_filter=f"PartitionKey eq '{requested_type}'"
-            )
+    query = db_session.query(ProcessedDocumentModel)
+    if requested_type != "all":
+        query = query.filter(ProcessedDocumentModel.document_type == requested_type)
 
-        documents: List[Dict[str, Any]] = []
-        for entity in entities:
-            blob_path = entity.get("blob_path")
-            if not blob_path:
-                continue
+    rows = query.order_by(ProcessedDocumentModel.processed_at.desc()).all()
 
-            blob_name = blob_path
-            if blob_name.startswith(container_prefix):
-                blob_name = blob_name[len(container_prefix):]
+    documents: List[Dict[str, Any]] = []
+    for row in rows:
+        blob_path = row.blob_path
+        if not blob_path:
+            continue
 
-            try:
-                projection = json.loads(entity.get("summary_json") or "{}")
-            except json.JSONDecodeError:
-                projection = {}
+        blob_name = blob_path
+        if blob_name.startswith(container_prefix):
+            blob_name = blob_name[len(container_prefix):]
 
-            raw_confidence = _to_float(entity.get("classification_confidence"), default=0.0)
-            if raw_confidence > 1.0:
-                raw_confidence = raw_confidence / 100.0
+        try:
+            projection = json.loads(row.summary_json or "{}")
+        except json.JSONDecodeError:
+            projection = {}
 
-            blob_data = dict(projection)
-            blob_data["document_type"] = normalize_document_type_value(
-                blob_data.get("document_type") or entity.get("document_type") or requested_type
-            )
-            blob_data["confidence"] = _to_float(blob_data.get("confidence"), default=raw_confidence)
-            blob_data["job_id"] = entity.get("job_id")
-            blob_data["processed_at"] = _to_iso_datetime(entity.get("Timestamp"))
+        raw_confidence = _to_float(row.classification_confidence, default=0.0)
+        if raw_confidence > 1.0:
+            raw_confidence = raw_confidence / 100.0
 
-            parsed = parse_document_data(
-                blob_name=blob_name,
-                blob_data=blob_data,
-                document_type=normalize_document_type_value(entity.get("document_type") or requested_type),
-            )
-            parsed["pending_processing"] = False
-            parsed_status = JobStatus.COMPLETED.value
-            parsed["status"] = parsed_status
-            parsed["processing_state"] = build_processing_state(
-                status=parsed_status,
-                document_type=parsed.get("document_type", "unknown"),
-                pending_processing=False,
-            )
-            documents.append(parsed)
+        blob_data = dict(projection)
+        blob_data["document_type"] = normalize_document_type_value(
+            blob_data.get("document_type") or row.document_type or requested_type
+        )
+        blob_data["confidence"] = _to_float(blob_data.get("confidence"), default=raw_confidence)
+        blob_data["job_id"] = row.job_id
+        blob_data["processed_at"] = _to_iso_datetime(row.processed_at)
 
-        documents.sort(key=lambda item: item.get("processed_at") or "", reverse=True)
-        return documents
-    except Exception:
-        return None
+        parsed = parse_document_data(
+            blob_name=blob_name,
+            blob_data=blob_data,
+            document_type=normalize_document_type_value(row.document_type or requested_type),
+        )
+        parsed["pending_processing"] = False
+        parsed_status = JobStatus.COMPLETED.value
+        parsed["status"] = parsed_status
+        parsed["processing_state"] = build_processing_state(
+            status=parsed_status,
+            document_type=parsed.get("document_type", "unknown"),
+            pending_processing=False,
+        )
+        documents.append(parsed)
+
+    return documents
 
 
 def list_inflight_job_documents(db_session, requested_type: str) -> List[Dict[str, Any]]:
@@ -203,50 +193,26 @@ def count_pending_unknown_jobs(db_session) -> int:
     return total
 
 
-def count_documents_by_type_from_table(table_client) -> Optional[Dict[str, int]]:
-    """Count documents by type from Azure Table index. Returns None on failure."""
-    if not table_client:
-        return None
-
+def count_documents_by_type_from_db(db_session: Session) -> Dict[str, int]:
+    """Count documents by type from backend Postgres index."""
     counts = {doc_type: 0 for doc_type in TABLE_DOCUMENT_TYPES}
-    try:
-        for doc_type in TABLE_DOCUMENT_TYPES:
-            entities = table_client.query_entities(
-                query_filter=f"PartitionKey eq '{doc_type}'",
-                select=["RowKey"],
-            )
-            counts[doc_type] = sum(1 for _ in entities)
-        return counts
-    except Exception:
-        return None
+    for doc_type in TABLE_DOCUMENT_TYPES:
+        counts[doc_type] = (
+            db_session.query(ProcessedDocumentModel)
+            .filter(ProcessedDocumentModel.document_type == doc_type)
+            .count()
+        )
+    return counts
 
 
-def get_processed_job_ids_from_table(table_client) -> Optional[Set[str]]:
-    """Collect processed job IDs from Azure Table index. Returns None on failure."""
-    if not table_client:
-        return None
-
-    try:
-        entities = table_client.query_entities(select=["job_id"])
-        job_ids = {entity.get("job_id") for entity in entities if entity.get("job_id")}
-        return job_ids
-    except Exception:
-        return None
+def get_processed_job_ids_from_db(db_session: Session) -> Set[str]:
+    """Collect processed job IDs from backend Postgres index."""
+    rows = db_session.query(ProcessedDocumentModel.job_id).all()
+    return {row[0] for row in rows if row[0]}
 
 
-def get_document_from_table(table_client, blob_name: str) -> Optional[Dict[str, Any]]:
-    """Look up a single processed document from the Azure Table index by blob path.
-
-    Args:
-        table_client: Azure Table client for the Documents table.
-        blob_name: Blob path with or without the container prefix.
-
-    Returns:
-        Parsed document dict if found; otherwise None.
-    """
-    if not table_client:
-        return None
-
+def get_document_from_db(db_session: Session, blob_name: str) -> Optional[Dict[str, Any]]:
+    """Look up a single processed document from backend Postgres index by blob path."""
     settings = get_settings()
     container_prefix = f"{settings.azure_storage_container_name}/"
     full_blob_path = (
@@ -254,51 +220,48 @@ def get_document_from_table(table_client, blob_name: str) -> Optional[Dict[str, 
         else f"{container_prefix}{blob_name}"
     )
 
-    try:
-        entities = table_client.query_entities(
-            query_filter=f"blob_path eq '{full_blob_path}'"
-        )
-        entity = next(iter(entities), None)
-        if entity is None:
-            return None
-
-        blob_path = entity.get("blob_path", full_blob_path)
-        display_blob_name = blob_path
-        if display_blob_name.startswith(container_prefix):
-            display_blob_name = display_blob_name[len(container_prefix):]
-
-        try:
-            projection = json.loads(entity.get("summary_json") or "{}")
-        except json.JSONDecodeError:
-            projection = {}
-
-        raw_confidence = _to_float(entity.get("classification_confidence"), default=0.0)
-        if raw_confidence > 1.0:
-            raw_confidence = raw_confidence / 100.0
-
-        blob_data = dict(projection)
-        blob_data["document_type"] = normalize_document_type_value(
-            blob_data.get("document_type") or entity.get("document_type") or "unknown"
-        )
-        blob_data["confidence"] = _to_float(blob_data.get("confidence"), default=raw_confidence)
-        blob_data["job_id"] = entity.get("job_id")
-        blob_data["processed_at"] = _to_iso_datetime(entity.get("Timestamp"))
-
-        parsed = parse_document_data(
-            blob_name=display_blob_name,
-            blob_data=blob_data,
-            document_type=normalize_document_type_value(entity.get("document_type") or "unknown"),
-        )
-        parsed["pending_processing"] = False
-        parsed["status"] = JobStatus.COMPLETED.value
-        parsed["processing_state"] = build_processing_state(
-            status=JobStatus.COMPLETED.value,
-            document_type=parsed.get("document_type", "unknown"),
-            pending_processing=False,
-        )
-        return parsed
-    except Exception:
+    row = (
+        db_session.query(ProcessedDocumentModel)
+        .filter(ProcessedDocumentModel.blob_path == full_blob_path)
+        .first()
+    )
+    if row is None:
         return None
+
+    try:
+        projection = json.loads(row.summary_json or "{}")
+    except json.JSONDecodeError:
+        projection = {}
+
+    raw_confidence = _to_float(row.classification_confidence, default=0.0)
+    if raw_confidence > 1.0:
+        raw_confidence = raw_confidence / 100.0
+
+    display_blob_name = row.blob_path
+    if display_blob_name.startswith(container_prefix):
+        display_blob_name = display_blob_name[len(container_prefix):]
+
+    blob_data = dict(projection)
+    blob_data["document_type"] = normalize_document_type_value(
+        blob_data.get("document_type") or row.document_type or "unknown"
+    )
+    blob_data["confidence"] = _to_float(blob_data.get("confidence"), default=raw_confidence)
+    blob_data["job_id"] = row.job_id
+    blob_data["processed_at"] = _to_iso_datetime(row.processed_at)
+
+    parsed = parse_document_data(
+        blob_name=display_blob_name,
+        blob_data=blob_data,
+        document_type=normalize_document_type_value(row.document_type or "unknown"),
+    )
+    parsed["pending_processing"] = False
+    parsed["status"] = JobStatus.COMPLETED.value
+    parsed["processing_state"] = build_processing_state(
+        status=JobStatus.COMPLETED.value,
+        document_type=parsed.get("document_type", "unknown"),
+        pending_processing=False,
+    )
+    return parsed
 
 
 def count_pending_uploads_by_job_id(uploads_container_client, processed_job_ids: Set[str]) -> int:
