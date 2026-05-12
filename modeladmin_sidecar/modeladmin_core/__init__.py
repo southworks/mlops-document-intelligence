@@ -15,11 +15,6 @@ from modeladmin_sidecar.modeladmin_core.normalization import (
     normalize_confidence,
     normalize_document_type,
 )
-from modeladmin_sidecar.modeladmin_core.policy import (
-    evaluate_candidate_decision,
-    get_threshold_for_type,
-    has_low_field_confidence,
-)
 
 __all__ = [
     "CANDIDATE_CREATED_EVENT",
@@ -31,7 +26,4 @@ __all__ = [
     "DocumentProcessingOutcome",
     "normalize_document_type",
     "normalize_confidence",
-    "evaluate_candidate_decision",
-    "get_threshold_for_type",
-    "has_low_field_confidence",
 ]

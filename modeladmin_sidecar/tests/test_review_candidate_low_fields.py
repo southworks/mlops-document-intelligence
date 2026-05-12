@@ -42,6 +42,7 @@ def test_boundary_intake_persists_low_confidence_field_snapshot(tmp_path) -> Non
             "classification_confidence": 0.84,
             "has_low_confidence": True,
             "trigger_reason": "low_field_confidence",
+            "low_confidence_field_names": ["VendorName", "Items.Quantity"],
             "structured_data": {
                 "ReceiptDate": {"value": "2026-04-02", "confidence": 0.91},
                 "VendorName": {"value": "Contoso", "confidence": 0.54},

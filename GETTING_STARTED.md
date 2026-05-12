@@ -44,14 +44,12 @@ MODELADMIN_DATABASE_URL=postgresql+psycopg2://postgres:postgres@postgres-service
 AZURE_COMPOSE_MODEL_ID=procurement-compose-model.v0
 ```
 
-### Confidence gate thresholds (optional tuning)
+### Confidence gate threshold (optional tuning)
 
-These control Stage 2. Documents whose extraction confidence falls below the threshold are routed as review candidates rather than accepted. Defaults to `0.70` for all types.
+Controls Stage 2. Documents whose classification confidence falls below this value are routed as review candidates rather than accepted. Defaults to `0.75` if unset. Set in the production app's `.env.local`.
 
 ```bash
-CONFIDENCE_THRESHOLD_INVOICE=0.70   # raise to capture more borderline invoices
-CONFIDENCE_THRESHOLD_PO=0.70
-CONFIDENCE_THRESHOLD_GRN=0.70
+MODELADMIN_CONFIDENCE_THRESHOLD=0.75   # raise to capture more borderline documents
 ```
 
 ---
@@ -162,5 +160,5 @@ For this demo, Postgres storage is intentionally non-persistent: recreating `pos
 |---|---|
 | `POST /admin/reset-demo` returns 409 | Model IDs in `bootstrap.json` do not exist in your ADI resource |
 | Background processing never completes | Check `backend-service` logs — the background task runs in-process |
-| Confidence gate never fires | Thresholds are too low — raise `CONFIDENCE_THRESHOLD_*` above your model's typical score |
+| Confidence gate never fires | Threshold is too low — raise `MODELADMIN_CONFIDENCE_THRESHOLD` in `.env.local` above your model's typical score |
 | ModelAdmin tables missing after restart | Postgres container was recreated (stateless mode) — re-run `POST /admin/reset-demo` |

@@ -32,18 +32,6 @@ class ModelAdminServiceSettings(BaseSettings):
         default="training-data",
         validation_alias=AliasChoices("TRAINING_DATA_CONTAINER", "MODELADMIN_TRAINING_DATA_CONTAINER"),
     )
-    confidence_threshold_invoice: float = Field(
-        default=0.70,
-        validation_alias=AliasChoices("CONFIDENCE_THRESHOLD_INVOICE"),
-    )
-    confidence_threshold_po: float = Field(
-        default=0.70,
-        validation_alias=AliasChoices("CONFIDENCE_THRESHOLD_PO"),
-    )
-    confidence_threshold_grn: float = Field(
-        default=0.70,
-        validation_alias=AliasChoices("CONFIDENCE_THRESHOLD_GRN"),
-    )
 
 
 @lru_cache()

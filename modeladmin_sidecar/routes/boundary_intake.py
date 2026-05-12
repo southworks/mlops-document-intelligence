@@ -2,7 +2,7 @@
 
 import json
 import logging
-from typing import Any, Dict, Optional
+from typing import Optional
 
 from fastapi import APIRouter, Depends, Header, HTTPException
 from sqlalchemy.orm import Session
@@ -13,43 +13,12 @@ from modeladmin_sidecar.modeladmin_core.boundary_contracts import (
     CandidateCreatedV1Payload,
     CandidateCreatedV1Response,
 )
-from modeladmin_sidecar.modeladmin_core import get_threshold_for_type, normalize_document_type
 from modeladmin_sidecar.repositories.review_candidate_repository import ReviewCandidateRepository
 from modeladmin_sidecar.telemetry import increment_counter
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/boundary/modeladmin", tags=["modeladmin-boundary"])
-
-
-def _extract_low_confidence_field_names(
-    structured_data: Optional[Dict[str, Any]],
-    threshold: float,
-) -> list[str]:
-    if not structured_data or not isinstance(structured_data, dict):
-        return []
-
-    field_names: list[str] = []
-
-    for field_name, field_value in structured_data.items():
-        if isinstance(field_value, dict):
-            confidence = field_value.get("confidence")
-            if isinstance(confidence, (int, float)) and float(confidence) < threshold:
-                field_names.append(field_name)
-            continue
-
-        if isinstance(field_value, list):
-            for entry in field_value:
-                if not isinstance(entry, dict):
-                    continue
-                for sub_field_name, sub_field_value in entry.items():
-                    if not isinstance(sub_field_value, dict):
-                        continue
-                    confidence = sub_field_value.get("confidence")
-                    if isinstance(confidence, (int, float)) and float(confidence) < threshold:
-                        field_names.append(f"{field_name}.{sub_field_name}")
-
-    return list(dict.fromkeys(field_names))
 
 
 @router.post("/candidate-created")
@@ -66,16 +35,7 @@ def intake_candidate_created(
             raise HTTPException(status_code=401, detail="Unauthorized ModelAdmin boundary request")
 
         repo = ReviewCandidateRepository(db)
-        threshold = get_threshold_for_type(
-            normalize_document_type(payload.predicted_document_type),
-            threshold_invoice=settings.confidence_threshold_invoice,
-            threshold_po=settings.confidence_threshold_po,
-            threshold_grn=settings.confidence_threshold_grn,
-        )
-        low_confidence_field_names = _extract_low_confidence_field_names(
-            payload.structured_data,
-            threshold,
-        )
+        low_confidence_field_names = payload.low_confidence_field_names or []
 
         existing = repo.get_by_document_and_compose_model(
             document_id=payload.document_id,

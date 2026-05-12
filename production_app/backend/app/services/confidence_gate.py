@@ -5,7 +5,7 @@ the candidate payload to the ModelAdmin sidecar (``notify_modeladmin``)."""
 from dataclasses import dataclass
 import logging
 import time
-from typing import Any, Dict, Optional, Protocol
+from typing import Any, Dict, List, Optional, Protocol
 
 import httpx
 
@@ -35,6 +35,37 @@ class NotifyResult:
     candidate_id: Optional[str] = None
     transport: str = "inprocess"
     fallback_used: bool = False
+
+
+def _extract_low_confidence_field_names(
+    structured_data: Optional[Dict[str, Any]],
+    threshold: float,
+) -> List[str]:
+    """Extract names of fields whose confidence is below threshold."""
+    if not structured_data or not isinstance(structured_data, dict):
+        return []
+
+    field_names: list[str] = []
+
+    for field_name, field_value in structured_data.items():
+        if isinstance(field_value, dict):
+            confidence = field_value.get("confidence")
+            if isinstance(confidence, (int, float)) and float(confidence) < threshold:
+                field_names.append(field_name)
+            continue
+
+        if isinstance(field_value, list):
+            for entry in field_value:
+                if not isinstance(entry, dict):
+                    continue
+                for sub_field_name, sub_field_value in entry.items():
+                    if not isinstance(sub_field_value, dict):
+                        continue
+                    confidence = sub_field_value.get("confidence")
+                    if isinstance(confidence, (int, float)) and float(confidence) < threshold:
+                        field_names.append(f"{field_name}.{sub_field_name}")
+
+    return list(dict.fromkeys(field_names))
 
 
 # ---------------------------------------------------------------------------
@@ -110,7 +141,14 @@ def build_candidate_payload(
     original_filename: Optional[str],
     structured_data: Optional[dict],
     error_details: Optional[str],
+    settings_override: Optional[Settings] = None,
 ) -> CandidateCreatedV1Payload:
+    cfg = settings_override or get_settings()
+    low_confidence_field_names = _extract_low_confidence_field_names(
+        structured_data,
+        cfg.modeladmin_confidence_threshold,
+    )
+
     return CandidateCreatedV1Payload(
         document_id=document_id,
         compose_model_id=compose_model_id,
@@ -125,6 +163,7 @@ def build_candidate_payload(
         original_filename=original_filename,
         structured_data=structured_data,
         processing_error=error_details,
+        low_confidence_field_names=low_confidence_field_names or None,
     )
 
 

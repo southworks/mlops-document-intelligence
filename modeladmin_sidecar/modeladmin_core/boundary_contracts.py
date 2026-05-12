@@ -1,7 +1,7 @@
 """Versioned boundary contracts for ModelAdmin runtime/service split."""
 
 from datetime import datetime, timezone
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -33,6 +33,7 @@ class CandidateCreatedV1Payload(BaseModel):
     original_filename: Optional[str] = None
     structured_data: Optional[Dict[str, Any]] = None
     processing_error: Optional[str] = None
+    low_confidence_field_names: Optional[List[str]] = None
 
     emitted_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
